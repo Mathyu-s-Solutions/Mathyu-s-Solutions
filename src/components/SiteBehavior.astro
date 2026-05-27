@@ -75,7 +75,7 @@ const bizDict = audienceDict(lang, 'biz');
   // ---------- mobile nav toggle ----------
   const siteNav = document.getElementById('site-nav');
   const navToggle = document.getElementById('nav-toggle');
-  const navLinks = document.getElementById('nav-links');
+  const navMenu = document.getElementById('nav-menu');
   function closeNav() {
     if (!siteNav) return;
     siteNav.classList.remove('open');
@@ -86,7 +86,9 @@ const bizDict = audienceDict(lang, 'biz');
     const open = siteNav.classList.toggle('open');
     navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
-  navLinks?.querySelectorAll('a, button').forEach((el) => el.addEventListener('click', closeNav));
+  // Close after navigating via a link or opening the contact modal,
+  // but keep the menu open when toggling theme/audience/language.
+  navMenu?.querySelectorAll('.nav-links a, .nav-cta').forEach((el) => el.addEventListener('click', closeNav));
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeNav(); });
   window.addEventListener('resize', () => { if (window.innerWidth > 1020) closeNav(); });
 

@@ -57,6 +57,7 @@ img, svg { max-width: 100%; }
 .brand-name { font-family: var(--font-display); font-weight: 600; font-size: 16px; letter-spacing: -0.01em; }
 .brand-name .dim { color: var(--fg-muted); font-weight: 500; }
 
+.nav-collapse { display: flex; align-items: center; gap: 28px; flex: 1; justify-content: space-between; margin-left: 12px; }
 .nav-links { display: flex; gap: 28px; align-items: center; }
 .nav-links a { color: var(--fg-dim); text-decoration: none; font-size: 14.5px; transition: color .15s; }
 .nav-links a:hover { color: var(--fg); }
@@ -87,9 +88,6 @@ img, svg { max-width: 100%; }
 .nav.open .nav-toggle-bars { background: transparent; }
 .nav.open .nav-toggle-bars::before { transform: translateY(6px) rotate(45deg); }
 .nav.open .nav-toggle-bars::after { transform: translateY(-6px) rotate(-45deg); }
-
-/* CTA shown inside the mobile dropdown only */
-.nav-cta-mobile { display: none; }
 
 .icon-btn, .ghost-btn {
   font-family: var(--font-mono);
@@ -616,15 +614,18 @@ html[data-audience="tech"] .biz-only { display: none !important; }
   .contact-info { border-right: none; border-bottom: 1px solid var(--line); }
   .foot-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
 
-  /* Mobile nav: collapse links into a dropdown toggled by the hamburger */
+  /* Mobile nav: bar keeps only brand + hamburger; everything else
+     collapses into a dropdown panel toggled by the hamburger. */
+  .nav-inner { justify-content: space-between; }
   .nav-toggle { display: inline-flex; }
-  .nav-links {
+  .nav-collapse {
     position: absolute;
     top: 100%; left: 0; right: 0;
+    margin-left: 0;
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    padding: 8px 0 14px;
+    padding: 8px 0 16px;
     background: color-mix(in oklch, var(--bg), transparent 2%);
     backdrop-filter: blur(14px) saturate(140%);
     -webkit-backdrop-filter: blur(14px) saturate(140%);
@@ -632,10 +633,18 @@ html[data-audience="tech"] .biz-only { display: none !important; }
     box-shadow: var(--shadow);
     display: none;
   }
-  .nav.open .nav-links { display: flex; }
+  .nav.open .nav-collapse { display: flex; }
+  .nav-links { flex-direction: column; align-items: stretch; gap: 0; }
   .nav-links a { padding: 13px 28px; font-size: 16px; }
   .nav-links a:hover { background: var(--bg-elev); }
-  .nav-cta-mobile { display: inline-flex; justify-content: center; margin: 10px 28px 2px; }
+  .nav-actions {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 16px 28px 4px;
+    margin-top: 8px;
+    border-top: 1px solid var(--line);
+  }
+  .nav-actions .nav-cta { flex: 1 1 100%; justify-content: center; }
 }
 @media (max-width: 620px) {
   .process { grid-template-columns: 1fr; }
@@ -643,12 +652,6 @@ html[data-audience="tech"] .biz-only { display: none !important; }
   .contact-info, .form { padding: 28px; }
   .hero { padding: 60px 0 40px; }
   section.block { padding: 70px 0; }
-
-  /* Tighten the nav bar so toggles + hamburger fit narrow phones */
-  .nav-inner { gap: 12px; }
-  .nav-actions { gap: 8px; }
-  .brand-name { display: none; }
-  .nav-cta { display: none; }
 
   /* Stack two-column form rows on small screens */
   .form .row2 { grid-template-columns: 1fr; }
@@ -658,6 +661,6 @@ html[data-audience="tech"] .biz-only { display: none !important; }
 }
 @media (max-width: 380px) {
   .wrap { padding: 0 18px; }
-  .nav-links a, .nav-cta-mobile { padding-left: 18px; padding-right: 18px; }
-  .nav-cta-mobile { margin-left: 18px; margin-right: 18px; }
+  .nav-links a { padding-left: 18px; padding-right: 18px; }
+  .nav-actions { padding-left: 18px; padding-right: 18px; }
 }
