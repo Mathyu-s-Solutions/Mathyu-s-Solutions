@@ -4,7 +4,7 @@
     "aud": { "biz": "Negocio", "tech": "Técnico" },
     "hero": {
       "eyebrow": "Consultora de software · Lima, Perú",
-      "h1a": "Construimos", "h1b": "software serio", "h1c": "para equipos que envían rápido.",
+      "h1a": "Construimos", "h1b": "software serio", "h1c": "para equipos que lanzan rápido.",
       "lead": "Web, mobile (iOS & Android) e IA con DevOps integrado y despliegue en AWS, Azure o GCP. De la idea al producto, con código mantenible y métricas reales.",
       "cta1": "Empezar un proyecto", "cta2": "Ver servicios",
       "m1": "Años de experiencia", "m2": "Clouds soportados", "m3": "Stacks principales", "m4": "Monitoreo & soporte"
