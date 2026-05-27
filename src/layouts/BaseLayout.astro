@@ -4,6 +4,8 @@ import '@fontsource-variable/instrument-sans';
 import '@fontsource-variable/jetbrains-mono';
 import '../styles/tokens.css';
 import '../styles/global.css';
+import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
 import { SITE } from '../data/site';
 import type { Lang } from '../i18n/utils';
 
@@ -15,14 +17,28 @@ interface Props {
   path: string;
   /** Exclude from search indexing (e.g. the 404 page) */
   noindex?: boolean;
+  /** Spanish/English counterpart paths for hreflang (default: home) */
+  esHref?: string;
+  enHref?: string;
+  /** Extra JSON-LD blocks to emit in <head> (e.g. Service, BreadcrumbList) */
+  extraJsonLd?: Record<string, unknown>[];
 }
 
-const { title, description, lang, path, noindex = false } = Astro.props;
+const {
+  title,
+  description,
+  lang,
+  path,
+  noindex = false,
+  esHref = '/es/',
+  enHref = '/en/',
+  extraJsonLd = [],
+} = Astro.props;
 
 const site = Astro.site ?? new URL(SITE.url);
 const canonical = new URL(path, site).toString();
-const esUrl = new URL('/es/', site).toString();
-const enUrl = new URL('/en/', site).toString();
+const esUrl = new URL(esHref, site).toString();
+const enUrl = new URL(enHref, site).toString();
 const ogImage = new URL('/og-image.png', site).toString();
 const ogLocale = lang === 'es' ? 'es_PE' : 'en_US';
 
@@ -141,9 +157,14 @@ const serviceLd = {
     <!-- Structured data -->
     <script type="application/ld+json" is:inline set:html={JSON.stringify(orgLd)} />
     <script type="application/ld+json" is:inline set:html={JSON.stringify(serviceLd)} />
+    {extraJsonLd.map((ld) => (
+      <script type="application/ld+json" is:inline set:html={JSON.stringify(ld)} />
+    ))}
   </head>
   <body>
     <a href="#top" class="visually-hidden">Skip to content</a>
     <slot />
+    <Analytics />
+    <SpeedInsights />
   </body>
 </html>

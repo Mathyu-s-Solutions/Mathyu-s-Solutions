@@ -1,18 +1,20 @@
 ---
 import { translator, type Lang } from '../i18n/utils';
 import { SITE } from '../data/site';
+import { servicePageHref, type PanelId } from '../data/services';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const tt = translator(lang, 'tech');
 const home = `/${lang}/`;
 const year = new Date().getFullYear();
-const services = [
-  { href: '#services', key: 'foot.s1a' },
-  { href: '#services', key: 'foot.s1b' },
-  { href: '#services', key: 'foot.s1c' },
-  { href: '#services', key: 'foot.s1d' },
-  { href: '#services', key: 'foot.s1e' },
+const serviceLinks: { panel: PanelId; key: string }[] = [
+  { panel: 'web', key: 'foot.s1a' },
+  { panel: 'mobile', key: 'foot.s1b' },
+  { panel: 'ai', key: 'foot.s1c' },
+  { panel: 'devops', key: 'foot.s1d' },
+  { panel: 'cloud', key: 'foot.s1e' },
 ];
+const services = serviceLinks.map((s) => ({ href: servicePageHref(s.panel, lang) ?? `${home}#services`, key: s.key }));
 const company = [
   { href: '#process', key: 'foot.s2a' },
   { href: '#cases', key: 'foot.s2b' },

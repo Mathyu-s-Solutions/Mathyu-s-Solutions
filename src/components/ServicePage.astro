@@ -1,0 +1,121 @@
+---
+import { translator, type Lang } from '../i18n/utils';
+import { SERVICES, type ServicePageData } from '../data/services';
+import { SITE } from '../data/site';
+import Nav from './Nav.astro';
+import Footer from './Footer.astro';
+import ContactModal from './ContactModal.astro';
+import SiteBehavior from './SiteBehavior.astro';
+import WebDashboard from './ServiceIllustrations/WebDashboard.astro';
+import MobileScreens from './ServiceIllustrations/MobileScreens.astro';
+import AIAgentFlow from './ServiceIllustrations/AIAgentFlow.astro';
+import MultiCloud from './ServiceIllustrations/MultiCloud.astro';
+
+interface Props { service: ServicePageData; lang: Lang }
+const { service, lang } = Astro.props;
+const tt = translator(lang, 'tech');
+const tb = translator(lang, 'biz');
+const loc = service[lang];
+
+const illus = { web: WebDashboard, mobile: MobileScreens, ai: AIAgentFlow, cloud: MultiCloud };
+const Illu = illus[service.illustration];
+
+const shortName: Record<string, Record<Lang, string>> = {
+  web: { es: 'Desarrollo web', en: 'Web development' },
+  apps: { es: 'Apps móviles', en: 'Mobile apps' },
+  ai: { es: 'Software con IA', en: 'AI software' },
+  cloud: { es: 'Cloud y DevOps', en: 'Cloud & DevOps' },
+};
+
+const others = SERVICES.filter((s) => s.id !== service.id);
+const homeHref = `/${lang}/`;
+const waHref = `https://wa.me/${SITE.whatsapp}`;
+
+const ui = {
+  es: { eyebrow: 'Servicio', includes: 'Qué incluye', ctaTitle: '¿Conversamos sobre tu proyecto?', cta: 'Cotizar', quote: 'Empezar un proyecto', wa: 'Escríbenos por WhatsApp', other: 'Otros servicios', back: '← Todos los servicios' },
+  en: { eyebrow: 'Service', includes: "What's included", ctaTitle: "Let's talk about your project?", cta: 'Get a quote', quote: 'Start a project', wa: 'Message us on WhatsApp', other: 'Other services', back: '← All services' },
+}[lang];
+---
+<Nav lang={lang} />
+<main>
+  <header class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow mono">{ui.eyebrow} · Lima, {SITE.countryName}</span>
+        <h1 style="font-size:clamp(36px,5vw,64px); margin:18px 0 22px;">{loc.h1}</h1>
+        <p class="lead">{loc.intro}</p>
+        <div class="hero-cta">
+          <button class="btn" type="button" data-modal-open>
+            <span>{ui.quote}</span><span class="arr" aria-hidden="true">→</span>
+          </button>
+          <a class="btn btn-secondary" href={waHref} target="_blank" rel="noopener">{ui.wa}</a>
+        </div>
+        <p style="margin-top:24px;"><a href={`${homeHref}#services`} style="color:var(--fg-dim); text-decoration:none; font-family:var(--font-mono); font-size:13px;">{ui.back}</a></p>
+      </div>
+      <div class="svc-illu" style="margin-top:0;">
+        <Illu />
+      </div>
+    </div>
+  </header>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow mono">{ui.includes}</span>
+          <h2 data-i18n={`${service.ns}.h`}>{tt(`${service.ns}.h`)}</h2>
+        </div>
+        <p class="desc" data-i18n={`${service.ns}.p`}>{tt(`${service.ns}.p`)}</p>
+      </div>
+
+      <div class="svc-tabs" style="grid-template-columns:1fr; padding:36px 40px; gap:32px;">
+        <ul class="feat" style="list-style:none; padding:0; margin:0; display:grid; gap:12px; grid-template-columns:repeat(2,1fr);">
+          {[1, 2, 3, 4].map((n) => (
+            <li style="display:flex; gap:12px; align-items:flex-start; font-size:15px;" data-i18n={`${service.ns}.f${n}`}>{tt(`${service.ns}.f${n}`)}</li>
+          ))}
+        </ul>
+        <div class="svc-stack">
+          <h3 style="font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.1em; color:var(--fg-muted); margin:0 0 14px;" data-i18n="svc.stackLabel">{tt('svc.stackLabel')}</h3>
+          <div class="chips tech-only">
+            {service.techChips.map((c) => <span class="chip">{c}</span>)}
+          </div>
+          <div class="chips biz-only">
+            {[1, 2, 3, 4, 5, 6].map((n) => (
+              <span class="chip">{tb(`${service.ns}.b${n}`)}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="section-head">
+        <div><span class="eyebrow mono">{ui.other}</span></div>
+      </div>
+      <div class="cases">
+        {others.map((s) => (
+          <a class="case" href={`/${lang}/${s[lang].slug}/`}>
+            <div class="body">
+              <h3>{shortName[s.id][lang]}</h3>
+              <p>{s[lang].intro}</p>
+              <div class="meta"><span>{ui.cta} →</span></div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div style="margin-top:48px; text-align:center; border:1px solid var(--line); border-radius:var(--r); padding:48px 28px; background:var(--bg-card);">
+        <h2 style="font-family:var(--font-display); font-size:clamp(28px,4vw,40px); margin:0 0 20px; letter-spacing:-.02em;">{ui.ctaTitle}</h2>
+        <div class="hero-cta" style="justify-content:center;">
+          <button class="btn" type="button" data-modal-open><span>{ui.cta}</span><span class="arr" aria-hidden="true">→</span></button>
+          <a class="btn btn-secondary" href={`${homeHref}#contact`}>{tt('nav.contact')}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<Footer lang={lang} />
+<ContactModal lang={lang} />
+<SiteBehavior lang={lang} />

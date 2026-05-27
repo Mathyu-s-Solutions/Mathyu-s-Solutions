@@ -1,5 +1,6 @@
 ---
 import { translator, type Lang } from '../i18n/utils';
+import { servicePageHref, type PanelId } from '../data/services';
 import WebDashboard from './ServiceIllustrations/WebDashboard.astro';
 import MobileScreens from './ServiceIllustrations/MobileScreens.astro';
 import AIAgentFlow from './ServiceIllustrations/AIAgentFlow.astro';
@@ -10,6 +11,7 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const tt = translator(lang, 'tech');
 const tb = translator(lang, 'biz');
+const moreLabel = lang === 'es' ? 'Ver más →' : 'Learn more →';
 
 const services = [
   {
@@ -81,6 +83,7 @@ const services = [
                     <li data-i18n={`${s.ns}.f${n}`}>{tt(`${s.ns}.f${n}`)}</li>
                   ))}
                 </ul>
+                <a class="ghost-btn" href={servicePageHref(s.id as PanelId, lang)}>{moreLabel}</a>
               </div>
               <div>
                 <div class="svc-stack">
