@@ -69,7 +69,7 @@ const ui = {
       </div>
 
       <div class="svc-tabs" style="grid-template-columns:1fr; padding:36px 40px; gap:32px;">
-        <ul class="feat" style="list-style:none; padding:0; margin:0; display:grid; gap:12px; grid-template-columns:repeat(2,1fr);">
+        <ul class="feat svc-feat-grid" style="list-style:none; padding:0; margin:0; display:grid; gap:12px; grid-template-columns:repeat(2,1fr);">
           {[1, 2, 3, 4].map((n) => (
             <li style="display:flex; gap:12px; align-items:flex-start; font-size:15px;" data-i18n={`${service.ns}.f${n}`}>{tt(`${service.ns}.f${n}`)}</li>
           ))}

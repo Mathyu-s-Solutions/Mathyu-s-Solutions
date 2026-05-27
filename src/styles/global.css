@@ -62,6 +62,35 @@ img, svg { max-width: 100%; }
 .nav-links a:hover { color: var(--fg); }
 .nav-actions { display: flex; align-items: center; gap: 10px; }
 
+/* Hamburger toggle — hidden on desktop, shown on small screens */
+.nav-toggle {
+  display: none;
+  width: 40px; height: 40px;
+  align-items: center; justify-content: center;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  color: var(--fg);
+  cursor: pointer;
+  transition: border-color .15s, background .15s;
+}
+.nav-toggle:hover { border-color: var(--line-strong); background: var(--bg-elev); }
+.nav-toggle-bars, .nav-toggle-bars::before, .nav-toggle-bars::after {
+  content: ""; display: block;
+  width: 18px; height: 2px;
+  background: currentColor; border-radius: 2px;
+  transition: transform .2s ease, opacity .2s ease;
+}
+.nav-toggle-bars { position: relative; }
+.nav-toggle-bars::before { position: absolute; top: -6px; left: 0; }
+.nav-toggle-bars::after { position: absolute; top: 6px; left: 0; }
+.nav.open .nav-toggle-bars { background: transparent; }
+.nav.open .nav-toggle-bars::before { transform: translateY(6px) rotate(45deg); }
+.nav.open .nav-toggle-bars::after { transform: translateY(-6px) rotate(-45deg); }
+
+/* CTA shown inside the mobile dropdown only */
+.nav-cta-mobile { display: none; }
+
 .icon-btn, .ghost-btn {
   font-family: var(--font-mono);
   font-size: 12px;
@@ -586,7 +615,27 @@ html[data-audience="tech"] .biz-only { display: none !important; }
   .contact-wrap { grid-template-columns: 1fr; }
   .contact-info { border-right: none; border-bottom: 1px solid var(--line); }
   .foot-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-  .nav-links { display: none; }
+
+  /* Mobile nav: collapse links into a dropdown toggled by the hamburger */
+  .nav-toggle { display: inline-flex; }
+  .nav-links {
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 8px 0 14px;
+    background: color-mix(in oklch, var(--bg), transparent 2%);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border-bottom: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    display: none;
+  }
+  .nav.open .nav-links { display: flex; }
+  .nav-links a { padding: 13px 28px; font-size: 16px; }
+  .nav-links a:hover { background: var(--bg-elev); }
+  .nav-cta-mobile { display: inline-flex; justify-content: center; margin: 10px 28px 2px; }
 }
 @media (max-width: 620px) {
   .process { grid-template-columns: 1fr; }
@@ -594,4 +643,21 @@ html[data-audience="tech"] .biz-only { display: none !important; }
   .contact-info, .form { padding: 28px; }
   .hero { padding: 60px 0 40px; }
   section.block { padding: 70px 0; }
+
+  /* Tighten the nav bar so toggles + hamburger fit narrow phones */
+  .nav-inner { gap: 12px; }
+  .nav-actions { gap: 8px; }
+  .brand-name { display: none; }
+  .nav-cta { display: none; }
+
+  /* Stack two-column form rows on small screens */
+  .form .row2 { grid-template-columns: 1fr; }
+
+  /* Service-page feature list stacks to one column */
+  .svc-feat-grid { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 380px) {
+  .wrap { padding: 0 18px; }
+  .nav-links a, .nav-cta-mobile { padding-left: 18px; padding-right: 18px; }
+  .nav-cta-mobile { margin-left: 18px; margin-right: 18px; }
 }

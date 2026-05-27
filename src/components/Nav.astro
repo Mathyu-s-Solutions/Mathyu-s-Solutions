@@ -9,26 +9,40 @@ const { lang } = Astro.props;
 const tt = translator(lang, 'tech');
 const home = `/${lang}/`;
 ---
-<nav class="nav">
+<nav class="nav" id="site-nav">
   <div class="wrap nav-inner">
     <a class="brand" href={home} aria-label="Mathyu's Solutions">
       <span class="brand-mark"><span class="br">&lt;</span>MS<span class="br">&gt;</span></span>
       <span class="brand-name">Mathyu's <span class="dim">Solutions</span></span>
     </a>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-links">
       <a href="#services" data-i18n="nav.services">{tt('nav.services')}</a>
       <a href="#process" data-i18n="nav.process">{tt('nav.process')}</a>
       <a href="#cases" data-i18n="nav.cases">{tt('nav.cases')}</a>
       <a href="#pricing" data-i18n="nav.pricing">{tt('nav.pricing')}</a>
       <a href="#contact" data-i18n="nav.contact">{tt('nav.contact')}</a>
+      <button class="btn nav-cta-mobile" type="button" data-modal-open>
+        <span data-i18n="nav.cta">{tt('nav.cta')}</span>
+        <span class="arr" aria-hidden="true">→</span>
+      </button>
     </div>
     <div class="nav-actions">
       <AudienceToggle lang={lang} />
       <LangToggle lang={lang} />
       <ThemeToggle />
-      <button class="btn" type="button" data-modal-open>
+      <button class="btn nav-cta" type="button" data-modal-open>
         <span data-i18n="nav.cta">{tt('nav.cta')}</span>
         <span class="arr" aria-hidden="true">→</span>
+      </button>
+      <button
+        class="nav-toggle"
+        id="nav-toggle"
+        type="button"
+        aria-label="Menú"
+        aria-expanded="false"
+        aria-controls="nav-links"
+      >
+        <span class="nav-toggle-bars" aria-hidden="true"></span>
       </button>
     </div>
   </div>

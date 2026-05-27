@@ -72,6 +72,24 @@ const bizDict = audienceDict(lang, 'biz');
     renderThemeIcon();
   });
 
+  // ---------- mobile nav toggle ----------
+  const siteNav = document.getElementById('site-nav');
+  const navToggle = document.getElementById('nav-toggle');
+  const navLinks = document.getElementById('nav-links');
+  function closeNav() {
+    if (!siteNav) return;
+    siteNav.classList.remove('open');
+    navToggle?.setAttribute('aria-expanded', 'false');
+  }
+  navToggle?.addEventListener('click', () => {
+    if (!siteNav) return;
+    const open = siteNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinks?.querySelectorAll('a, button').forEach((el) => el.addEventListener('click', closeNav));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeNav(); });
+  window.addEventListener('resize', () => { if (window.innerWidth > 1020) closeNav(); });
+
   // ---------- service tabs ----------
   const tabs = Array.from(document.querySelectorAll<HTMLElement>('.svc-tab'));
   const panels = Array.from(document.querySelectorAll<HTMLElement>('.svc-panel'));
