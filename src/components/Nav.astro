@@ -1,0 +1,35 @@
+---
+import { translator, type Lang } from '../i18n/utils';
+import AudienceToggle from './controls/AudienceToggle.astro';
+import LangToggle from './controls/LangToggle.astro';
+import ThemeToggle from './controls/ThemeToggle.astro';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const tt = translator(lang, 'tech');
+const home = `/${lang}/`;
+---
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href={home} aria-label="Mathyu's Solutions">
+      <span class="brand-mark"><span class="br">&lt;</span>MS<span class="br">&gt;</span></span>
+      <span class="brand-name">Mathyu's <span class="dim">Solutions</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#services" data-i18n="nav.services">{tt('nav.services')}</a>
+      <a href="#process" data-i18n="nav.process">{tt('nav.process')}</a>
+      <a href="#cases" data-i18n="nav.cases">{tt('nav.cases')}</a>
+      <a href="#pricing" data-i18n="nav.pricing">{tt('nav.pricing')}</a>
+      <a href="#contact" data-i18n="nav.contact">{tt('nav.contact')}</a>
+    </div>
+    <div class="nav-actions">
+      <AudienceToggle lang={lang} />
+      <LangToggle lang={lang} />
+      <ThemeToggle />
+      <button class="btn" type="button" data-modal-open>
+        <span data-i18n="nav.cta">{tt('nav.cta')}</span>
+        <span class="arr" aria-hidden="true">→</span>
+      </button>
+    </div>
+  </div>
+</nav>

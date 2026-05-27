@@ -1,0 +1,99 @@
+<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <rect width="400" height="250" fill="#11161b" />
+
+  <!-- header -->
+  <text x="14" y="22" fill="#6a7280" font-family="JetBrains Mono Variable, monospace" font-size="7">PIPELINE · main → production</text>
+  <text x="386" y="22" text-anchor="end" fill="#7fd99a" font-family="JetBrains Mono Variable, monospace" font-size="7">● running</text>
+
+  <!-- stage: commit -->
+  <g transform="translate(14 40)">
+    <rect width="66" height="44" rx="6" fill="#1a1f24" stroke="#7fd99a" />
+    <circle cx="56" cy="8" r="3" fill="#7fd99a" />
+    <text x="33" y="14" text-anchor="middle" fill="#7fd99a" font-family="JetBrains Mono Variable, monospace" font-size="6" font-weight="700">COMMIT</text>
+    <text x="33" y="26" text-anchor="middle" fill="#d4dae0" font-family="JetBrains Mono Variable, monospace" font-size="8" font-weight="600">a3f9d2</text>
+    <text x="33" y="36" text-anchor="middle" fill="#6a7280" font-family="JetBrains Mono Variable, monospace" font-size="6">feat: api</text>
+  </g>
+  <line x1="80" y1="62" x2="100" y2="62" stroke="#4a5260" stroke-width="1.5" />
+  <polygon points="100,59 104,62 100,65" fill="#4a5260" />
+
+  <!-- stage: build -->
+  <g transform="translate(104 40)">
+    <rect width="66" height="44" rx="6" fill="#1a1f24" stroke="#7fd99a" />
+    <circle cx="56" cy="8" r="3" fill="#7fd99a" />
+    <text x="33" y="14" text-anchor="middle" fill="#7fd99a" font-family="JetBrains Mono Variable, monospace" font-size="6" font-weight="700">BUILD</text>
+    <text x="33" y="26" text-anchor="middle" fill="#d4dae0" font-family="JetBrains Mono Variable, monospace" font-size="8" font-weight="600">1m 12s</text>
+    <text x="33" y="36" text-anchor="middle" fill="#6a7280" font-family="JetBrains Mono Variable, monospace" font-size="6">3 jobs ✓</text>
+  </g>
+  <line x1="170" y1="62" x2="190" y2="62" stroke="#4a5260" stroke-width="1.5" />
+  <polygon points="190,59 194,62 190,65" fill="#4a5260" />
+
+  <!-- stage: test -->
+  <g transform="translate(194 40)">
+    <rect width="66" height="44" rx="6" fill="#1a1f24" stroke="#7fd99a" />
+    <circle cx="56" cy="8" r="3" fill="#7fd99a" />
+    <text x="33" y="14" text-anchor="middle" fill="#7fd99a" font-family="JetBrains Mono Variable, monospace" font-size="6" font-weight="700">TEST</text>
+    <text x="33" y="26" text-anchor="middle" fill="#d4dae0" font-family="JetBrains Mono Variable, monospace" font-size="8" font-weight="600">248/248</text>
+    <text x="33" y="36" text-anchor="middle" fill="#6a7280" font-family="JetBrains Mono Variable, monospace" font-size="6">cov 94%</text>
+  </g>
+  <line x1="260" y1="62" x2="280" y2="62" stroke="#4a5260" stroke-width="1.5" />
+  <polygon points="280,59 284,62 280,65" fill="#4a5260" />
+
+  <!-- stage: deploy (in progress) -->
+  <g transform="translate(284 40)">
+    <rect width="66" height="44" rx="6" fill="#241e10" stroke="#f4bf4f" />
+    <circle cx="56" cy="8" r="3" fill="#f4bf4f">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" repeatCount="indefinite" />
+    </circle>
+    <text x="33" y="14" text-anchor="middle" fill="#f4bf4f" font-family="JetBrains Mono Variable, monospace" font-size="6" font-weight="700">DEPLOY</text>
+    <text x="33" y="26" text-anchor="middle" fill="#d4dae0" font-family="JetBrains Mono Variable, monospace" font-size="8" font-weight="600">prod-us</text>
+    <text x="33" y="36" text-anchor="middle" fill="#f4bf4f" font-family="JetBrains Mono Variable, monospace" font-size="6">canary 10%</text>
+  </g>
+
+  <!-- connecting line down -->
+  <line x1="317" y1="84" x2="317" y2="116" stroke="#3a4248" stroke-dasharray="2 3" />
+
+  <!-- observability box -->
+  <g transform="translate(14 122)">
+    <rect width="372" height="112" rx="8" fill="#1a1f24" stroke="#252b32" />
+    <text x="14" y="18" fill="#6a7280" font-family="JetBrains Mono Variable, monospace" font-size="6">OBSERVABILITY · last 24h</text>
+    <text x="358" y="18" text-anchor="end" fill="#7fd99a" font-family="JetBrains Mono Variable, monospace" font-size="6">datadog · grafana</text>
+
+    <!-- uptime card -->
+    <g transform="translate(14 28)">
+      <text x="0" y="10" fill="#6a7280" font-family="JetBrains Mono Variable, monospace" font-size="6">UPTIME</text>
+      <text x="0" y="26" fill="#fff" font-family="Bricolage Grotesque Variable, serif" font-size="14" font-weight="700">99.98%</text>
+      <polyline points="0,52 8,46 16,48 24,42 32,44 40,40 48,42 56,38 64,40 72,36 80,38 88,34" fill="none" stroke="#7fd99a" stroke-width="1.5" />
+    </g>
+
+    <!-- p95 card -->
+    <g transform="translate(122 28)">
+      <text x="0" y="10" fill="#6a7280" font-family="JetBrains Mono Variable, monospace" font-size="6">P95 LATENCY</text>
+      <text x="0" y="26" fill="#fff" font-family="Bricolage Grotesque Variable, serif" font-size="14" font-weight="700">148 ms</text>
+      <polyline points="0,42 8,40 16,44 24,38 32,42 40,36 48,40 56,34 64,38 72,32 80,36 88,30" fill="none" stroke="#7fd99a" stroke-width="1.5" />
+    </g>
+
+    <!-- errors card -->
+    <g transform="translate(232 28)">
+      <text x="0" y="10" fill="#6a7280" font-family="JetBrains Mono Variable, monospace" font-size="6">ERRORS</text>
+      <text x="0" y="26" fill="#fff" font-family="Bricolage Grotesque Variable, serif" font-size="14" font-weight="700">0.02%</text>
+      <g>
+        <rect x="0" y="46" width="6" height="6" fill="#2d4d3c" />
+        <rect x="10" y="42" width="6" height="10" fill="#3a6650" />
+        <rect x="20" y="44" width="6" height="8" fill="#2d4d3c" />
+        <rect x="30" y="38" width="6" height="14" fill="#7fd99a" />
+        <rect x="40" y="46" width="6" height="6" fill="#2d4d3c" />
+        <rect x="50" y="40" width="6" height="12" fill="#3a6650" />
+        <rect x="60" y="44" width="6" height="8" fill="#2d4d3c" />
+        <rect x="70" y="36" width="6" height="16" fill="#7fd99a" />
+        <rect x="80" y="44" width="6" height="8" fill="#2d4d3c" />
+      </g>
+    </g>
+
+    <!-- cost card -->
+    <g transform="translate(322 28)">
+      <text x="0" y="10" fill="#6a7280" font-family="JetBrains Mono Variable, monospace" font-size="6">COST</text>
+      <text x="0" y="26" fill="#fff" font-family="Bricolage Grotesque Variable, serif" font-size="14" font-weight="700">-32%</text>
+      <text x="0" y="40" fill="#7fd99a" font-family="JetBrains Mono Variable, monospace" font-size="6">vs Q-1</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,227 @@
+{
+  "tech": {
+    "nav": { "services": "Services", "process": "Process", "cases": "Cases", "pricing": "Plans", "contact": "Contact", "cta": "Get a quote" },
+    "aud": { "biz": "Business", "tech": "Technical" },
+    "hero": {
+      "eyebrow": "Software consultancy · Lima, Peru",
+      "h1a": "We build", "h1b": "serious software", "h1c": "for teams that ship fast.",
+      "lead": "Web, mobile (iOS & Android) and AI with DevOps baked in and deployment on AWS, Azure or GCP. From idea to product, with maintainable code and real metrics.",
+      "cta1": "Start a project", "cta2": "See services",
+      "m1": "Years of experience", "m2": "Clouds supported", "m3": "Core stacks", "m4": "Monitoring & support"
+    },
+    "trust": { "label": "// Stack & cloud" },
+    "svc": {
+      "eyebrow": "01 · Services", "title": "Five practices. One team. One contract.",
+      "desc": "We cover the full cycle: digital product, native mobile, AI capabilities, infrastructure and continuous operation. No middlemen.",
+      "tab1": "Web Apps", "tab2": "Mobile · iOS & Android", "tab3": "AI Applications", "tab4": "DevOps & SRE", "tab5": "Cloud Engineering",
+      "stackLabel": "Typical stack",
+      "web": {
+        "eyebrow": "Web Product", "h": "SPAs, dashboards and platforms that scale with your business.",
+        "p": "Fast frontends, solid backends and day-one observability. System design ready for integrations, multi-tenant and real growth.",
+        "f1": "React, Next.js and server-first architectures", "f2": "REST/GraphQL APIs · Node, Python or Go",
+        "f3": "Auth, payments, multi-tenant and RBAC from day one", "f4": "Core Web Vitals, technical SEO and A/B testing"
+      },
+      "mob": {
+        "eyebrow": "Native mobile + cross-platform", "h": "Apps that feel native on iOS and Android.",
+        "p": "Native (Swift / Kotlin) when performance matters, React Native / Flutter when speed wins. We ship to stores, not demos.",
+        "f1": "Swift / SwiftUI for iOS · Kotlin / Compose for Android", "f2": "React Native and Flutter for faster delivery",
+        "f3": "Push, deep links, biometrics, in-app payments", "f4": "Store publishing, code-signing and automated release trains"
+      },
+      "ai": {
+        "eyebrow": "Applied AI", "h": "AI that lives in your product, not in a demo.",
+        "p": "Copilots, agents and RAG pipelines on your data, with guardrails, evaluation and cost control. No magic, all measurable.",
+        "f1": "RAG, semantic search and tool-using agents", "f2": "Fine-tuning and self-hosted open-source models",
+        "f3": "LLM evaluation, observability and guardrails", "f4": "Integration with OpenAI, Anthropic, Bedrock or Vertex"
+      },
+      "dev": {
+        "eyebrow": "DevOps · SRE · Platform", "h": "CI/CD, IaC and observability included by default.",
+        "p": "Not an extra layer: every project ships with pipelines, infrastructure as code and metrics from the first commit. Fewer surprises in prod.",
+        "f1": "GitHub Actions, GitLab CI or Jenkins · per-env pipelines", "f2": "Terraform and Pulumi · versioned infrastructure",
+        "f3": "Kubernetes, ECS and serverless when it fits", "f4": "Datadog, Grafana, Sentry · real SLOs and alerts"
+      },
+      "cloud": {
+        "eyebrow": "Cloud · AWS · Azure · GCP", "h": "Multi-cloud without lock-in: the right cloud for each workload.",
+        "p": "Pragmatic, secure architectures with audited cost. We migrate, modernize and operate workloads on all three majors.",
+        "f1": "Landing zones, IAM, networking and security baseline", "f2": "Migrations and modernizations (lift, shift & re-arch)",
+        "f3": "FinOps · cost visibility and continuous optimization", "f4": "Disaster recovery, backups and compliance"
+      }
+    },
+    "proc": {
+      "eyebrow": "02 · Process", "title": "From brief to production, drama-free.",
+      "desc": "A measurable process: five phases with clear deliverables, focused meetings and shippable code from week one.",
+      "n1": "01 / DISCOVER", "n2": "02 / DESIGN", "n3": "03 / BUILD", "n4": "04 / SHIP", "n5": "05 / OPERATE",
+      "s1h": "Technical discovery", "s1p": "We map goal, users and constraints. Architecture doc and phased plan.",
+      "s2h": "Design & prototype", "s2p": "UX/UI, design system and clickable prototype validated with real users before writing code.",
+      "s3h": "Sprint build", "s3p": "1–2 week sprints, demos, progress metrics and peer-reviewed code.",
+      "s4h": "Ship", "s4p": "CI/CD to production on AWS, Azure or GCP. Load and security testing, assisted go-live.",
+      "s5h": "Operate", "s5p": "SLOs, 24/7 monitoring, cost optimization and continuous evolution roadmap."
+    },
+    "case": {
+      "eyebrow": "03 · Case studies", "title": "Real products. Real users.",
+      "desc": "A small selection of projects we've shipped: a circular-economy platform in Peru, a bilingual park site in Italy, and a native iOS app on the App Store.",
+      "b1": "Sustainability · Web", "b2": "Tourism · Web · IT/EN", "b3": "Productivity · iOS",
+      "c1p": "Web platform for a circular-economy company: construction waste management and eco-materials in Peru.",
+      "c2p": "Bilingual (IT/EN) website for an Italian gardens & butterflies association in Basilicata: bookings, subscriptions and gallery.",
+      "c3p": "Native iOS app: smart alarms based on calendar events. In 2 taps you pick the event and how many minutes before to wake up."
+    },
+    "testi": {
+      "eyebrow": "04 · Testimonials", "title": "What the teams we work with say.",
+      "desc": "Long-term relationships with CTOs, founders and product leads. Few clients, deep commitment.",
+      "q1": "They felt the product as their own from week one. Delivered in three months what had been stuck for a year.",
+      "q2": "DevOps included changed everything: we stopped firefighting and started iterating product.",
+      "q3": "The AI team took us from prototype to live in production with eval metrics even finance could understand."
+    },
+    "price": {
+      "eyebrow": "05 · Plans", "title": "Clear collaboration models.",
+      "desc": "We work fixed-scope, dedicated team or retainer. No hidden fees, with full visibility over effort.",
+      "from": "from", "month": "/ mo", "custom": "Custom", "badge": "MOST CHOSEN",
+      "p1h": "Launchpad", "p1t": "Fixed scope project", "p1d": "Market-ready web or mobile MVP, with baseline DevOps and cloud deploy.",
+      "p1f1": "1 product · web or mobile", "p1f2": "Design + dev + deploy", "p1f3": "CI/CD and cloud included", "p1f4": "Delivered in 6–10 weeks", "p1c": "Request proposal",
+      "p2h": "Scale", "p2t": "Dedicated team", "p2d": "Multidisciplinary squad embedded with your team: product + dev + DevOps + AI if needed.",
+      "p2f1": "Squad of 3–5 senior people", "p2f2": "Sprints, demos and weekly metrics", "p2f3": "Mobile + web + AI + cloud", "p2f4": "3-month minimum commitment", "p2c": "Reserve squad",
+      "p3h": "Enterprise", "p3t": "Retainer & SRE", "p3d": "Continuous operation and evolution of critical platforms, with SLOs, on-call and FinOps.",
+      "p3f1": "Per-service SLOs and SLAs", "p3f2": "24/7 on-call and support", "p3f3": "Multi-cloud FinOps", "p3f4": "Quarterly joint roadmap", "p3c": "Talk to a partner"
+    },
+    "ct": {
+      "eyebrow": "06 · Contact", "title": "Tell us about your project.",
+      "desc": "We reply in under 24 business hours with an honest first read on scope, time and cost.",
+      "info": "// Direct contact", "h": "Let's talk, no middlemen.", "p": "Write, call or schedule a meeting. We work remote, based in Lima — Peru.",
+      "lblPhone": "Phone · WhatsApp", "lblMail": "Email", "lblRuc": "RUC",
+      "fName": "Your name", "fEmail": "Email", "fCompany": "Company", "fService": "Service",
+      "fOpt1": "Web application", "fOpt2": "Mobile app (iOS / Android)", "fOpt3": "AI solution", "fOpt4": "DevOps / SRE", "fOpt5": "Cloud (AWS · Azure · GCP)", "fOpt6": "Not sure · I need advice",
+      "fMsg": "Tell us about your project", "fNote": "We reply in < 24 business hours", "fSend": "Send message", "whatsapp": "Message us on WhatsApp"
+    },
+    "foot": {
+      "blurb": "Software consultancy · web, mobile, AI and cloud. We build serious products for teams that ship fast.",
+      "s1": "Services", "s1a": "Web Apps", "s1b": "Mobile iOS & Android", "s1c": "AI Applications", "s1d": "DevOps & SRE", "s1e": "Cloud Engineering",
+      "s2": "Company", "s2a": "Process", "s2b": "Cases", "s2c": "Plans", "s2d": "Contact",
+      "s3": "Contact", "rights": "All rights reserved"
+    },
+    "mod": {
+      "eyebrow": "// Quick quote", "h": "Let's start your project.", "p": "Leave your info and a technical partner reaches out in under 24 business hours.",
+      "brief": "Short brief", "send": "Send & schedule call"
+    }
+  },
+
+  "biz": {
+    "nav": { "services": "Services", "process": "How we work", "cases": "Projects", "pricing": "Pricing", "contact": "Contact", "cta": "Get a quote" },
+    "aud": { "biz": "Business", "tech": "Technical" },
+    "hero": {
+      "eyebrow": "Software to grow your business · Lima, Peru",
+      "h1a": "We build", "h1b": "the software", "h1c": "your business needs to grow.",
+      "lead": "Websites, online stores, mobile apps and AI automation. We walk with you from idea to the day your customers are already using it.",
+      "cta1": "Let's talk about your project", "cta2": "See what we do",
+      "m1": "Years helping businesses", "m2": "Industries we serve", "m3": "Types of solutions", "m4": "Ongoing support"
+    },
+    "trust": { "label": "// Stack & cloud" },
+    "trustBiz": {
+      "label": "// Industries we serve",
+      "c1": "Retail", "c2": "Restaurants", "c3": "Professional services", "c4": "Health & clinics",
+      "c5": "Education", "c6": "Real estate", "c7": "Logistics & delivery", "c8": "Startups & founders"
+    },
+    "bh": {
+      "eyebrow": "// What you get", "title": "Your business, ready for the internet.",
+      "i1t": "Your website or online store", "i1d": "Built to sell, fast and easy to update yourself.",
+      "i2t": "Your mobile app", "i2d": "On the App Store and Google Play, ready for your customers.",
+      "i3t": "AI that saves you time", "i3d": "Chatbots, automations and WhatsApp auto-replies.",
+      "i4t": "Support when you need it", "i4d": "Maintenance, improvements and continuous backup. No surprises.",
+      "p1": "years", "p2": "typical weeks", "p3": "Ongoing support"
+    },
+    "svc": {
+      "eyebrow": "01 · What we do", "title": "Five solutions to grow your business.",
+      "desc": "We're with you start to finish: idea, design, build, launch and support. No middlemen and no fine print.",
+      "tab1": "Websites & online stores", "tab2": "Mobile apps", "tab3": "AI automation", "tab4": "Maintenance & support", "tab5": "Your business on the cloud",
+      "stackLabel": "What's included",
+      "web": {
+        "eyebrow": "Your web presence", "h": "A website or online store built to sell.",
+        "p": "Modern, fast and easy to update. Mobile-ready, optimized for Google and with all the integrations your business needs.",
+        "f1": "Brand website or full online store", "f2": "Online payments (Niubiz, Culqi, MercadoPago, Izipay)",
+        "f3": "Admin panel so you can update prices and products yourself", "f4": "Google ranking and fast loading speed",
+        "b1": "Brand website", "b2": "Online store", "b3": "Admin panel", "b4": "Online payments", "b5": "Google SEO", "b6": "Hosting included"
+      },
+      "mob": {
+        "eyebrow": "Mobile apps", "h": "Your business in your customers' pocket.",
+        "p": "Professional apps for iPhone and Android: orders, bookings, loyalty, delivery — whatever your business needs. We publish them on the official stores.",
+        "f1": "iPhone app (App Store) and Android (Play Store)", "f2": "Notifications, in-app payments and biometric login",
+        "f3": "Store publishing and version support", "f4": "Design your customers understand right away",
+        "b1": "iPhone app", "b2": "Android app", "b3": "Push notifications", "b4": "Biometric login", "b5": "In-app payments", "b6": "Store publishing"
+      },
+      "ai": {
+        "eyebrow": "Practical AI", "h": "Automate tasks and serve your customers 24/7.",
+        "p": "Chatbots that actually understand, assistants that reply on WhatsApp, systems that classify documents, recommend products or summarize meetings. Applied AI, not hype.",
+        "f1": "Smart chatbots for WhatsApp and your website", "f2": "Smart search across your documents and emails",
+        "f3": "Automatic summary and classification of information", "f4": "Data analysis and sales predictions",
+        "b1": "WhatsApp chatbot", "b2": "24/7 service", "b3": "Email summary", "b4": "Smart search", "b5": "Sales prediction", "b6": "Recommendations"
+      },
+      "dev": {
+        "eyebrow": "Maintenance, no surprises", "h": "Your system always running, without you having to worry.",
+        "p": "We keep your site, app and systems running 24/7. We catch problems before your customers do and handle updates and backups.",
+        "f1": "Continuous monitoring and automatic backups", "f2": "Monthly security updates",
+        "f3": "Fast response if something fails", "f4": "Clear monthly reports, in plain language",
+        "b1": "24/7 monitoring", "b2": "Auto backups", "b3": "Updates", "b4": "Security", "b5": "Monthly reports", "b6": "Fast response"
+      },
+      "cloud": {
+        "eyebrow": "Your business on the cloud", "h": "Your systems, data and files safe and reachable.",
+        "p": "We move your business to the big cloud providers (AWS, Azure or Google). Your data backed up, your team working from anywhere, with controlled costs.",
+        "f1": "Migration of your systems to the cloud", "f2": "Secure backup of all your information",
+        "f3": "Access from anywhere and any device", "f4": "Monthly cost control with no surprises",
+        "b1": "Cloud migration", "b2": "Secure backup", "b3": "Remote access", "b4": "Cost control", "b5": "Corporate email", "b6": "Shared files"
+      }
+    },
+    "proc": {
+      "eyebrow": "02 · How we work", "title": "A simple process, no technical knots.",
+      "desc": "Five clear steps. You choose how involved to be and we handle the technical side.",
+      "n1": "01 / WE LISTEN", "n2": "02 / WE DESIGN", "n3": "03 / WE BUILD", "n4": "04 / WE LAUNCH", "n5": "05 / WE SUPPORT",
+      "s1h": "We listen", "s1p": "We talk about your business, your customers and what you want to achieve. You get a clear proposal with timeline and cost.",
+      "s2h": "We design", "s2p": "We show you how your site or app will look before we start building. We adjust until you love it.",
+      "s3h": "We build", "s3p": "We build in stages and show you progress every week. You review and approve.",
+      "s4h": "We launch", "s4p": "We deploy everything to the cloud and publish to the stores if it's an app. We're there with you on launch day.",
+      "s5h": "We support", "s5p": "We provide support, updates and improvements. If something breaks, we fix it fast."
+    },
+    "case": {
+      "eyebrow": "03 · Projects", "title": "Real products people use.",
+      "desc": "A small sample of projects we've launched: a circular-economy platform in Peru, a bilingual park website in Italy, and a native iPhone app on the App Store.",
+      "b1": "Sustainability · Web", "b2": "Tourism · Web · IT/EN", "b3": "Productivity · iPhone",
+      "c1p": "Website for a circular-economy company: construction waste management and eco-materials in Peru.",
+      "c2p": "Bilingual (IT/EN) website for an Italian gardens and butterflies association: bookings, subscriptions and gallery.",
+      "c3p": "Native iPhone app: smart alarms based on your calendar. In 2 taps you pick the event and how many minutes before to wake."
+    },
+    "testi": {
+      "eyebrow": "04 · Testimonials", "title": "What the businesses who trusted us say.",
+      "desc": "Long-term relationships with owners, managers and entrepreneurs. Few clients, deep commitment.",
+      "q1": "They understood my business from day one. Delivered in three months what had been stuck for a year.",
+      "q2": "Now everything just works. We stopped firefighting and started growing.",
+      "q3": "We went from an idea to a real app in production, with data I actually understand and can show my board."
+    },
+    "price": {
+      "eyebrow": "05 · Pricing", "title": "Three ways to work together.",
+      "desc": "Fixed-scope project, dedicated team or monthly support. No hidden costs and everything talked through up front.",
+      "from": "from", "month": "/ mo", "custom": "Custom", "badge": "MOST CHOSEN",
+      "p1h": "Start", "p1t": "Fixed-scope project", "p1d": "Your first website or app, ready to use and grow with your business.",
+      "p1f1": "1 web or mobile app", "p1f2": "Design + build + publishing", "p1f3": "Cloud hosting included", "p1f4": "Delivered in 4–8 weeks", "p1c": "Request a proposal",
+      "p2h": "Growth", "p2t": "Team made to measure", "p2d": "A team working with you every month to build and improve your platform.",
+      "p2f1": "Team of 3–5 people", "p2f2": "Meetings and progress every week", "p2f3": "Web + app + AI if you need", "p2f4": "3-month minimum commitment", "p2c": "Reserve team",
+      "p3h": "Enterprise", "p3t": "Ongoing support", "p3d": "Continuous maintenance and improvements for your platform, with support whenever you need it.",
+      "p3f1": "Priority support", "p3f2": "Help when you need it", "p3f3": "Improvements and new features", "p3f4": "Clear monthly reports", "p3c": "Talk to us"
+    },
+    "ct": {
+      "eyebrow": "06 · Contact", "title": "Tell us about your business.",
+      "desc": "We reply in less than 24 business hours with an honest first read on what you need, how long it takes and how much it costs.",
+      "info": "// Let's talk", "h": "Let's talk, no middlemen.", "p": "Write, call or schedule a meeting. We work remote from Lima — Peru.",
+      "lblPhone": "Phone · WhatsApp", "lblMail": "Email", "lblRuc": "Tax ID",
+      "fName": "Your name", "fEmail": "Email", "fCompany": "Your business", "fService": "What do you need?",
+      "fOpt1": "Website or online store", "fOpt2": "Mobile app", "fOpt3": "AI automation", "fOpt4": "Maintenance & support", "fOpt5": "Move my business to the cloud", "fOpt6": "Not sure · I need advice",
+      "fMsg": "Tell us about your project", "fNote": "We reply in < 24 business hours", "fSend": "Send message", "whatsapp": "Message us on WhatsApp"
+    },
+    "foot": {
+      "blurb": "Custom software for your business. Websites, apps, AI automation and ongoing support.",
+      "s1": "Services", "s1a": "Websites & online stores", "s1b": "Mobile apps", "s1c": "AI automation", "s1d": "Maintenance & support", "s1e": "Cloud migration",
+      "s2": "Business", "s2a": "How we work", "s2b": "Projects", "s2c": "Pricing", "s2d": "Contact",
+      "s3": "Contact", "rights": "All rights reserved"
+    },
+    "mod": {
+      "eyebrow": "// Quick quote", "h": "Let's start your project.", "p": "Leave your info and we'll reach out in less than 24 business hours.",
+      "brief": "Tell us briefly", "send": "Send and schedule meeting"
+    }
+  }
+}

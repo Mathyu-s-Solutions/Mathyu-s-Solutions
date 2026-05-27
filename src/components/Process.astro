@@ -1,0 +1,36 @@
+---
+import { translator, type Lang } from '../i18n/utils';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const tt = translator(lang, 'tech');
+
+const steps = [
+  { n: 'proc.n1', h: 'proc.s1h', p: 'proc.s1p', ico: '◇' },
+  { n: 'proc.n2', h: 'proc.s2h', p: 'proc.s2p', ico: '◈' },
+  { n: 'proc.n3', h: 'proc.s3h', p: 'proc.s3p', ico: '▲' },
+  { n: 'proc.n4', h: 'proc.s4h', p: 'proc.s4p', ico: '●' },
+  { n: 'proc.n5', h: 'proc.s5h', p: 'proc.s5p', ico: '∞' },
+];
+---
+<section class="block" id="process">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow mono"><span data-i18n="proc.eyebrow">{tt('proc.eyebrow')}</span></span>
+        <h2 data-i18n="proc.title">{tt('proc.title')}</h2>
+      </div>
+      <p class="desc" data-i18n="proc.desc">{tt('proc.desc')}</p>
+    </div>
+
+    <div class="process reveal">
+      {steps.map((s) => (
+        <div class="proc-step">
+          <span class="num" data-i18n={s.n}>{tt(s.n)}</span>
+          <h4 data-i18n={s.h}>{tt(s.h)}</h4>
+          <p data-i18n={s.p}>{tt(s.p)}</p>
+          <span class="ico mono" aria-hidden="true">{s.ico}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,36 @@
+{
+  "name": "mathyus-solutions",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mathyu's Solutions — software consultancy landing (Astro, SEO-first)",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "og": "node scripts/og.mjs",
+    "astro": "astro"
+  },
+  "engines": {
+    "node": ">=18.20.8"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "@fontsource-variable/bricolage-grotesque": "^5.2.10",
+    "@fontsource-variable/instrument-sans": "^5.2.8",
+    "@fontsource-variable/jetbrains-mono": "^5.2.8",
+    "astro": "^6.3.8"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "sharp": "^0.34.5",
+    "typescript": "^6.0.3"
+  }
+}

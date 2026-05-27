@@ -1,0 +1,38 @@
+---
+import { translator, type Lang } from '../i18n/utils';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const tt = translator(lang, 'tech');
+
+const items = [
+  { q: 'testi.q1', av: 'LR', name: 'Laura Ramírez', role: 'CTO · Fintech' },
+  { q: 'testi.q2', av: 'CV', name: 'Carlos Velasco', role: 'Head of Product · Retail' },
+  { q: 'testi.q3', av: 'AM', name: 'Andrea Molina', role: 'Founder · SaaS' },
+];
+---
+<section class="block" id="testi">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow mono"><span data-i18n="testi.eyebrow">{tt('testi.eyebrow')}</span></span>
+        <h2 data-i18n="testi.title">{tt('testi.title')}</h2>
+      </div>
+      <p class="desc" data-i18n="testi.desc">{tt('testi.desc')}</p>
+    </div>
+
+    <div class="testi">
+      {items.map((it) => (
+        <div class="t-card reveal">
+          <p class="q" data-i18n={it.q}>{tt(it.q)}</p>
+          <div class="who">
+            <div class="av" aria-hidden="true">{it.av}</div>
+            <div>
+              <b>{it.name}</b>
+              <span>{it.role}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

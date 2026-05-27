@@ -1,0 +1,68 @@
+---
+import { translator, type Lang } from '../i18n/utils';
+import { SITE } from '../data/site';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const tt = translator(lang, 'tech');
+const home = `/${lang}/`;
+const year = new Date().getFullYear();
+const services = [
+  { href: '#services', key: 'foot.s1a' },
+  { href: '#services', key: 'foot.s1b' },
+  { href: '#services', key: 'foot.s1c' },
+  { href: '#services', key: 'foot.s1d' },
+  { href: '#services', key: 'foot.s1e' },
+];
+const company = [
+  { href: '#process', key: 'foot.s2a' },
+  { href: '#cases', key: 'foot.s2b' },
+  { href: '#pricing', key: 'foot.s2c' },
+  { href: '#contact', key: 'foot.s2d' },
+];
+---
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href={home} aria-label="Mathyu's Solutions">
+          <span class="brand-mark"><span class="br">&lt;</span>MS<span class="br">&gt;</span></span>
+          <span class="brand-name">Mathyu's <span class="dim">Solutions</span></span>
+        </a>
+        <p class="blurb" data-i18n="foot.blurb">{tt('foot.blurb')}</p>
+        <div class="trust" style="margin-top:8px; padding: 14px 0;">
+          <span>// stack</span>
+          <div class="chip">AWS</div><div class="chip">Azure</div><div class="chip">GCP</div>
+        </div>
+      </div>
+      <div>
+        <h3 data-i18n="foot.s1">{tt('foot.s1')}</h3>
+        <ul>
+          {services.map((s) => (
+            <li><a href={s.href} data-i18n={s.key}>{tt(s.key)}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3 data-i18n="foot.s2">{tt('foot.s2')}</h3>
+        <ul>
+          {company.map((s) => (
+            <li><a href={s.href} data-i18n={s.key}>{tt(s.key)}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3 data-i18n="foot.s3">{tt('foot.s3')}</h3>
+        <ul>
+          <li><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+          <li><a href={`tel:${SITE.phoneE164}`}>{SITE.phone}</a></li>
+          <li><span>{SITE.city}, {SITE.countryName}</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© {year} Mathyu's Solutions · <span data-i18n="foot.rights">{tt('foot.rights')}</span></span>
+      <span class="ruc">RUC {SITE.ruc}</span>
+      <span class="mono">&lt;MS/&gt; · v1.0</span>
+    </div>
+  </div>
+</footer>

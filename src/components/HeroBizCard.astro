@@ -1,0 +1,35 @@
+---
+import { translator, type Lang } from '../i18n/utils';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+// Business-audience hero card. Only shown in business mode → render biz copy.
+const tb = translator(lang, 'biz');
+const items = [
+  { n: '01', t: tb('bh.i1t'), d: tb('bh.i1d') },
+  { n: '02', t: tb('bh.i2t'), d: tb('bh.i2d') },
+  { n: '03', t: tb('bh.i3t'), d: tb('bh.i3d') },
+  { n: '04', t: tb('bh.i4t'), d: tb('bh.i4d') },
+];
+---
+<aside class="biz-only">
+  <div class="biz-hero">
+    <span class="bh-eyebrow">{tb('bh.eyebrow')}</span>
+    <h2 class="bh-title">{tb('bh.title')}</h2>
+    <ul>
+      {items.map((it) => (
+        <li>
+          <span class="ico">{it.n}</span>
+          <div>
+            <b>{it.t}</b>
+            <span class="d">{it.d}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+    <div class="bh-foot">
+      <span class="pill"><b>+6</b> {tb('bh.p1')}</span>
+      <span class="pill"><b>4-8</b> {tb('bh.p2')}</span>
+      <span class="pill">{tb('bh.p3')}</span>
+    </div>
+  </div>
+</aside>

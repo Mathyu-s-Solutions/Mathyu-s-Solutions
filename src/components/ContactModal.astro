@@ -1,0 +1,36 @@
+---
+import { translator, type Lang } from '../i18n/utils';
+import { SITE } from '../data/site';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const tt = translator(lang, 'tech');
+const closeLabel = lang === 'es' ? 'Cerrar' : 'Close';
+---
+<div class="modal-bg" id="ms-modal" role="dialog" aria-modal="true" aria-labelledby="ms-modal-title" aria-hidden="true">
+  <div class="modal">
+    <button class="close" type="button" data-modal-close aria-label={closeLabel}>✕</button>
+    <span class="eyebrow mono"><span data-i18n="mod.eyebrow">{tt('mod.eyebrow')}</span></span>
+    <h2 id="ms-modal-title" data-i18n="mod.h">{tt('mod.h')}</h2>
+    <p data-i18n="mod.p">{tt('mod.p')}</p>
+    <form class="form" style="padding:0; gap:14px;" id="modal-form" data-mailto={SITE.email} data-whatsapp={SITE.whatsapp} novalidate>
+      <div class="row2">
+        <div class="field">
+          <label for="mf-name" data-i18n="ct.fName">{tt('ct.fName')}</label>
+          <input id="mf-name" name="name" type="text" required autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="mf-email" data-i18n="ct.fEmail">{tt('ct.fEmail')}</label>
+          <input id="mf-email" name="email" type="email" required autocomplete="email" />
+        </div>
+      </div>
+      <div class="field">
+        <label for="mf-msg" data-i18n="mod.brief">{tt('mod.brief')}</label>
+        <textarea id="mf-msg" name="msg" required placeholder="¿Qué quieres construir?"></textarea>
+      </div>
+      <button class="btn" type="submit" style="justify-content:center;">
+        <span data-i18n="mod.send">{tt('mod.send')}</span>
+        <span class="arr" aria-hidden="true">→</span>
+      </button>
+    </form>
+  </div>
+</div>

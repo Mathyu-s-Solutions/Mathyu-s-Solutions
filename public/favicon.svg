@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Mathyu's Solutions">
+  <rect width="64" height="64" rx="14" fill="#11161b" />
+  <rect x="3.5" y="3.5" width="57" height="57" rx="12" fill="none" stroke="#7fd99a" stroke-opacity="0.3" stroke-width="1.5" />
+  <text x="32" y="43" text-anchor="middle" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, monospace" font-weight="700" font-size="29" letter-spacing="-1.5" fill="#7fd99a">MS</text>
+</svg>

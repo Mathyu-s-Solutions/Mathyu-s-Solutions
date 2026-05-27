@@ -1,0 +1,107 @@
+---
+import { translator, type Lang } from '../i18n/utils';
+import WebDashboard from './ServiceIllustrations/WebDashboard.astro';
+import MobileScreens from './ServiceIllustrations/MobileScreens.astro';
+import AIAgentFlow from './ServiceIllustrations/AIAgentFlow.astro';
+import DevOpsPipeline from './ServiceIllustrations/DevOpsPipeline.astro';
+import MultiCloud from './ServiceIllustrations/MultiCloud.astro';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const tt = translator(lang, 'tech');
+const tb = translator(lang, 'biz');
+
+const services = [
+  {
+    id: 'web', num: '01', tab: 'svc.tab1', ns: 'svc.web', Illu: WebDashboard,
+    techChips: ['Next.js', 'React', 'TypeScript', 'Node', 'Python', 'PostgreSQL', 'Redis', 'Stripe'],
+  },
+  {
+    id: 'mobile', num: '02', tab: 'svc.tab2', ns: 'svc.mob', Illu: MobileScreens,
+    techChips: ['Swift', 'SwiftUI', 'Kotlin', 'Jetpack Compose', 'React Native', 'Flutter', 'Firebase', 'Fastlane'],
+  },
+  {
+    id: 'ai', num: '03', tab: 'svc.tab3', ns: 'svc.ai', Illu: AIAgentFlow,
+    techChips: ['OpenAI', 'Anthropic', 'Bedrock', 'LangChain', 'LlamaIndex', 'pgvector', 'Pinecone', 'Python'],
+  },
+  {
+    id: 'devops', num: '04', tab: 'svc.tab4', ns: 'svc.dev', Illu: DevOpsPipeline,
+    techChips: ['Terraform', 'Kubernetes', 'Docker', 'GitHub Actions', 'ArgoCD', 'Datadog', 'Grafana', 'Sentry'],
+  },
+  {
+    id: 'cloud', num: '05', tab: 'svc.tab5', ns: 'svc.cloud', Illu: MultiCloud,
+    techChips: ['AWS', 'Azure', 'GCP', 'Cloudflare', 'CloudFront', 'EKS / AKS / GKE', 'RDS · Aurora', 'BigQuery'],
+  },
+];
+---
+<section class="block" id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow mono"><span data-i18n="svc.eyebrow">{tt('svc.eyebrow')}</span></span>
+        <h2 data-i18n="svc.title">{tt('svc.title')}</h2>
+      </div>
+      <p class="desc" data-i18n="svc.desc">{tt('svc.desc')}</p>
+    </div>
+
+    <div class="svc-tabs reveal">
+      <div class="svc-tablist" role="tablist" aria-label={lang === 'es' ? 'Servicios' : 'Services'}>
+        {services.map((s, i) => (
+          <button
+            class="svc-tab"
+            role="tab"
+            id={`tab-${s.id}`}
+            aria-controls={`panel-${s.id}`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            tabindex={i === 0 ? '0' : '-1'}
+            data-panel={s.id}
+          >
+            <span class="num">{s.num}</span><span class="name" data-i18n={s.tab}>{tt(s.tab)}</span>
+          </button>
+        ))}
+      </div>
+
+      <div class="svc-panels">
+        {services.map((s, i) => {
+          const Illu = s.Illu;
+          return (
+            <div
+              class={`svc-panel${i === 0 ? ' active' : ''}`}
+              id={`panel-${s.id}`}
+              role="tabpanel"
+              aria-labelledby={`tab-${s.id}`}
+              data-panel={s.id}
+            >
+              <div>
+                <span class="eyebrow mono"><span data-i18n={`${s.ns}.eyebrow`}>{tt(`${s.ns}.eyebrow`)}</span></span>
+                <h3 data-i18n={`${s.ns}.h`}>{tt(`${s.ns}.h`)}</h3>
+                <p data-i18n={`${s.ns}.p`}>{tt(`${s.ns}.p`)}</p>
+                <ul class="feat">
+                  {[1, 2, 3, 4].map((n) => (
+                    <li data-i18n={`${s.ns}.f${n}`}>{tt(`${s.ns}.f${n}`)}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <div class="svc-stack">
+                  <h4 data-i18n="svc.stackLabel">{tt('svc.stackLabel')}</h4>
+                  <div class="chips tech-only">
+                    {s.techChips.map((c) => <span class="chip">{c}</span>)}
+                  </div>
+                  <div class="chips biz-only">
+                    {[1, 2, 3, 4, 5, 6].map((n) => (
+                      <span class="chip">{tb(`${s.ns}.b${n}`)}</span>
+                    ))}
+                  </div>
+                </div>
+                <div class="svc-illu">
+                  <Illu />
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,92 @@
+<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <marker id="arr-ai" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#7fd99a" />
+    </marker>
+    <marker id="arr-ai-dim" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#4a5260" />
+    </marker>
+  </defs>
+  <rect width="400" height="250" fill="#11161b" />
+
+  <!-- User input -->
+  <g transform="translate(14 100)">
+    <rect width="74" height="42" rx="6" fill="#1a1f24" stroke="#3a4248" />
+    <circle cx="14" cy="14" r="6" fill="#6a7280" />
+    <path d="M8 32 Q 14 26, 20 32 Z" fill="#6a7280" />
+    <text x="28" y="16" fill="#d4dae0" font-family="Instrument Sans Variable, sans-serif" font-size="7" font-weight="600">User</text>
+    <text x="28" y="26" fill="#6a7280" font-family="JetBrains Mono Variable, monospace" font-size="6">prompt</text>
+    <rect x="6" y="32" width="62" height="3" rx="1" fill="#2a3038" />
+  </g>
+
+  <!-- Agent box -->
+  <g transform="translate(140 78)">
+    <rect width="120" height="90" rx="8" fill="#16261f" stroke="#7fd99a" stroke-width="1.5" />
+    <text x="60" y="18" text-anchor="middle" fill="#7fd99a" font-family="JetBrains Mono Variable, monospace" font-size="7" font-weight="700" letter-spacing="1.5">LLM AGENT</text>
+    <line x1="10" y1="24" x2="110" y2="24" stroke="#2d4d3c" />
+    <text x="10" y="36" fill="#6a7280" font-family="JetBrains Mono Variable, monospace" font-size="6">thinking…</text>
+    <rect x="10" y="42" width="76" height="3" rx="1" fill="#7fd99a" opacity="0.7" />
+    <rect x="10" y="50" width="96" height="3" rx="1" fill="#7fd99a" opacity="0.45" />
+    <rect x="10" y="58" width="62" height="3" rx="1" fill="#7fd99a" opacity="0.7" />
+    <rect x="10" y="66" width="84" height="3" rx="1" fill="#7fd99a" opacity="0.35" />
+    <rect x="10" y="74" width="50" height="3" rx="1" fill="#7fd99a" opacity="0.55" />
+  </g>
+
+  <!-- arrow user -> agent -->
+  <line x1="90" y1="121" x2="136" y2="121" stroke="#7fd99a" stroke-width="1.5" marker-end="url(#arr-ai)" />
+
+  <!-- Tools (right top) -->
+  <g transform="translate(296 32)">
+    <rect width="90" height="22" rx="4" fill="#1a1f24" stroke="#3a4248" />
+    <circle cx="11" cy="11" r="4" fill="#f4bf4f" />
+    <text x="22" y="14" fill="#d4dae0" font-family="JetBrains Mono Variable, monospace" font-size="7">web_search</text>
+  </g>
+  <g transform="translate(296 62)">
+    <rect width="90" height="22" rx="4" fill="#1a1f24" stroke="#3a4248" />
+    <circle cx="11" cy="11" r="4" fill="#62c554" />
+    <text x="22" y="14" fill="#d4dae0" font-family="JetBrains Mono Variable, monospace" font-size="7">vector_db</text>
+  </g>
+  <g transform="translate(296 92)">
+    <rect width="90" height="22" rx="4" fill="#1a1f24" stroke="#3a4248" />
+    <circle cx="11" cy="11" r="4" fill="#ed6a5a" />
+    <text x="22" y="14" fill="#d4dae0" font-family="JetBrains Mono Variable, monospace" font-size="7">api_call</text>
+  </g>
+
+  <!-- tool labels -->
+  <text x="296" y="22" fill="#6a7280" font-family="JetBrains Mono Variable, monospace" font-size="6">TOOLS</text>
+
+  <!-- lines to tools -->
+  <line x1="260" y1="100" x2="292" y2="43" stroke="#4a5260" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#arr-ai-dim)" />
+  <line x1="260" y1="115" x2="292" y2="73" stroke="#4a5260" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#arr-ai-dim)" />
+  <line x1="260" y1="135" x2="292" y2="103" stroke="#4a5260" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#arr-ai-dim)" />
+
+  <!-- Response (right bottom) -->
+  <g transform="translate(296 140)">
+    <rect width="90" height="46" rx="6" fill="#1a1f24" stroke="#3a4248" />
+    <text x="10" y="14" fill="#7fd99a" font-family="JetBrains Mono Variable, monospace" font-size="6" font-weight="700">RESPONSE</text>
+    <rect x="10" y="20" width="70" height="3" rx="1" fill="#d4dae0" />
+    <rect x="10" y="28" width="56" height="3" rx="1" fill="#d4dae0" />
+    <rect x="10" y="36" width="44" height="3" rx="1" fill="#6a7280" />
+  </g>
+  <line x1="260" y1="150" x2="292" y2="158" stroke="#7fd99a" stroke-width="1.5" marker-end="url(#arr-ai)" />
+
+  <!-- Bottom row: eval/cost/latency -->
+  <g transform="translate(14 200)">
+    <rect width="372" height="36" rx="6" fill="#1a1f24" stroke="#252b32" />
+    <text x="10" y="14" fill="#6a7280" font-family="JetBrains Mono Variable, monospace" font-size="6">OBSERVABILITY · EVAL · GUARDRAILS</text>
+
+    <rect x="10" y="20" width="42" height="10" rx="2" fill="#16261f" />
+    <text x="31" y="27" text-anchor="middle" fill="#7fd99a" font-family="JetBrains Mono Variable, monospace" font-size="6" font-weight="700">PASS 94%</text>
+
+    <rect x="60" y="20" width="48" height="10" rx="2" fill="#1a1f24" stroke="#3a4248" />
+    <text x="84" y="27" text-anchor="middle" fill="#d4dae0" font-family="JetBrains Mono Variable, monospace" font-size="6">$0.012</text>
+
+    <rect x="116" y="20" width="48" height="10" rx="2" fill="#1a1f24" stroke="#3a4248" />
+    <text x="140" y="27" text-anchor="middle" fill="#d4dae0" font-family="JetBrains Mono Variable, monospace" font-size="6">312 ms</text>
+
+    <rect x="172" y="20" width="56" height="10" rx="2" fill="#1a1f24" stroke="#3a4248" />
+    <text x="200" y="27" text-anchor="middle" fill="#d4dae0" font-family="JetBrains Mono Variable, monospace" font-size="6">1.2k tok</text>
+
+    <text x="362" y="27" text-anchor="end" fill="#7fd99a" font-family="JetBrains Mono Variable, monospace" font-size="6">● live</text>
+  </g>
+</svg>

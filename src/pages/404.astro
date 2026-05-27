@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const lang = 'es' as const;
+const title = "404 — Página no encontrada · Mathyu's Solutions";
+const description = 'La página que buscas no existe o se movió.';
+---
+<BaseLayout title={title} description={description} lang={lang} path="/404/" noindex>
+  <main class="wrap" style="min-height:70vh; display:grid; place-items:center; text-align:center; padding:120px 28px;">
+    <div>
+      <p class="eyebrow mono" style="justify-content:center;">Error 404</p>
+      <h1 class="font-display" style="font-size:clamp(40px,7vw,72px); margin:18px 0 12px;">Página no encontrada</h1>
+      <p style="color:var(--fg-dim); max-width:48ch; margin:0 auto 28px;">
+        Lo sentimos, esta página no existe. / Sorry, this page doesn't exist.
+      </p>
+      <div class="hero-cta" style="justify-content:center;">
+        <a class="btn" href="/es/">Ir al inicio</a>
+        <a class="btn btn-secondary" href="/en/">Go to homepage</a>
+      </div>
+    </div>
+  </main>
+</BaseLayout>

@@ -1,0 +1,63 @@
+<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <rect width="400" height="250" fill="#11161b" />
+
+  <!-- top: orchestrator -->
+  <g transform="translate(130 16)">
+    <rect width="140" height="46" rx="8" fill="#16261f" stroke="#7fd99a" stroke-width="1.5" />
+    <text x="70" y="18" text-anchor="middle" fill="#7fd99a" font-family="JetBrains Mono Variable, monospace" font-size="7" font-weight="700">YOUR APP</text>
+    <line x1="14" y1="24" x2="126" y2="24" stroke="#2d4d3c" />
+    <text x="70" y="36" text-anchor="middle" fill="#d4dae0" font-family="Bricolage Grotesque Variable, serif" font-size="9" font-style="italic">multi-cloud orchestration</text>
+  </g>
+
+  <!-- connecting lines down -->
+  <line x1="200" y1="62" x2="76" y2="110" stroke="#4a5260" stroke-dasharray="3 3" />
+  <line x1="200" y1="62" x2="200" y2="110" stroke="#4a5260" stroke-dasharray="3 3" />
+  <line x1="200" y1="62" x2="324" y2="110" stroke="#4a5260" stroke-dasharray="3 3" />
+
+  <!-- AWS card -->
+  <g transform="translate(20 110)">
+    <rect width="112" height="120" rx="8" fill="#1a1f24" stroke="#252b32" />
+    <g transform="translate(28 12)">
+      <path d="M0 30 Q 0 18, 14 16 Q 18 4, 32 4 Q 46 4, 50 16 Q 60 16, 60 26 Q 60 36, 50 36 L 8 36 Q 0 36, 0 30 Z" fill="#ff9900" opacity="0.95" />
+      <text x="30" y="28" text-anchor="middle" fill="#1a1f24" font-family="JetBrains Mono Variable, monospace" font-size="8" font-weight="700">aws</text>
+    </g>
+    <text x="56" y="74" text-anchor="middle" fill="#ff9900" font-family="JetBrains Mono Variable, monospace" font-size="10" font-weight="700" letter-spacing="2">AWS</text>
+    <line x1="14" y1="82" x2="98" y2="82" stroke="#2a3038" />
+    <text x="14" y="94" fill="#d4dae0" font-family="JetBrains Mono Variable, monospace" font-size="6">EKS · RDS · S3</text>
+    <text x="14" y="104" fill="#d4dae0" font-family="JetBrains Mono Variable, monospace" font-size="6">CloudFront · Lambda</text>
+    <text x="14" y="114" fill="#7fd99a" font-family="JetBrains Mono Variable, monospace" font-size="6">● us-east-1</text>
+  </g>
+
+  <!-- Azure card -->
+  <g transform="translate(144 110)">
+    <rect width="112" height="120" rx="8" fill="#1a1f24" stroke="#252b32" />
+    <g transform="translate(36 14)">
+      <polygon points="2,32 22,2 32,2 18,32" fill="#0089d6" />
+      <polygon points="18,32 32,2 40,32" fill="#50aae5" />
+    </g>
+    <text x="56" y="74" text-anchor="middle" fill="#50aae5" font-family="JetBrains Mono Variable, monospace" font-size="10" font-weight="700" letter-spacing="1">AZURE</text>
+    <line x1="14" y1="82" x2="98" y2="82" stroke="#2a3038" />
+    <text x="14" y="94" fill="#d4dae0" font-family="JetBrains Mono Variable, monospace" font-size="6">AKS · CosmosDB</text>
+    <text x="14" y="104" fill="#d4dae0" font-family="JetBrains Mono Variable, monospace" font-size="6">Functions · Blob</text>
+    <text x="14" y="114" fill="#7fd99a" font-family="JetBrains Mono Variable, monospace" font-size="6">● westeurope</text>
+  </g>
+
+  <!-- GCP card -->
+  <g transform="translate(268 110)">
+    <rect width="112" height="120" rx="8" fill="#1a1f24" stroke="#252b32" />
+    <g transform="translate(40 14)">
+      <polygon points="0,16 8,2 24,2 32,16 24,30 8,30" fill="#4285f4" />
+      <polygon points="0,16 8,30 24,30" fill="#34a853" opacity="0.95" />
+      <polygon points="24,2 32,16 24,30" fill="#fbbc04" opacity="0.95" />
+      <polygon points="8,2 0,16 8,16" fill="#ea4335" opacity="0.95" />
+    </g>
+    <text x="56" y="74" text-anchor="middle" fill="#4285f4" font-family="JetBrains Mono Variable, monospace" font-size="10" font-weight="700" letter-spacing="2">GCP</text>
+    <line x1="14" y1="82" x2="98" y2="82" stroke="#2a3038" />
+    <text x="14" y="94" fill="#d4dae0" font-family="JetBrains Mono Variable, monospace" font-size="6">GKE · BigQuery</text>
+    <text x="14" y="104" fill="#d4dae0" font-family="JetBrains Mono Variable, monospace" font-size="6">Run · Pub/Sub</text>
+    <text x="14" y="114" fill="#7fd99a" font-family="JetBrains Mono Variable, monospace" font-size="6">● us-central1</text>
+  </g>
+
+  <!-- small region label -->
+  <text x="14" y="244" fill="#6a7280" font-family="JetBrains Mono Variable, monospace" font-size="6">// terraform · IAM · landing zones · FinOps</text>
+</svg>

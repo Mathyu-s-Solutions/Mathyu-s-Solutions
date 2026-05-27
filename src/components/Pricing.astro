@@ -1,0 +1,66 @@
+---
+import { translator, type Lang } from '../i18n/utils';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const tt = translator(lang, 'tech');
+
+const plans = [
+  {
+    id: 'p1', featured: false, h: 'price.p1h', tag: 'price.p1t',
+    priceSpec: 'tech:$8K|biz:S/2.5K', priceInit: '$8K', smallKey: 'price.from',
+    desc: 'price.p1d', cta: 'price.p1c', ctaClass: 'btn btn-secondary',
+  },
+  {
+    id: 'p2', featured: true, h: 'price.p2h', tag: 'price.p2t',
+    priceSpec: 'tech:$15K|biz:S/6.5K', priceInit: '$15K', smallKey: 'price.month',
+    desc: 'price.p2d', cta: 'price.p2c', ctaClass: 'btn',
+  },
+  {
+    id: 'p3', featured: false, h: 'price.p3h', tag: 'price.p3t',
+    custom: true,
+    desc: 'price.p3d', cta: 'price.p3c', ctaClass: 'btn btn-secondary',
+  },
+];
+---
+<section class="block" id="pricing">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow mono"><span data-i18n="price.eyebrow">{tt('price.eyebrow')}</span></span>
+        <h2 data-i18n="price.title">{tt('price.title')}</h2>
+      </div>
+      <p class="desc" data-i18n="price.desc">{tt('price.desc')}</p>
+    </div>
+
+    <div class="pricing">
+      {plans.map((p) => (
+        <div class={`plan reveal${p.featured ? ' featured' : ''}`} data-badge={p.featured ? tt('price.badge') : undefined}>
+          <h3 data-i18n={p.h}>{tt(p.h)}</h3>
+          <span class="tag" data-i18n={p.tag}>{tt(p.tag)}</span>
+          <div class="price">
+            {p.custom ? (
+              <span data-i18n="price.custom">{tt('price.custom')}</span>
+            ) : (
+              <Fragment>
+                <span data-price={p.priceSpec}>{p.priceInit}</span>{' '}
+                <small data-i18n={p.smallKey}>{tt(p.smallKey!)}</small>
+              </Fragment>
+            )}
+          </div>
+          <p class="pdesc" data-i18n={p.desc}>{tt(p.desc)}</p>
+          <ul>
+            {[1, 2, 3, 4].map((n) => (
+              <li data-i18n={`price.${p.id}f${n}`}>{tt(`price.${p.id}f${n}`)}</li>
+            ))}
+          </ul>
+          <div class="cta">
+            <button class={p.ctaClass} type="button" data-modal-open>
+              <span data-i18n={p.cta}>{tt(p.cta)}</span>
+              <span class="arr" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

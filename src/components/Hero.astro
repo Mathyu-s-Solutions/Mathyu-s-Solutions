@@ -1,0 +1,49 @@
+---
+import { translator, type Lang } from '../i18n/utils';
+import HeroTerminal from './HeroTerminal.astro';
+import HeroBizCard from './HeroBizCard.astro';
+import TrustStrip from './TrustStrip.astro';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const tt = translator(lang, 'tech');
+
+const meta = [
+  { b: '+6', key: 'hero.m1' },
+  { b: '3', key: 'hero.m2' },
+  { b: '5', key: 'hero.m3' },
+  { b: '24/7', key: 'hero.m4' },
+];
+---
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow mono"><span data-i18n="hero.eyebrow">{tt('hero.eyebrow')}</span></span>
+      <h1>
+        <span data-i18n="hero.h1a">{tt('hero.h1a')}</span>
+        <span class="accent" data-i18n="hero.h1b">{tt('hero.h1b')}</span>
+        <span data-i18n="hero.h1c">{tt('hero.h1c')}</span>
+        <span class="stack mono" aria-hidden="true">&lt;MS/&gt;</span>
+      </h1>
+      <p class="lead" data-i18n="hero.lead">{tt('hero.lead')}</p>
+      <div class="hero-cta">
+        <button class="btn" type="button" data-modal-open>
+          <span data-i18n="hero.cta1">{tt('hero.cta1')}</span>
+          <span class="arr" aria-hidden="true">→</span>
+        </button>
+        <a class="btn btn-secondary" href="#services">
+          <span data-i18n="hero.cta2">{tt('hero.cta2')}</span>
+        </a>
+      </div>
+      <div class="hero-meta">
+        {meta.map((m) => (
+          <div class="m"><b>{m.b}</b><span data-i18n={m.key}>{tt(m.key)}</span></div>
+        ))}
+      </div>
+    </div>
+    <HeroTerminal />
+    <HeroBizCard lang={lang} />
+  </div>
+
+  <TrustStrip lang={lang} />
+</header>

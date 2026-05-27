@@ -1,0 +1,20 @@
+---
+import { translator, type Lang } from '../i18n/utils';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const tt = translator(lang, 'tech');
+const tb = translator(lang, 'biz');
+
+const techChips = ['AWS', 'Azure', 'GCP', 'Kubernetes', 'Terraform', 'React · Next.js', 'Swift · Kotlin', 'Python · Node', 'OpenAI · LangChain'];
+const bizChips = ['trustBiz.c1', 'trustBiz.c2', 'trustBiz.c3', 'trustBiz.c4', 'trustBiz.c5', 'trustBiz.c6', 'trustBiz.c7', 'trustBiz.c8'];
+---
+<div class="wrap">
+  <div class="trust tech-only">
+    <span>{tt('trust.label')}</span>
+    {techChips.map((c) => <div class="chip">{c}</div>)}
+  </div>
+  <div class="trust biz-only">
+    <span>{tb('trustBiz.label')}</span>
+    {bizChips.map((k) => <div class="chip">{tb(k)}</div>)}
+  </div>
+</div>

@@ -1,0 +1,189 @@
+---
+import { audienceDict, type Lang } from '../i18n/utils';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+// Embed the "business" copy for the current language so the audience
+// toggle can swap text on the client without another network request.
+const bizDict = audienceDict(lang, 'biz');
+---
+<script type="application/json" id="ms-i18n-biz" is:inline set:html={JSON.stringify(bizDict)}></script>
+
+<script>
+  const root = document.documentElement;
+
+  // ---------- audience text dictionary (business) ----------
+  let BIZ: Record<string, string> = {};
+  try {
+    const el = document.getElementById('ms-i18n-biz');
+    if (el && el.textContent) BIZ = JSON.parse(el.textContent);
+  } catch (_) { /* noop */ }
+
+  const i18nEls = Array.from(document.querySelectorAll<HTMLElement>('[data-i18n]'));
+  i18nEls.forEach((el) => { if (el.dataset.def === undefined) el.dataset.def = el.textContent ?? ''; });
+
+  const priceEls = Array.from(document.querySelectorAll<HTMLElement>('[data-price]'));
+  priceEls.forEach((el) => { if (el.dataset.def === undefined) el.dataset.def = el.textContent ?? ''; });
+
+  function applyAudience(aud: string) {
+    for (const el of i18nEls) {
+      const key = el.getAttribute('data-i18n') ?? '';
+      if (aud === 'biz') {
+        const v = BIZ[key];
+        el.textContent = v == null ? (el.dataset.def ?? '') : v;
+      } else {
+        el.textContent = el.dataset.def ?? '';
+      }
+    }
+    for (const el of priceEls) {
+      const spec = el.getAttribute('data-price') ?? '';
+      const parts: Record<string, string> = {};
+      for (const seg of spec.split('|')) {
+        const idx = seg.indexOf(':');
+        if (idx > -1) parts[seg.slice(0, idx)] = seg.slice(idx + 1);
+      }
+      el.textContent = parts[aud] ?? el.dataset.def ?? '';
+    }
+  }
+
+  // ---------- audience toggle ----------
+  const audButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('#aud-toggle button'));
+  function setAudience(aud: string, persist: boolean) {
+    root.setAttribute('data-audience', aud);
+    audButtons.forEach((b) => b.setAttribute('aria-pressed', b.dataset.aud === aud ? 'true' : 'false'));
+    applyAudience(aud);
+    if (persist) { try { localStorage.setItem('ms-aud', aud); } catch (_) { /* noop */ } }
+  }
+  audButtons.forEach((b) => b.addEventListener('click', () => setAudience(b.dataset.aud ?? 'tech', true)));
+  setAudience(root.getAttribute('data-audience') === 'biz' ? 'biz' : 'tech', false);
+
+  // ---------- theme toggle ----------
+  const themeBtn = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  const SUN = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>';
+  const MOON = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+  function renderThemeIcon() {
+    if (themeIcon) themeIcon.innerHTML = root.getAttribute('data-theme') === 'dark' ? SUN : MOON;
+  }
+  renderThemeIcon();
+  themeBtn?.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('ms-theme', next); } catch (_) { /* noop */ }
+    renderThemeIcon();
+  });
+
+  // ---------- service tabs ----------
+  const tabs = Array.from(document.querySelectorAll<HTMLElement>('.svc-tab'));
+  const panels = Array.from(document.querySelectorAll<HTMLElement>('.svc-panel'));
+  function selectTab(tab: HTMLElement) {
+    const target = tab.dataset.panel;
+    tabs.forEach((t) => {
+      const on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.setAttribute('tabindex', on ? '0' : '-1');
+    });
+    panels.forEach((p) => p.classList.toggle('active', p.dataset.panel === target));
+  }
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => selectTab(tab));
+    tab.addEventListener('keydown', (e: KeyboardEvent) => {
+      let ni = -1;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') ni = (i + 1) % tabs.length;
+      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') ni = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === 'Home') ni = 0;
+      else if (e.key === 'End') ni = tabs.length - 1;
+      if (ni > -1) { e.preventDefault(); selectTab(tabs[ni]); tabs[ni].focus(); }
+    });
+  });
+
+  // ---------- modal ----------
+  const modal = document.getElementById('ms-modal');
+  let lastFocus: HTMLElement | null = null;
+  function openModal() {
+    if (!modal) return;
+    lastFocus = document.activeElement as HTMLElement | null;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    modal.querySelector<HTMLElement>('input, textarea, button')?.focus();
+  }
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    lastFocus?.focus();
+  }
+  document.querySelectorAll('[data-modal-open]').forEach((b) => b.addEventListener('click', openModal));
+  document.querySelectorAll('[data-modal-close]').forEach((b) => b.addEventListener('click', closeModal));
+  modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('open')) closeModal();
+  });
+  modal?.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key !== 'Tab') return;
+    const f = modal.querySelectorAll<HTMLElement>('button, input, textarea, select, a[href]');
+    if (!f.length) return;
+    const first = f[0];
+    const last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+  // ---------- mailto forms ----------
+  const LANG = root.getAttribute('lang') || 'es';
+  function field(form: HTMLFormElement, name: string): string {
+    const el = form.querySelector<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>('[name="' + name + '"]');
+    return el ? el.value.trim() : '';
+  }
+  function buildMailto(form: HTMLFormElement): string {
+    const to = form.dataset.mailto ?? '';
+    const name = field(form, 'name');
+    const email = field(form, 'email');
+    const company = field(form, 'company');
+    const service = field(form, 'service');
+    const msg = field(form, 'msg');
+    const subject = (LANG === 'es' ? 'Nuevo proyecto — ' : 'New project — ') + (name || email || 'Web');
+    const lines: string[] = [];
+    if (name) lines.push((LANG === 'es' ? 'Nombre: ' : 'Name: ') + name);
+    if (email) lines.push('Email: ' + email);
+    if (company) lines.push((LANG === 'es' ? 'Empresa: ' : 'Company: ') + company);
+    if (service) lines.push((LANG === 'es' ? 'Servicio: ' : 'Service: ') + service);
+    if (msg) { lines.push(''); lines.push(msg); }
+    return 'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
+  }
+  function wireForm(form: HTMLFormElement | null) {
+    if (!form) return;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      const btn = form.querySelector<HTMLButtonElement>('button[type=submit]');
+      const span = btn?.querySelector('span');
+      const original = span?.textContent ?? '';
+      window.location.href = buildMailto(form);
+      if (span) {
+        span.textContent = LANG === 'es' ? '✓ Abriendo tu correo…' : '✓ Opening your email…';
+        setTimeout(() => {
+          if (span) span.textContent = original;
+          form.reset();
+          if (form.id === 'modal-form') closeModal();
+        }, 2500);
+      }
+    });
+  }
+  wireForm(document.getElementById('contact-form') as HTMLFormElement | null);
+  wireForm(document.getElementById('modal-form') as HTMLFormElement | null);
+
+  // ---------- reveal on scroll ----------
+  const reveals = Array.from(document.querySelectorAll<HTMLElement>('.reveal'));
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+    reveals.forEach((el) => io.observe(el));
+  } else {
+    reveals.forEach((el) => el.classList.add('in'));
+  }
+</script>

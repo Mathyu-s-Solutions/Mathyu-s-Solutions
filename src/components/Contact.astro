@@ -1,0 +1,99 @@
+---
+import { translator, type Lang } from '../i18n/utils';
+import { SITE } from '../data/site';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const tt = translator(lang, 'tech');
+const waBase = `https://wa.me/${SITE.whatsapp}`;
+---
+<section class="block" id="contact">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow mono"><span data-i18n="ct.eyebrow">{tt('ct.eyebrow')}</span></span>
+        <h2 data-i18n="ct.title">{tt('ct.title')}</h2>
+      </div>
+      <p class="desc" data-i18n="ct.desc">{tt('ct.desc')}</p>
+    </div>
+
+    <div class="contact-wrap reveal">
+      <div class="contact-info">
+        <span class="eyebrow mono"><span data-i18n="ct.info">{tt('ct.info')}</span></span>
+        <h3 data-i18n="ct.h">{tt('ct.h')}</h3>
+        <p data-i18n="ct.p">{tt('ct.p')}</p>
+
+        <div class="contact-list">
+          <a class="row" href={waBase} target="_blank" rel="noopener">
+            <div class="ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
+            </div>
+            <div>
+              <span class="lbl" data-i18n="ct.lblPhone">{tt('ct.lblPhone')}</span>
+              <div class="val">{SITE.phone}</div>
+            </div>
+          </a>
+          <a class="row" href={`mailto:${SITE.email}`}>
+            <div class="ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-10 7L2 7" /></svg>
+            </div>
+            <div>
+              <span class="lbl" data-i18n="ct.lblMail">{tt('ct.lblMail')}</span>
+              <div class="val">{SITE.email}</div>
+            </div>
+          </a>
+          <div class="row">
+            <div class="ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18M9 21V9" /></svg>
+            </div>
+            <div>
+              <span class="lbl" data-i18n="ct.lblRuc">{tt('ct.lblRuc')}</span>
+              <div class="val">{SITE.ruc}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form class="form" id="contact-form" data-mailto={SITE.email} data-whatsapp={SITE.whatsapp} novalidate>
+        <div class="field">
+          <label for="cf-name" data-i18n="ct.fName">{tt('ct.fName')}</label>
+          <input id="cf-name" name="name" type="text" required autocomplete="name" placeholder="Mathyu Pérez" />
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label for="cf-email" data-i18n="ct.fEmail">{tt('ct.fEmail')}</label>
+            <input id="cf-email" name="email" type="email" required autocomplete="email" placeholder="tu@empresa.com" />
+          </div>
+          <div class="field">
+            <label for="cf-company" data-i18n="ct.fCompany">{tt('ct.fCompany')}</label>
+            <input id="cf-company" name="company" type="text" autocomplete="organization" placeholder="Empresa S.A.C." />
+          </div>
+        </div>
+        <div class="field">
+          <label for="cf-service" data-i18n="ct.fService">{tt('ct.fService')}</label>
+          <select id="cf-service" name="service">
+            <option data-i18n="ct.fOpt1">{tt('ct.fOpt1')}</option>
+            <option data-i18n="ct.fOpt2">{tt('ct.fOpt2')}</option>
+            <option data-i18n="ct.fOpt3">{tt('ct.fOpt3')}</option>
+            <option data-i18n="ct.fOpt4">{tt('ct.fOpt4')}</option>
+            <option data-i18n="ct.fOpt5">{tt('ct.fOpt5')}</option>
+            <option data-i18n="ct.fOpt6">{tt('ct.fOpt6')}</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="cf-msg" data-i18n="ct.fMsg">{tt('ct.fMsg')}</label>
+          <textarea id="cf-msg" name="msg" required placeholder="Objetivo, alcance estimado, fechas..."></textarea>
+        </div>
+        <div class="submit-row">
+          <span class="small" data-i18n="ct.fNote">{tt('ct.fNote')}</span>
+          <div class="hero-cta">
+            <a class="btn btn-secondary" href={waBase} target="_blank" rel="noopener" data-i18n="ct.whatsapp">{tt('ct.whatsapp')}</a>
+            <button class="btn" type="submit">
+              <span data-i18n="ct.fSend">{tt('ct.fSend')}</span>
+              <span class="arr" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

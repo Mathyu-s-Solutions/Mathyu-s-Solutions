@@ -1,0 +1,149 @@
+---
+import '@fontsource-variable/bricolage-grotesque';
+import '@fontsource-variable/instrument-sans';
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/tokens.css';
+import '../styles/global.css';
+import { SITE } from '../data/site';
+import type { Lang } from '../i18n/utils';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: Lang;
+  /** Path of this page, e.g. "/es/" — used for canonical & og:url */
+  path: string;
+  /** Exclude from search indexing (e.g. the 404 page) */
+  noindex?: boolean;
+}
+
+const { title, description, lang, path, noindex = false } = Astro.props;
+
+const site = Astro.site ?? new URL(SITE.url);
+const canonical = new URL(path, site).toString();
+const esUrl = new URL('/es/', site).toString();
+const enUrl = new URL('/en/', site).toString();
+const ogImage = new URL('/og-image.png', site).toString();
+const ogLocale = lang === 'es' ? 'es_PE' : 'en_US';
+
+const orgLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE.name,
+  alternateName: SITE.shortName,
+  url: SITE.url,
+  logo: new URL('/favicon.svg', site).toString(),
+  image: ogImage,
+  email: SITE.email,
+  telephone: SITE.phoneE164,
+  taxID: SITE.ruc,
+  foundingDate: String(SITE.foundingYear),
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: SITE.city,
+    addressRegion: SITE.region,
+    addressCountry: SITE.country,
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: SITE.phoneE164,
+    email: SITE.email,
+    contactType: 'sales',
+    areaServed: ['PE', 'LATAM'],
+    availableLanguage: ['Spanish', 'English'],
+  },
+  sameAs: SITE.sameAs,
+};
+
+const serviceLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: SITE.name,
+  description,
+  url: canonical,
+  image: ogImage,
+  telephone: SITE.phoneE164,
+  email: SITE.email,
+  priceRange: '$$',
+  areaServed: ['PE', 'LATAM'],
+  serviceType: [
+    'Web Development',
+    'Mobile App Development',
+    'AI Applications',
+    'DevOps',
+    'Cloud Engineering',
+  ],
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: SITE.city,
+    addressCountry: SITE.country,
+  },
+};
+---
+
+<!doctype html>
+<html lang={lang} data-theme="dark" data-audience="tech">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- FOUC prevention: apply theme & audience before first paint -->
+    <script is:inline>
+      (function () {
+        try {
+          var t = localStorage.getItem('ms-theme') || 'dark';
+          var a = localStorage.getItem('ms-aud') || 'tech';
+          var r = document.documentElement;
+          r.setAttribute('data-theme', t);
+          r.setAttribute('data-audience', a);
+        } catch (e) {}
+      })();
+    </script>
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={SITE.name} />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'} />
+    <meta name="theme-color" content="#11161b" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="generator" content={Astro.generator} />
+
+    <link rel="canonical" href={canonical} />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="es-PE" href={esUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="x-default" href={esUrl} />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${SITE.name} — ${description}`} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={lang === 'es' ? 'en_US' : 'es_PE'} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Structured data -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(orgLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(serviceLd)} />
+  </head>
+  <body>
+    <a href="#top" class="visually-hidden">Skip to content</a>
+    <slot />
+  </body>
+</html>

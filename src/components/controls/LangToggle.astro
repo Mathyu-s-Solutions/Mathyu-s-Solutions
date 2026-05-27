@@ -1,0 +1,14 @@
+---
+import { otherLang, type Lang } from '../../i18n/utils';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const target = otherLang(lang);
+const href = `/${target}/`;
+const label = target.toUpperCase();
+const title = lang === 'es' ? 'Switch to English' : 'Cambiar a español';
+---
+<a class="icon-btn" id="lang-toggle" href={href} title={title} hreflang={target} aria-label={title}>
+  <span aria-hidden="true">{lang.toUpperCase()}</span>
+  <span aria-hidden="true">/</span>
+  <span><strong>{label}</strong></span>
+</a>
