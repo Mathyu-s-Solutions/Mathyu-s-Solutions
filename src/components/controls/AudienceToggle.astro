@@ -5,6 +5,6 @@ const { lang } = Astro.props;
 const tt = translator(lang, 'tech');
 ---
 <div class="aud-toggle" id="aud-toggle" role="group" aria-label={lang === 'es' ? 'Audiencia' : 'Audience'}>
-  <button type="button" data-aud="biz" aria-pressed="false">{tt('aud.biz')}</button>
-  <button type="button" data-aud="tech" aria-pressed="true">{tt('aud.tech')}</button>
+  <button type="button" data-aud="biz" aria-pressed="true">{tt('aud.biz')}</button>
+  <button type="button" data-aud="tech" aria-pressed="false">{tt('aud.tech')}</button>
 </div>

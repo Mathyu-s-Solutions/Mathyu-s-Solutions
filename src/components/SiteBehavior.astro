@@ -2,20 +2,22 @@
 import { audienceDict, type Lang } from '../i18n/utils';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
-// Embed the "business" copy for the current language so the audience
-// toggle can swap text on the client without another network request.
-const bizDict = audienceDict(lang, 'biz');
+// The HTML is server-rendered with the "business" copy (the default audience),
+// so embed the "technical" copy for the client to swap in when requested.
+const techDict = audienceDict(lang, 'tech');
 ---
-<script type="application/json" id="ms-i18n-biz" is:inline set:html={JSON.stringify(bizDict)}></script>
+<script type="application/json" id="ms-i18n-tech" is:inline set:html={JSON.stringify(techDict)}></script>
 
 <script>
   const root = document.documentElement;
 
-  // ---------- audience text dictionary (business) ----------
-  let BIZ: Record<string, string> = {};
+  // ---------- audience text dictionary (technical) ----------
+  // Base HTML is rendered with business copy; this holds the technical copy
+  // to swap in when the user selects the "tech" audience.
+  let TECH: Record<string, string> = {};
   try {
-    const el = document.getElementById('ms-i18n-biz');
-    if (el && el.textContent) BIZ = JSON.parse(el.textContent);
+    const el = document.getElementById('ms-i18n-tech');
+    if (el && el.textContent) TECH = JSON.parse(el.textContent);
   } catch (_) { /* noop */ }
 
   const i18nEls = Array.from(document.querySelectorAll<HTMLElement>('[data-i18n]'));
@@ -27,8 +29,8 @@ const bizDict = audienceDict(lang, 'biz');
   function applyAudience(aud: string) {
     for (const el of i18nEls) {
       const key = el.getAttribute('data-i18n') ?? '';
-      if (aud === 'biz') {
-        const v = BIZ[key];
+      if (aud === 'tech') {
+        const v = TECH[key];
         el.textContent = v == null ? (el.dataset.def ?? '') : v;
       } else {
         el.textContent = el.dataset.def ?? '';

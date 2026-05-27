@@ -3,7 +3,7 @@ import { translator, type Lang } from '../i18n/utils';
 import { SITE } from '../data/site';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
-const tt = translator(lang, 'tech');
+const tt = translator(lang, 'biz');
 const closeLabel = lang === 'es' ? 'Cerrar' : 'Close';
 ---
 <div class="modal-bg" id="ms-modal" role="dialog" aria-modal="true" aria-labelledby="ms-modal-title" aria-hidden="true">

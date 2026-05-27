@@ -13,7 +13,7 @@ const dicts: Record<Lang, Record<Audience, Dict>> = {
 
 export const LANGS: Lang[] = ['es', 'en'];
 export const DEFAULT_LANG: Lang = 'es';
-export const DEFAULT_AUDIENCE: Audience = 'tech';
+export const DEFAULT_AUDIENCE: Audience = 'biz';
 
 export function isLang(v: string | undefined | null): v is Lang {
   return v === 'es' || v === 'en';

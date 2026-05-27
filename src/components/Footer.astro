@@ -4,7 +4,7 @@ import { SITE } from '../data/site';
 import { servicePageHref, type PanelId } from '../data/services';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
-const tt = translator(lang, 'tech');
+const tt = translator(lang, 'biz');
 const home = `/${lang}/`;
 const year = new Date().getFullYear();
 const serviceLinks: { panel: PanelId; key: string }[] = [

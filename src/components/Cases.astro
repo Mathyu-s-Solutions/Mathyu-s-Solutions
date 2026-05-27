@@ -3,7 +3,7 @@ import { translator, type Lang } from '../i18n/utils';
 import { CASES } from '../data/cases';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
-const tt = translator(lang, 'tech');
+const tt = translator(lang, 'biz');
 const newTab = lang === 'es' ? 'se abre en una pestaña nueva' : 'opens in a new tab';
 ---
 <section class="block" id="cases">
