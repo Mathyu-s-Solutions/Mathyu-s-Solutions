@@ -125,6 +125,7 @@ const serviceLd = {
           var t = localStorage.getItem('ms-theme') || 'dark';
           var a = localStorage.getItem('ms-aud') || 'biz';
           var r = document.documentElement;
+          r.classList.add('js');
           r.setAttribute('data-theme', t);
           r.setAttribute('data-audience', a);
         } catch (e) {}

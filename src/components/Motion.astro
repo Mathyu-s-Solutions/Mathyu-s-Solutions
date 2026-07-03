@@ -1,0 +1,122 @@
+---
+// Motion layer — Apple-grade animation: Lenis smooth scrolling + GSAP
+// ScrollTrigger reveals. Pure progressive enhancement: initial hidden
+// states are gated behind `html.js` (see global.css), so content is
+// fully visible without JavaScript and for reduced-motion users.
+---
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import Lenis from 'lenis';
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---------- nav: glass intensifies once the page scrolls ----------
+  const nav = document.getElementById('site-nav');
+  function syncNav() { nav?.classList.toggle('scrolled', window.scrollY > 10); }
+  window.addEventListener('scroll', syncNav, { passive: true });
+  syncNav();
+
+  // ---------- cursor spotlight on cards ----------
+  document.querySelectorAll<HTMLElement>('.case, .plan, .t-card').forEach((card) => {
+    card.addEventListener('pointermove', (e: PointerEvent) => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      card.style.setProperty('--my', `${e.clientY - r.top}px`);
+    });
+  });
+
+  function showEverything() {
+    document.querySelectorAll('.reveal, [data-animate]').forEach((el) => el.classList.add('in'));
+  }
+
+  if (reduceMotion) {
+    // CSS already forces visibility under prefers-reduced-motion;
+    // the class is belt-and-braces for older browsers.
+    showEverything();
+  } else {
+    try {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // ---------- Lenis smooth scroll, synced with ScrollTrigger ----------
+      // Lenis honors the CSS scroll-margin-top on anchor targets,
+      // so no extra offset is needed for the sticky nav.
+      const lenis = new Lenis({
+        lerp: 0.11,
+        anchors: true,
+      });
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+      gsap.ticker.lagSmoothing(0);
+
+      // Freeze the page while the contact modal is open.
+      const modal = document.getElementById('ms-modal');
+      if (modal) {
+        modal.setAttribute('data-lenis-prevent', '');
+        new MutationObserver(() => {
+          if (modal.classList.contains('open')) lenis.stop();
+          else lenis.start();
+        }).observe(modal, { attributes: true, attributeFilter: ['class'] });
+      }
+
+      // ---------- hero entrance ----------
+      const heroEls = gsap.utils.toArray<HTMLElement>('.hero [data-animate]');
+      if (heroEls.length) {
+        const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 1 } });
+        tl.to(heroEls, { opacity: 1, y: 0, stagger: 0.09 }, 0.08);
+
+        // Terminal output types itself in behind the card fade.
+        tl.from('.terminal-body .line', { opacity: 0, y: 8, duration: 0.4, stagger: 0.08 }, 0.6);
+
+        // Stat counters (+6, 3, 5, 24/7 …) count up from zero.
+        document.querySelectorAll<HTMLElement>('.hero-meta .m b').forEach((el) => {
+          const m = (el.textContent ?? '').match(/^([^\d]*)(\d+)(.*)$/);
+          if (!m) return;
+          const target = Number(m[2]);
+          const state = { v: 0 };
+          tl.to(state, {
+            v: target,
+            duration: 1.4,
+            ease: 'power2.out',
+            onUpdate: () => { el.textContent = m[1] + Math.round(state.v) + m[3]; },
+          }, 0.45);
+        });
+      }
+
+      // ---------- scroll-triggered reveals (staggered per batch) ----------
+      const reveals = gsap.utils.toArray<HTMLElement>('.reveal');
+      if (reveals.length) {
+        ScrollTrigger.batch(reveals, {
+          start: 'top 88%',
+          once: true,
+          onEnter: (els) => {
+            gsap.to(els, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.12, overwrite: true });
+          },
+        });
+      }
+
+      // ---------- gentle parallax inside case-study thumbnails ----------
+      gsap.utils.toArray<SVGElement>('.case .thumb svg').forEach((svg) => {
+        gsap.fromTo(svg,
+          { yPercent: -5, scale: 1.12 },
+          {
+            yPercent: 5,
+            scale: 1.12,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: svg.closest('.case'),
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: true,
+            },
+          },
+        );
+      });
+
+      // Re-measure once web fonts settle to keep trigger positions exact.
+      document.fonts?.ready.then(() => ScrollTrigger.refresh());
+    } catch (_) {
+      showEverything();
+    }
+  }
+</script>

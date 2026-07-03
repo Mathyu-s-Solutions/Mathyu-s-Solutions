@@ -19,11 +19,21 @@
   --warn: oklch(0.78 0.15 65);
 
   /* Radius */
-  --r: 14px;
+  --r: 16px;
   --r-sm: 8px;
+  --r-pill: 999px;
+
+  /* Motion — Apple-like decelerating curves */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-io: cubic-bezier(0.65, 0.05, 0.36, 1);
+  --dur-fast: 0.22s;
+  --dur: 0.45s;
+  --dur-slow: 0.8s;
 
   /* Shadow */
   --shadow: 0 1px 0 oklch(1 0 0 / 0.04) inset, 0 30px 60px -20px oklch(0 0 0 / 0.55);
+  --shadow-sm: 0 1px 0 oklch(1 0 0 / 0.03) inset, 0 10px 24px -12px oklch(0 0 0 / 0.4);
+  --glow-accent: 0 10px 40px -12px color-mix(in oklch, var(--accent), transparent 55%);
 
   /* Typography — Fontsource variable families with graceful fallbacks */
   --font-display: "Bricolage Grotesque Variable", "Bricolage Grotesque", ui-serif, serif;
@@ -43,4 +53,5 @@ html[data-theme="light"] {
   --accent: oklch(0.62 0.18 148);
   --accent-ink: oklch(0.98 0.02 148);
   --shadow: 0 1px 0 oklch(0 0 0 / 0.03) inset, 0 24px 50px -24px oklch(0 0 0 / 0.12);
+  --shadow-sm: 0 1px 0 oklch(0 0 0 / 0.02) inset, 0 10px 22px -14px oklch(0 0 0 / 0.1);
 }

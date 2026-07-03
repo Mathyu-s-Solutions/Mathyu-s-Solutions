@@ -18,15 +18,15 @@ const meta = [
 <header class="hero" id="top">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow mono"><span data-i18n="hero.eyebrow">{tt('hero.eyebrow')}</span></span>
-      <h1>
+      <span class="eyebrow mono" data-animate><span data-i18n="hero.eyebrow">{tt('hero.eyebrow')}</span></span>
+      <h1 data-animate>
         <span data-i18n="hero.h1a">{tt('hero.h1a')}</span>
         <span class="accent" data-i18n="hero.h1b">{tt('hero.h1b')}</span>
         <span data-i18n="hero.h1c">{tt('hero.h1c')}</span>
         <span class="stack mono" aria-hidden="true">&lt;MS/&gt;</span>
       </h1>
-      <p class="lead" data-i18n="hero.lead">{tt('hero.lead')}</p>
-      <div class="hero-cta">
+      <p class="lead" data-animate data-i18n="hero.lead">{tt('hero.lead')}</p>
+      <div class="hero-cta" data-animate>
         <button class="btn" type="button" data-modal-open>
           <span data-i18n="hero.cta1">{tt('hero.cta1')}</span>
           <span class="arr" aria-hidden="true">→</span>
@@ -35,7 +35,7 @@ const meta = [
           <span data-i18n="hero.cta2">{tt('hero.cta2')}</span>
         </a>
       </div>
-      <div class="hero-meta">
+      <div class="hero-meta" data-animate>
         {meta.map((m) => (
           <div class="m"><b>{m.b}</b><span data-i18n={m.key}>{tt(m.key)}</span></div>
         ))}

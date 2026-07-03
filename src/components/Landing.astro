@@ -12,6 +12,7 @@ import Contact from './Contact.astro';
 import Footer from './Footer.astro';
 import ContactModal from './ContactModal.astro';
 import SiteBehavior from './SiteBehavior.astro';
+import Motion from './Motion.astro';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -30,3 +31,4 @@ const { lang } = Astro.props;
 <Footer lang={lang} />
 <ContactModal lang={lang} />
 <SiteBehavior lang={lang} />
+<Motion />

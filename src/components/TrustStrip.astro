@@ -6,15 +6,25 @@ const tt = translator(lang, 'tech');
 const tb = translator(lang, 'biz');
 
 const techChips = ['AWS', 'Azure', 'GCP', 'Kubernetes', 'Terraform', 'React · Next.js', 'Swift · Kotlin', 'Python · Node', 'OpenAI · LangChain'];
-const bizChips = ['trustBiz.c1', 'trustBiz.c2', 'trustBiz.c3', 'trustBiz.c4', 'trustBiz.c5', 'trustBiz.c6', 'trustBiz.c7', 'trustBiz.c8'];
+const bizChips = ['trustBiz.c1', 'trustBiz.c2', 'trustBiz.c3', 'trustBiz.c4', 'trustBiz.c5', 'trustBiz.c6', 'trustBiz.c7', 'trustBiz.c8'].map((k) => tb(k));
 ---
 <div class="wrap">
-  <div class="trust tech-only">
+  <div class="trust tech-only" data-animate>
     <span>{tt('trust.label')}</span>
-    {techChips.map((c) => <div class="chip">{c}</div>)}
+    <div class="trust-marquee">
+      <div class="trust-track">
+        {techChips.map((c) => <div class="chip">{c}</div>)}
+        {techChips.map((c) => <div class="chip dup" aria-hidden="true">{c}</div>)}
+      </div>
+    </div>
   </div>
-  <div class="trust biz-only">
+  <div class="trust biz-only" data-animate>
     <span>{tb('trustBiz.label')}</span>
-    {bizChips.map((k) => <div class="chip">{tb(k)}</div>)}
+    <div class="trust-marquee">
+      <div class="trust-track">
+        {bizChips.map((c) => <div class="chip">{c}</div>)}
+        {bizChips.map((c) => <div class="chip dup" aria-hidden="true">{c}</div>)}
+      </div>
+    </div>
   </div>
 </div>
