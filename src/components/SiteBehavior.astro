@@ -30,9 +30,6 @@ const techDict = audienceDict(lang, 'tech');
   const i18nEls = Array.from(document.querySelectorAll<HTMLElement>('[data-i18n]'));
   i18nEls.forEach((el) => { if (el.dataset.def === undefined) el.dataset.def = el.textContent ?? ''; });
 
-  const priceEls = Array.from(document.querySelectorAll<HTMLElement>('[data-price]'));
-  priceEls.forEach((el) => { if (el.dataset.def === undefined) el.dataset.def = el.textContent ?? ''; });
-
   function applyAudience(aud: string) {
     for (const el of i18nEls) {
       const key = el.getAttribute('data-i18n') ?? '';
@@ -47,6 +44,22 @@ const techDict = audienceDict(lang, 'tech');
       // node and invalidates layout, even when the value is unchanged.
       if (el.textContent !== next) el.textContent = next;
     }
+  }
+
+  // ---------- currency (S/ for Peru, US$ elsewhere) ----------
+  // The HTML ships with PEN prices. Peru has a single IANA timezone
+  // (America/Lima), so the visitor's timezone is a reliable, offline,
+  // zero-request country proxy. If detection fails we keep PEN.
+  // data-price spec format: "pen:<text>|usd:<text>".
+  const priceEls = Array.from(document.querySelectorAll<HTMLElement>('[data-price]'));
+  priceEls.forEach((el) => { if (el.dataset.def === undefined) el.dataset.def = el.textContent ?? ''; });
+  let currency = 'pen';
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (tz && tz !== 'America/Lima') currency = 'usd';
+  } catch (_) { /* keep PEN */ }
+  if (currency !== 'pen') {
+    root.setAttribute('data-currency', currency);
     for (const el of priceEls) {
       const spec = el.getAttribute('data-price') ?? '';
       const parts: Record<string, string> = {};
@@ -54,7 +67,7 @@ const techDict = audienceDict(lang, 'tech');
         const idx = seg.indexOf(':');
         if (idx > -1) parts[seg.slice(0, idx)] = seg.slice(idx + 1);
       }
-      const next = parts[aud] ?? el.dataset.def ?? '';
+      const next = parts[currency] ?? el.dataset.def ?? '';
       if (el.textContent !== next) el.textContent = next;
     }
   }

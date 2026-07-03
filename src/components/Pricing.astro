@@ -4,15 +4,18 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const tt = translator(lang, 'biz');
 
+// Prices per currency. PEN is server-rendered (default for Peru); the client
+// swaps to USD when the visitor is detected outside Peru (see SiteBehavior).
+// data-price spec format: "pen:<text>|usd:<text>".
 const plans = [
   {
     id: 'p1', featured: false, h: 'price.p1h', tag: 'price.p1t',
-    priceSpec: 'tech:S/2.5K|biz:S/2.5K', priceInit: 'S/2.5K', smallKey: 'price.from',
+    priceSpec: 'pen:S/2.5K|usd:$1K', priceInit: 'S/2.5K', smallKey: 'price.from',
     desc: 'price.p1d', cta: 'price.p1c', ctaClass: 'btn btn-secondary',
   },
   {
     id: 'p2', featured: true, h: 'price.p2h', tag: 'price.p2t',
-    priceSpec: 'tech:S/6.5K|biz:S/6.5K', priceInit: 'S/6.5K', smallKey: 'price.month',
+    priceSpec: 'pen:S/6.5K|usd:$2.5K', priceInit: 'S/6.5K', smallKey: 'price.month',
     desc: 'price.p2d', cta: 'price.p2c', ctaClass: 'btn',
   },
   {
@@ -21,6 +24,18 @@ const plans = [
     desc: 'price.p3d', cta: 'price.p3c', ctaClass: 'btn btn-secondary',
   },
 ];
+
+// Note under the pricing grid; also swaps with the visitor's currency.
+const note = {
+  es: {
+    pen: 'Precios referenciales en soles peruanos (S/). Cada proyecto se cotiza según su alcance.',
+    usd: 'Precios referenciales en dólares (US$) para clientes fuera de Perú. Cada proyecto se cotiza según su alcance.',
+  },
+  en: {
+    pen: 'Reference prices in Peruvian soles (S/). Every project is quoted by scope.',
+    usd: 'Reference prices in US dollars (US$). Every project is quoted by scope.',
+  },
+}[lang];
 ---
 <section class="block" id="pricing">
   <div class="wrap">
@@ -62,5 +77,11 @@ const plans = [
         </div>
       ))}
     </div>
+
+    <p
+      class="reveal"
+      style="margin:20px 0 0; font-size:13px; color:var(--fg-muted); text-align:center;"
+      data-price={`pen:${note.pen}|usd:${note.usd}`}
+    >{note.pen}</p>
   </div>
 </section>

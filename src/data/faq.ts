@@ -16,7 +16,7 @@ export const FAQ: Record<Lang, { eyebrow: string; title: string; items: QA[] }> 
     items: [
       {
         q: '¿Cuánto cuesta hacer una página web o una app en Perú?',
-        a: 'Depende del alcance. Un proyecto inicial (una web o una app móvil) arranca desde S/2.5K e incluye diseño, desarrollo, publicación y hosting. Te enviamos una cotización clara en menos de 24 horas hábiles.',
+        a: 'Depende del alcance. Un proyecto inicial (una web o una app móvil) arranca desde S/ 2,500 (US$ 1,000 para clientes fuera de Perú) e incluye diseño, desarrollo, publicación y hosting. Te enviamos una cotización clara en menos de 24 horas hábiles.',
       },
       {
         q: '¿Cuánto tiempo toma desarrollar mi proyecto?',
@@ -46,7 +46,7 @@ export const FAQ: Record<Lang, { eyebrow: string; title: string; items: QA[] }> 
     items: [
       {
         q: 'How much does it cost to build a website or an app in Peru?',
-        a: 'It depends on scope. An initial project (a website or a mobile app) starts from S/2.5K and includes design, development, publishing and hosting. We send a clear quote within 24 business hours.',
+        a: 'It depends on scope. An initial project (a website or a mobile app) starts from US$ 1,000 (S/ 2,500 for clients in Peru) and includes design, development, publishing and hosting. We send a clear quote within 24 business hours.',
       },
       {
         q: 'How long does it take to build my project?',

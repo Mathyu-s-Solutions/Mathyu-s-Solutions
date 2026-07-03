@@ -42,11 +42,15 @@ const enUrl = new URL(enHref, site).toString();
 const ogImage = new URL('/og-image.png', site).toString();
 const ogLocale = lang === 'es' ? 'es_PE' : 'en_US';
 
+const orgId = new URL('/#organization', site).toString();
+
 const orgLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
+  '@id': orgId,
   name: SITE.name,
-  alternateName: SITE.shortName,
+  // Variants people actually type when searching the brand.
+  alternateName: [SITE.shortName, 'Mathyus Solutions', 'Mathyu Solutions'],
   url: SITE.url,
   logo: new URL('/favicon.svg', site).toString(),
   image: ogImage,
@@ -71,6 +75,16 @@ const orgLd = {
   sameAs: SITE.sameAs,
 };
 
+const webSiteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': new URL('/#website', site).toString(),
+  name: SITE.name,
+  url: SITE.url,
+  inLanguage: lang === 'es' ? 'es-PE' : 'en',
+  publisher: { '@id': orgId },
+};
+
 const serviceLd = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
@@ -80,7 +94,8 @@ const serviceLd = {
   image: ogImage,
   telephone: SITE.phoneE164,
   email: SITE.email,
-  priceRange: '$$',
+  priceRange: 'S/ 2,500+',
+  parentOrganization: { '@id': orgId },
   areaServed: ['PE', 'LATAM'],
   serviceType: [
     'Web Development',
@@ -154,8 +169,13 @@ const serviceLd = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
+    <!-- Local SEO hints -->
+    <meta name="geo.region" content="PE-LIM" />
+    <meta name="geo.placename" content={`${SITE.city}, ${SITE.countryName}`} />
+
     <!-- Structured data -->
     <script type="application/ld+json" is:inline set:html={JSON.stringify(orgLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(webSiteLd)} />
     <script type="application/ld+json" is:inline set:html={JSON.stringify(serviceLd)} />
     {extraJsonLd.map((ld) => (
       <script type="application/ld+json" is:inline set:html={JSON.stringify(ld)} />

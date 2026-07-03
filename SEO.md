@@ -15,8 +15,18 @@ para empezar a aparecer en Google y conseguir clientes.
 - **Títulos y meta-descriptions** únicos por página, con keywords y ubicación (Lima/Perú).
 - **Un solo `<h1>` por página** y jerarquía correcta (h1 → h2 → h3).
 - **`hreflang`** entre español (`/es/`) e inglés (`/en/`), incl. páginas de servicio.
-- **Datos estructurados (JSON-LD):** `Organization`, `ProfessionalService`, `Service` y
-  `BreadcrumbList` (páginas de servicio) y `FAQPage` (home).
+- **Datos estructurados (JSON-LD):** `Organization` (con `@id` y variantes del nombre),
+  `WebSite`, `ProfessionalService`, `Service` y `BreadcrumbList` (páginas de servicio) y
+  `FAQPage` (home **y cada página de servicio**).
+- **FAQ por página de servicio** (4 preguntas long-tail por servicio, ES y EN):
+  "¿cuánto cuesta una página web en Perú?", "¿cuánto cuesta hacer una app?", etc.
+  Se editan en `src/data/services.ts` (campo `faqs`).
+- **Metadatos de SEO local** (`geo.region`, `geo.placename`) y `priceRange` real en el JSON-LD.
+- **Precios en dos monedas:** el HTML se genera con soles (S/). En el navegador, si la zona
+  horaria del visitante no es `America/Lima`, los precios de la sección Planes cambian a USD
+  automáticamente (sin llamadas a servicios externos). Los montos se editan en
+  `src/components/Pricing.astro` (`priceSpec`, formato `pen:…|usd:…`) y las respuestas del
+  FAQ mencionan ambas monedas.
 - **Sitemap** (`/sitemap-index.xml`) con todas las rutas y alternates + **`robots.txt`**.
 - **Páginas de servicio dedicadas** (cada una rankea por su término):
   - `/es/desarrollo-web/` · `/es/desarrollo-de-apps/` · `/es/software-con-ia/` · `/es/cloud-y-devops/`

@@ -32,9 +32,19 @@ const homeHref = `/${lang}/`;
 const waHref = `https://wa.me/${SITE.whatsapp}`;
 
 const ui = {
-  es: { eyebrow: 'Servicio', includes: 'Qué incluye', ctaTitle: '¿Conversamos sobre tu proyecto?', cta: 'Cotizar', quote: 'Empezar un proyecto', wa: 'Escríbenos por WhatsApp', other: 'Otros servicios', back: '← Todos los servicios' },
-  en: { eyebrow: 'Service', includes: "What's included", ctaTitle: "Let's talk about your project?", cta: 'Get a quote', quote: 'Start a project', wa: 'Message us on WhatsApp', other: 'Other services', back: '← All services' },
+  es: { eyebrow: 'Servicio', includes: 'Qué incluye', ctaTitle: '¿Conversamos sobre tu proyecto?', cta: 'Cotizar', quote: 'Empezar un proyecto', wa: 'Escríbenos por WhatsApp', other: 'Otros servicios', back: '← Todos los servicios', faqEyebrow: 'FAQ', faqTitle: 'Preguntas frecuentes' },
+  en: { eyebrow: 'Service', includes: "What's included", ctaTitle: "Let's talk about your project?", cta: 'Get a quote', quote: 'Start a project', wa: 'Message us on WhatsApp', other: 'Other services', back: '← All services', faqEyebrow: 'FAQ', faqTitle: 'Frequently asked questions' },
 }[lang];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: loc.faqs.map((it) => ({
+    '@type': 'Question',
+    name: it.q,
+    acceptedAnswer: { '@type': 'Answer', text: it.a },
+  })),
+};
 ---
 <Nav lang={lang} />
 <main>
@@ -89,6 +99,27 @@ const ui = {
     </div>
   </section>
 
+  {loc.faqs.length > 0 && (
+    <section class="block">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow mono">{ui.faqEyebrow}</span>
+            <h2>{ui.faqTitle}</h2>
+          </div>
+        </div>
+        <div class="faq reveal">
+          {loc.faqs.map((it) => (
+            <details class="faq-item">
+              <summary>{it.q}</summary>
+              <p>{it.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
   <section class="block">
     <div class="wrap">
       <div class="section-head">
@@ -116,6 +147,9 @@ const ui = {
     </div>
   </section>
 </main>
+{loc.faqs.length > 0 && (
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
+)}
 <Footer lang={lang} />
 <ContactModal lang={lang} />
 <SiteBehavior lang={lang} />
