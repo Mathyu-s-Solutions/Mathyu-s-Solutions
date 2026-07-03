@@ -33,11 +33,11 @@ para empezar a aparecer en Google y conseguir clientes.
    - vercel.com → *Add New → Project* → importa `Mathyu-s-Solutions`.
    - Framework: **Astro** (autodetectado) · Build: `pnpm build` · Output: `dist`.
    - Deploy. Te da una URL `*.vercel.app`.
-2. **Dominio** `mathyussolutions.com`
+2. **Dominio** `mathyusolutions.com`
    - En Vercel → *Settings → Domains* → agrega el dominio y apunta los DNS (Vercel te da los registros).
    - Si cambias de dominio, actualiza `site` en `astro.config.mjs` y `SITE.url` en `src/data/site.ts`, y vuelve a desplegar.
 3. **Google Search Console** → https://search.google.com/search-console
-   - *Agregar propiedad* → **Prefijo de URL** `https://mathyussolutions.com`.
+   - *Agregar propiedad* → **Prefijo de URL** `https://mathyusolutions.com`.
    - Verifica (lo más fácil: registro DNS TXT, o subiendo un archivo HTML a `public/`).
    - *Sitemaps* → envía `sitemap-index.xml`.
    - *Inspección de URL* → pega `/es/` y "Solicitar indexación" (repite con las páginas clave).
@@ -50,7 +50,7 @@ para empezar a aparecer en Google y conseguir clientes.
 1. **Perfil de Empresa de Google** (Google Business Profile) → https://business.google.com
    - Nombre exacto: **Mathyu's Solutions**.
    - Categoría principal: *Servicio de desarrollo de software* (agrega *Diseñador de páginas web*, *Consultor de software*).
-   - Teléfono **+51 994 283 802**, web `https://mathyussolutions.com`, zona de servicio (Lima/Perú; sin dirección física si trabajas remoto).
+   - Teléfono **+51 994 283 802**, web `https://mathyusolutions.com`, zona de servicio (Lima/Perú; sin dirección física si trabajas remoto).
    - **NAP consistente:** Nombre, teléfono y datos idénticos a los de la web (ya están en el JSON-LD).
    - Descripción con keywords + servicios + fotos del trabajo/logo.
 2. **Reseñas** ⭐ — el factor #1 del ranking local. Pide a tus clientes (Ciclo, Parco dei Colori, etc.)
@@ -93,7 +93,7 @@ Cada **página de servicio** apunta a un clúster. La **home** apunta a "consult
 
 ## 6) Checklist de lanzamiento
 
-- [ ] Sitio desplegado en Vercel con dominio `mathyussolutions.com` (HTTPS).
+- [ ] Sitio desplegado en Vercel con dominio `mathyusolutions.com` (HTTPS).
 - [ ] `astro.config.mjs` `site` y `src/data/site.ts` `url` apuntan al dominio final.
 - [ ] Verificado en Google Search Console + sitemap enviado.
 - [ ] Indexación solicitada para `/es/`, `/en/` y las páginas de servicio.

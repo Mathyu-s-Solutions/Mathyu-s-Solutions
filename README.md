@@ -134,7 +134,7 @@ Abre tu terminal en una carpeta vacía y di a Claude Code:
    import sitemap from '@astrojs/sitemap';
 
    export default defineConfig({
-     site: 'https://mathyussolutions.com',
+     site: 'https://mathyusolutions.com',
      i18n: {
        defaultLocale: 'es',
        locales: ['es', 'en'],
@@ -202,8 +202,8 @@ const canonical = new URL(path, Astro.site).toString();
     "@type": "Organization",
     "name": "Mathyu's Solutions",
     "alternateName": "MS",
-    "url": "https://mathyussolutions.com",
-    "logo": "https://mathyussolutions.com/og-image.png",
+    "url": "https://mathyusolutions.com",
+    "logo": "https://mathyusolutions.com/og-image.png",
     "email": "mathyusolutions@gmail.com",
     "telephone": "+51-994-283-802",
     "taxID": "20609454211",
@@ -233,7 +233,7 @@ const canonical = new URL(path, Astro.site).toString();
   ```
   User-agent: *
   Allow: /
-  Sitemap: https://mathyussolutions.com/sitemap-index.xml
+  Sitemap: https://mathyusolutions.com/sitemap-index.xml
   ```
 - **Imágenes**: cada `<Image>` con `alt` descriptivo. Nunca alt vacío en imagen significativa.
 - **Headings**: un solo `<h1>` por página (el del hero). Jerarquía estricta h1→h2→h3.
@@ -394,7 +394,7 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({ output: 'static', adapter: cloudflare() });
 ```
 
-Conectar repo de GitHub → Cloudflare detecta Astro → auto-deploy en cada push. Dominio custom `mathyussolutions.com` con SSL gratis.
+Conectar repo de GitHub → Cloudflare detecta Astro → auto-deploy en cada push. Dominio custom `mathyusolutions.com` con SSL gratis.
 
 Alternativas: **Vercel** (deploy también automático, gratis para personal) o **Netlify**.
 

@@ -68,7 +68,7 @@ CSS crítico inline · reduced-motion.
 El sitio es estático; Vercel detecta Astro automáticamente:
 1. Importa el repo en Vercel (Framework preset: **Astro**).
 2. Build command: `pnpm build` · Output dir: `dist` · Install: `pnpm install` (auto).
-3. Asigna el dominio `mathyussolutions.com`.
+3. Asigna el dominio `mathyusolutions.com`.
 
 No se necesita adapter ni variables de entorno. Si cambias el dominio, actualiza `site`
 en `astro.config.mjs` y las URLs en `src/data/site.ts`.

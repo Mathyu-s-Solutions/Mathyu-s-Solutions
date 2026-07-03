@@ -5,7 +5,7 @@
 export const SITE = {
   name: "Mathyu's Solutions",
   shortName: 'MS',
-  url: 'https://mathyussolutions.com',
+  url: 'https://mathyusolutions.com',
   email: 'mathyusolutions@gmail.com',
   /** Human-readable phone */
   phone: '+51 994 283 802',

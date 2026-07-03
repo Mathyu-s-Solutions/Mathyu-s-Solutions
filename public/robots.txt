@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mathyussolutions.com/sitemap-index.xml
+Sitemap: https://mathyusolutions.com/sitemap-index.xml

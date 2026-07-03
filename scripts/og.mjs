@@ -37,7 +37,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
   <g font-family="monospace" font-size="24" fill="#7fd99a">
     <text x="92" y="540">AWS · Azure · GCP</text>
   </g>
-  <text x="1110" y="540" text-anchor="end" font-family="monospace" font-size="24" fill="#6a7280">mathyussolutions.com</text>
+  <text x="1110" y="540" text-anchor="end" font-family="monospace" font-size="24" fill="#6a7280">mathyusolutions.com</text>
 </svg>`;
 
 await sharp(Buffer.from(svg)).png().toFile(out);

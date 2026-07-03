@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 // Production site URL. Update if the final domain changes.
-const SITE = 'https://mathyussolutions.com';
+const SITE = 'https://mathyusolutions.com';
 
 // https://astro.build/config
 export default defineConfig({
