@@ -11,6 +11,13 @@ const techDict = audienceDict(lang, 'tech');
 <script>
   const root = document.documentElement;
 
+  // Let the browser paint the interaction's visual feedback before running
+  // heavy work — keeps INP low on slow devices. rAF fires right before the
+  // next paint; the timeout then lands right after it.
+  function afterPaint(fn: () => void) {
+    requestAnimationFrame(() => setTimeout(fn, 0));
+  }
+
   // ---------- audience text dictionary (technical) ----------
   // Base HTML is rendered with business copy; this holds the technical copy
   // to swap in when the user selects the "tech" audience.
@@ -29,12 +36,16 @@ const techDict = audienceDict(lang, 'tech');
   function applyAudience(aud: string) {
     for (const el of i18nEls) {
       const key = el.getAttribute('data-i18n') ?? '';
+      let next: string;
       if (aud === 'tech') {
         const v = TECH[key];
-        el.textContent = v == null ? (el.dataset.def ?? '') : v;
+        next = v == null ? (el.dataset.def ?? '') : v;
       } else {
-        el.textContent = el.dataset.def ?? '';
+        next = el.dataset.def ?? '';
       }
+      // Skip identical writes: setting textContent always replaces the text
+      // node and invalidates layout, even when the value is unchanged.
+      if (el.textContent !== next) el.textContent = next;
     }
     for (const el of priceEls) {
       const spec = el.getAttribute('data-price') ?? '';
@@ -43,19 +54,23 @@ const techDict = audienceDict(lang, 'tech');
         const idx = seg.indexOf(':');
         if (idx > -1) parts[seg.slice(0, idx)] = seg.slice(idx + 1);
       }
-      el.textContent = parts[aud] ?? el.dataset.def ?? '';
+      const next = parts[aud] ?? el.dataset.def ?? '';
+      if (el.textContent !== next) el.textContent = next;
     }
   }
 
   // ---------- audience toggle ----------
   const audButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('#aud-toggle button'));
-  function setAudience(aud: string, persist: boolean) {
+  function setAudience(aud: string, persist: boolean, deferSwap = false) {
     root.setAttribute('data-audience', aud);
     audButtons.forEach((b) => b.setAttribute('aria-pressed', b.dataset.aud === aud ? 'true' : 'false'));
-    applyAudience(aud);
+    // On click, paint the pressed state first and swap the ~170 text nodes a
+    // frame later; on the initial call stay synchronous to avoid a copy flash.
+    if (deferSwap) afterPaint(() => applyAudience(aud));
+    else applyAudience(aud);
     if (persist) { try { localStorage.setItem('ms-aud', aud); } catch (_) { /* noop */ } }
   }
-  audButtons.forEach((b) => b.addEventListener('click', () => setAudience(b.dataset.aud ?? 'tech', true)));
+  audButtons.forEach((b) => b.addEventListener('click', () => setAudience(b.dataset.aud ?? 'tech', true, true)));
   setAudience(root.getAttribute('data-audience') === 'biz' ? 'biz' : 'tech', false);
 
   // ---------- theme toggle ----------
@@ -182,15 +197,17 @@ const techDict = audienceDict(lang, 'tech');
       const btn = form.querySelector<HTMLButtonElement>('button[type=submit]');
       const span = btn?.querySelector('span');
       const original = span?.textContent ?? '';
-      window.location.href = buildMailto(form);
-      if (span) {
-        span.textContent = LANG === 'es' ? '✓ Abriendo tu correo…' : '✓ Opening your email…';
-        setTimeout(() => {
-          if (span) span.textContent = original;
-          form.reset();
-          if (form.id === 'modal-form') closeModal();
-        }, 2500);
-      }
+      const href = buildMailto(form);
+      // Paint the feedback first, then hand off to the OS mail client:
+      // navigating to mailto: synchronously can freeze the tab for seconds
+      // while the mail app launches, which tanks INP for this click.
+      if (span) span.textContent = LANG === 'es' ? '✓ Abriendo tu correo…' : '✓ Opening your email…';
+      afterPaint(() => { window.location.href = href; });
+      setTimeout(() => {
+        if (span) span.textContent = original;
+        form.reset();
+        if (form.id === 'modal-form') closeModal();
+      }, 2500);
     });
   }
   wireForm(document.getElementById('contact-form') as HTMLFormElement | null);
