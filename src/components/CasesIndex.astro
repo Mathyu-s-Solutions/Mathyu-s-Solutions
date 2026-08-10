@@ -17,12 +17,11 @@ const waHref = `https://wa.me/${SITE.whatsapp}`;
 ---
 <Nav lang={lang} />
 <main>
-  <header class="hero blog-hero" id="top">
+  <header class="listing-header" id="top">
     <div class="wrap">
       <Breadcrumbs lang={lang} items={[{ name: ui.navLabel, path: casesIndexPath(lang) }]} />
-      <span class="eyebrow mono" style="margin-top:22px;">{ui.navLabel}</span>
-      <h1 style="font-size:clamp(36px,5.5vw,64px); margin:18px 0 22px; max-width:18ch;">{ui.heading}</h1>
-      <p class="lead" style="max-width:60ch;">{ui.lead}</p>
+      <h1>{ui.heading}</h1>
+      <p class="post-lead">{ui.lead}</p>
     </div>
   </header>
 

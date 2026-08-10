@@ -51,5 +51,15 @@ const all = [home, ...items];
     transition: color var(--dur-fast) var(--ease);
   }
   .crumbs a:hover { color: var(--accent); }
-  .crumbs [aria-current="page"] { color: var(--fg-muted); }
+  /* Article titles make for a very long final crumb. Clip it visually — the
+     JSON-LD BreadcrumbList still carries the full name. */
+  .crumbs [aria-current="page"] {
+    color: var(--fg-muted);
+    display: inline-block;
+    max-width: 38ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: bottom;
+  }
 </style>

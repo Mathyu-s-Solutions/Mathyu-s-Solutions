@@ -22,38 +22,40 @@ const others = CASES.filter((c) => c.id !== study.id);
 <Nav lang={lang} />
 <main>
   <article>
-    <header class="hero blog-hero" id="top">
-      <div class="wrap">
-        <Breadcrumbs
-          lang={lang}
-          items={[
-            { name: ui.navLabel, path: casesIndexPath(lang) },
-            { name: study.name, path: casePath(study, lang) },
-          ]}
-        />
-        <div class="post-card-meta mono" style="margin-top:22px;">
-          <span>{study.name}</span>
-          <span>·</span>
-          <span>{ui.year} {study.year}</span>
-          <span>·</span>
-          <span>{study.urlLabel}</span>
+    {/* Text and artwork sit side by side, the same shape the service pages
+        use — the artwork reads as part of the header rather than an unrelated
+        full-bleed band under it. */}
+    <header class="case-header" id="top">
+      <div class="wrap case-header-grid">
+        <div class="case-header-text">
+          <Breadcrumbs
+            lang={lang}
+            items={[
+              { name: ui.navLabel, path: casesIndexPath(lang) },
+              { name: study.name, path: casePath(study, lang) },
+            ]}
+          />
+          <h1>{copy.h1}</h1>
+          <p class="post-lead">{copy.summary}</p>
+          <div class="post-meta mono">
+            <span>{ui.year} {study.year}</span>
+            <span aria-hidden="true">·</span>
+            <span>{study.urlLabel}</span>
+          </div>
+          <div class="hero-cta" style="margin-top:26px;">
+            <a class="btn" href={study.href} target="_blank" rel="noopener">
+              <span>{copy.visitLabel}</span><span class="arr" aria-hidden="true">→</span>
+            </a>
+            <button class="btn btn-secondary" type="button" data-modal-open>{ui.ctaButton}</button>
+          </div>
         </div>
-        <h1 style="font-size:clamp(32px,4.6vw,54px); margin:18px 0 22px; max-width:22ch;">{copy.h1}</h1>
-        <p class="lead" style="max-width:62ch;">{copy.summary}</p>
-        <div class="hero-cta" style="margin-top:28px;">
-          <a class="btn" href={study.href} target="_blank" rel="noopener">
-            <span>{copy.visitLabel}</span><span class="arr" aria-hidden="true">→</span>
-          </a>
-          <button class="btn btn-secondary" type="button" data-modal-open>{ui.ctaButton}</button>
+        <div class="case-art" aria-hidden="true">
+          <CaseThumb id={study.id} />
         </div>
       </div>
     </header>
 
     <div class="wrap">
-      <div class="case-hero-art" aria-hidden="true">
-        <CaseThumb id={study.id} />
-      </div>
-
       <div class="case-grid">
         <div class="prose">
           <h2>{copy.contextTitle}</h2>

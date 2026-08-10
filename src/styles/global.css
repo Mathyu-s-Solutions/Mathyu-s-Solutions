@@ -66,7 +66,10 @@ html.lenis, html.lenis body { height: auto; }
   border-bottom-color: var(--line);
   box-shadow: 0 12px 32px -24px oklch(0 0 0 / 0.5);
 }
-.nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; gap: 24px; }
+/* padding-block, not the `padding` shorthand: this element is also a `.wrap`,
+   whose horizontal padding is the only thing keeping the bar off the screen
+   edge on viewports narrower than the 1240px max-width. */
+.nav-inner { display: flex; align-items: center; justify-content: space-between; padding-block: 14px; gap: 24px; }
 .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--fg); }
 .brand-mark {
   font-family: var(--font-mono);
@@ -83,11 +86,14 @@ html.lenis, html.lenis body { height: auto; }
 .brand-name { font-family: var(--font-display); font-weight: 600; font-size: 16px; letter-spacing: -0.01em; }
 .brand-name .dim { color: var(--fg-muted); font-weight: 500; }
 
-.nav-collapse { display: flex; align-items: center; gap: 28px; flex: 1; justify-content: space-between; margin-left: 12px; }
-.nav-links { display: flex; gap: 28px; align-items: center; }
-.nav-links a { color: var(--fg-dim); text-decoration: none; font-size: 14.5px; transition: color .15s; }
+.nav-collapse { display: flex; align-items: center; gap: 24px; flex: 1; justify-content: space-between; margin-left: 16px; }
+.nav-links { display: flex; gap: 22px; align-items: center; }
+/* nowrap: a two-word label like "Cómo trabajamos" used to break onto a second
+   line and blow up the height of the whole bar. */
+.nav-links a { color: var(--fg-dim); text-decoration: none; font-size: 14.5px; white-space: nowrap; transition: color .15s; }
 .nav-links a:hover { color: var(--fg); }
-.nav-actions { display: flex; align-items: center; gap: 10px; }
+.nav-actions { display: flex; align-items: center; gap: 8px; }
+#lang-toggle { min-width: 42px; justify-content: center; }
 
 /* Hamburger toggle — hidden on desktop, shown on small screens */
 .nav-toggle {
@@ -667,6 +673,11 @@ html[data-audience="tech"] .biz-only { display: none !important; }
    so content stays visible without JavaScript) ---------- */
 html.js .reveal { opacity: 0; transform: translateY(28px); }
 html.js [data-animate] { opacity: 0; transform: translateY(26px); }
+/* Must be qualified with `html.js` too: `.reveal.in` alone scores lower than
+   `html.js .reveal` and loses, so the element would stay at opacity 0. On the
+   landing page GSAP hides the problem by writing inline styles, but the
+   class-only reveal used on blog and case pages depends on this rule. */
+html.js .reveal.in, html.js [data-animate].in,
 .reveal.in, [data-animate].in {
   opacity: 1; transform: none;
   transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
@@ -691,9 +702,21 @@ html.js [data-animate] { opacity: 0; transform: translateY(26px); }
   * { scroll-behavior: auto !important; }
 }
 
-/* ---------- BLOG ---------- */
-.blog-hero { padding-bottom: 40px; }
-.blog-hero::after { display: none; }
+/* ---------- BLOG ----------
+   Long-form pages get an editorial header, not the landing hero: no glow, no
+   grid overlay, and far less vertical space, so the first paragraph is visible
+   without scrolling. */
+.listing-header { padding: 44px 0 32px; }
+.listing-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4.4vw, 52px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+  margin: 20px 0 16px;
+  max-width: 20ch;
+}
+.post-lead { color: var(--fg-dim); font-size: 18px; line-height: 1.6; max-width: 62ch; margin: 0; }
 
 .post-list { display: grid; gap: 18px; max-width: 900px; }
 .post-card {
@@ -723,9 +746,48 @@ html.js [data-animate] { opacity: 0; transform: translateY(26px); }
   border: 1px solid var(--line); border-radius: var(--r-pill); color: var(--fg-muted);
 }
 
-/* Article layout: optional sticky TOC beside the text column */
-.post-body { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 56px; padding-top: 8px; padding-bottom: 40px; align-items: start; }
-.post-body > .prose:only-child { grid-column: 1 / -1; max-width: 74ch; }
+/* Article layout: header and body share one grid so the H1 and the paragraphs
+   start on the same left edge. The rail column stretches to the full row height
+   (rather than shrink-wrapping the list) — that is what gives the sticky TOC
+   room to travel. */
+.post-shell {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  column-gap: 56px;
+  /* padding-block only — `.wrap` owns the horizontal padding (see .nav-inner). */
+  padding-block: 44px 48px;
+}
+/* Header and body both live in column 2; the rail sits beside the body only. */
+.post-shell > .post-header { grid-column: 2; }
+.post-shell > .post-rail { grid-column: 1; grid-row: 2; }
+.post-shell > .post-main { grid-column: 2; grid-row: 2; }
+.post-shell.no-rail { grid-template-columns: minmax(0, 1fr); }
+.post-shell.no-rail > .post-header,
+.post-shell.no-rail > .post-main { grid-column: 1; }
+.post-main { max-width: 74ch; min-width: 0; }
+
+.post-header { margin-bottom: 40px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+.post-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 3.8vw, 46px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin: 20px 0 18px;
+}
+.post-header .post-lead { font-size: 19px; }
+.post-meta {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+  margin-top: 22px;
+  font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--fg-muted);
+}
+.post-meta .chip {
+  text-transform: none; letter-spacing: 0;
+  padding: 4px 9px; border: 1px solid var(--line);
+  border-radius: var(--r-pill); color: var(--fg-dim);
+}
+
 .post-toc { position: sticky; top: 96px; border-left: 1px solid var(--line); padding-left: 20px; }
 .post-toc .toc-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--fg-muted); margin: 0 0 14px; font-weight: 500; }
 .post-toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; counter-reset: toc; }
@@ -759,6 +821,9 @@ html.js [data-animate] { opacity: 0; transform: translateY(26px); }
   scroll-margin-top: 96px;
 }
 .prose h2 + p, .prose h3 + p { margin-top: 0; }
+/* An article or case that opens on a heading shouldn't inherit the big
+   between-sections margin — it would hang below the sidebar next to it. */
+.prose > :first-child { margin-top: 0; }
 .prose strong { color: var(--fg); font-weight: 600; }
 .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 .prose a:hover { text-decoration-thickness: 2px; }
@@ -843,21 +908,37 @@ html.js [data-animate] { opacity: 0; transform: translateY(26px); }
 }
 .cases-more a:hover { color: var(--accent); }
 
-.case-hero-art {
+.case-header { padding: 44px 0 8px; }
+.case-header-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 56px;
+  align-items: center;
+}
+.case-header-text h1 {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 3.8vw, 48px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin: 20px 0 18px;
+  max-width: 18ch;
+}
+.case-art {
   border: 1px solid var(--line);
   border-radius: var(--r);
   overflow: hidden;
-  aspect-ratio: 24 / 9;
+  aspect-ratio: 5 / 3;
   background: var(--bg-elev);
 }
-.case-hero-art svg { width: 100%; height: 100%; display: block; }
+.case-art svg { width: 100%; height: 100%; display: block; }
 
 .case-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 280px;
   gap: 56px;
   align-items: start;
-  padding: 48px 0 8px;
+  padding: 32px 0 8px;
 }
 .case-aside { position: sticky; top: 96px; }
 .case-facts {
@@ -881,10 +962,23 @@ html.js [data-animate] { opacity: 0; transform: translateY(26px); }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1020px) {
-  .case-grid { grid-template-columns: 1fr; gap: 32px; padding-top: 36px; }
+  .case-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; padding-top: 36px; }
   .case-aside { position: static; }
-  .case-hero-art { aspect-ratio: 16 / 9; }
-  .post-body { grid-template-columns: 1fr; gap: 28px; }
+  .case-header-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .case-header-text h1 { max-width: none; }
+  .case-art { aspect-ratio: 16 / 9; }
+  /* Single column: placements reset to DOM order (header → contents → article)
+     and the rail stops being a sidebar, becoming a plain summary card.
+     minmax(0, 1fr) rather than 1fr — a plain 1fr track refuses to shrink below
+     its content's min-content width, and the price tables (min-width: 460px)
+     would then push the whole page into horizontal scroll. */
+  .post-shell,
+  .post-shell.no-rail { grid-template-columns: minmax(0, 1fr); }
+  .post-shell > .post-header,
+  .post-shell > .post-rail,
+  .post-shell > .post-main { grid-column: 1; grid-row: auto; }
+  .post-main { max-width: none; }
+  .post-header { margin-bottom: 32px; }
   .post-toc {
     position: static;
     border-left: none;
@@ -892,6 +986,7 @@ html.js [data-animate] { opacity: 0; transform: translateY(26px); }
     border-radius: var(--r-sm);
     background: var(--bg-elev);
     padding: 20px 22px;
+    margin-bottom: 36px;
   }
   .hero-grid { grid-template-columns: 1fr; gap: 40px; }
   .section-head { grid-template-columns: 1fr; gap: 18px; }

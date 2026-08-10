@@ -19,14 +19,18 @@ const { Content, headings } = await render(post);
 const waHref = `https://wa.me/${SITE.whatsapp}`;
 const service = SERVICES.find((s) => s.id === post.data.service);
 
-// Only H2s make a useful table of contents.
+// Only H2s make a useful table of contents, and only if there are enough of
+// them to be worth a rail.
 const toc = headings.filter((h) => h.depth === 2);
+const hasToc = toc.length > 2;
 ---
 <Nav lang={lang} />
 <main>
   <article class="post" id="top">
-    <header class="hero blog-hero">
-      <div class="wrap">
+    {/* Header and body share one grid, so the H1 sits on the same left edge as
+        the article text instead of floating in its own full-bleed hero. */}
+    <div class={`wrap post-shell${hasToc ? '' : ' no-rail'}`}>
+      <header class="post-header">
         <Breadcrumbs
           lang={lang}
           items={[
@@ -34,42 +38,41 @@ const toc = headings.filter((h) => h.depth === 2);
             { name: post.data.heading, path: postHref(post) },
           ]}
         />
-        <div class="post-card-meta mono" style="margin-top:22px;">
+        <h1>{post.data.heading}</h1>
+        <p class="post-lead">{post.data.description}</p>
+        <div class="post-meta mono">
           <time datetime={post.data.pubDate.toISOString()}>
             {ui.published} {formatDate(post.data.pubDate, lang)}
           </time>
-          <span>·</span>
+          <span aria-hidden="true">·</span>
           <span>{readingMinutes(post)} {ui.readingTime}</span>
           {post.data.updatedDate && (
             <>
-              <span>·</span>
+              <span aria-hidden="true">·</span>
               <span>{ui.updated} {formatDate(post.data.updatedDate, lang)}</span>
             </>
           )}
-        </div>
-        <h1 style="font-size:clamp(32px,4.6vw,54px); margin:18px 0 22px; max-width:24ch;">
-          {post.data.heading}
-        </h1>
-        <p class="lead" style="max-width:62ch;">{post.data.description}</p>
-        <div class="post-card-tags" style="margin-top:24px;">
           {post.data.tags.map((tag) => <span class="chip">{tag}</span>)}
         </div>
-      </div>
-    </header>
+      </header>
 
-    <div class="wrap post-body">
-      {toc.length > 2 && (
-        <aside class="post-toc" aria-label={ui.toc}>
-          {/* Deliberately not a heading: the article's H2s should be the only
-              second-level items in the document outline. */}
-          <p class="mono toc-label">{ui.toc}</p>
-          <ol>
-            {toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}
-          </ol>
-        </aside>
+      {/* DOM order is header → contents → article, which is the right reading
+          order once the grid collapses to one column on small screens. On
+          desktop the rail is placed back into column 1 beside the body. */}
+      {hasToc && (
+        <div class="post-rail">
+          <aside class="post-toc" aria-label={ui.toc}>
+            {/* Deliberately not a heading: the article's H2s should be the only
+                second-level items in the document outline. */}
+            <p class="mono toc-label">{ui.toc}</p>
+            <ol>
+              {toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}
+            </ol>
+          </aside>
+        </div>
       )}
 
-      <div class="prose">
+      <div class="post-main prose">
         <Content />
 
         {post.data.faqs.length > 0 && (
@@ -106,8 +109,8 @@ const toc = headings.filter((h) => h.depth === 2);
       </div>
 
       {related.length > 0 && (
-        <section class="block" style="padding-top:0;">
-          <div class="section-head reveal" style="margin-bottom:28px;">
+        <section class="block" style="padding-top:64px;">
+          <div class="section-head" style="margin-bottom:28px;">
             <div><span class="eyebrow mono">{ui.more}</span></div>
           </div>
           <div class="post-list">
@@ -118,7 +121,7 @@ const toc = headings.filter((h) => h.depth === 2);
                     <time datetime={r.data.pubDate.toISOString()}>
                       {formatDate(r.data.updatedDate ?? r.data.pubDate, lang)}
                     </time>
-                    <span>·</span>
+                    <span aria-hidden="true">·</span>
                     <span>{readingMinutes(r)} {ui.readingTime}</span>
                   </div>
                   <h3>{r.data.heading}</h3>

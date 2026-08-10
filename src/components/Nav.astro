@@ -9,6 +9,10 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const tt = translator(lang, 'biz');
 const home = `/${lang}/`;
+// "Cómo trabajamos" / Process is deliberately not in the top nav: it is
+// reassurance copy, not navigation, and the long label was what pushed the bar
+// onto two lines. It still lives in the footer and on the landing page.
+//
 // On the landing page keep bare hashes so smooth-scroll handles them; anywhere
 // else prefix with the home path so every page links back into the main
 // sections (good for users, and it spreads internal link equity to the home).
@@ -34,7 +38,6 @@ const anchor = (id: string) => (isHome ? `#${id}` : `${home}#${id}`);
     <div class="nav-collapse" id="nav-menu">
       <div class="nav-links">
         <a href={anchor('services')} data-i18n="nav.services">{tt('nav.services')}</a>
-        <a href={anchor('process')} data-i18n="nav.process">{tt('nav.process')}</a>
         <a href={casesIndexPath(lang)} data-i18n="nav.cases">{tt('nav.cases')}</a>
         <a href={anchor('pricing')} data-i18n="nav.pricing">{tt('nav.pricing')}</a>
         <a href={`${home}blog/`}>Blog</a>

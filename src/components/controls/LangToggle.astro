@@ -7,8 +7,8 @@ const href = `/${target}/`;
 const label = target.toUpperCase();
 const title = lang === 'es' ? 'Switch to English' : 'Cambiar a español';
 ---
+{/* Shows only the language you'd switch *to* — "ES / EN" read as a status
+    label and took twice the width in an already crowded bar. */}
 <a class="icon-btn" id="lang-toggle" href={href} title={title} hreflang={target} aria-label={title}>
-  <span aria-hidden="true">{lang.toUpperCase()}</span>
-  <span aria-hidden="true">/</span>
-  <span><strong>{label}</strong></span>
+  <strong>{label}</strong>
 </a>
