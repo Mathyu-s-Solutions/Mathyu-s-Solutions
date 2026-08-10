@@ -1,5 +1,6 @@
 ---
 import { translator, type Lang } from '../i18n/utils';
+import { casesIndexPath } from '../data/cases';
 import AudienceToggle from './controls/AudienceToggle.astro';
 import LangToggle from './controls/LangToggle.astro';
 import ThemeToggle from './controls/ThemeToggle.astro';
@@ -34,7 +35,7 @@ const anchor = (id: string) => (isHome ? `#${id}` : `${home}#${id}`);
       <div class="nav-links">
         <a href={anchor('services')} data-i18n="nav.services">{tt('nav.services')}</a>
         <a href={anchor('process')} data-i18n="nav.process">{tt('nav.process')}</a>
-        <a href={anchor('cases')} data-i18n="nav.cases">{tt('nav.cases')}</a>
+        <a href={casesIndexPath(lang)} data-i18n="nav.cases">{tt('nav.cases')}</a>
         <a href={anchor('pricing')} data-i18n="nav.pricing">{tt('nav.pricing')}</a>
         <a href={`${home}blog/`}>Blog</a>
         <a href={anchor('contact')} data-i18n="nav.contact">{tt('nav.contact')}</a>

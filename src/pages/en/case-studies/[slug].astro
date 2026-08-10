@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import CasePage from '../../../components/CasePage.astro';
+import { CASES, CASES_UI, casePath, casesIndexPath, type CaseStudy } from '../../../data/cases';
+import { abs } from '../../../data/site';
+import { caseJsonLd } from '../../../data/caseSchema';
+
+export function getStaticPaths() {
+  return CASES.map((study) => ({ params: { slug: study.page.en.slug }, props: { study } }));
+}
+
+const lang = 'en' as const;
+const { study } = Astro.props as { study: CaseStudy };
+const copy = study.page[lang];
+const path = casePath(study, lang);
+const ui = CASES_UI[lang];
+---
+<BaseLayout
+  title={`${copy.title} — Mathyu's Solutions`}
+  description={copy.description}
+  lang={lang}
+  path={path}
+  esHref={casePath(study, 'es')}
+  enHref={path}
+  ogImage={`/og/caso-${copy.slug}.png`}
+  ogType="article"
+  breadcrumbs={[
+    { name: ui.navLabel, path: casesIndexPath(lang) },
+    { name: study.name, path },
+  ]}
+  extraJsonLd={caseJsonLd(study, lang, abs(path))}
+>
+  <CasePage lang={lang} study={study} />
+</BaseLayout>

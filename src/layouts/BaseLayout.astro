@@ -4,6 +4,11 @@ import '@fontsource-variable/instrument-sans';
 import '@fontsource-variable/jetbrains-mono';
 import '../styles/tokens.css';
 import '../styles/global.css';
+// Resolved to the hashed build URL so the preload never goes stale.
+// Without it the browser can't discover the font until the stylesheet has
+// downloaded and parsed — a three-hop chain in front of the LCP heading.
+import displayFont from '@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wght-normal.woff2?url';
+import bodyFont from '@fontsource-variable/instrument-sans/files/instrument-sans-latin-wght-normal.woff2?url';
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
 import { SITE } from '../data/site';
@@ -346,6 +351,18 @@ const graph = {
     {enUrl && <link rel="alternate" hreflang="en" href={enUrl} />}
     {enUrl && <link rel="alternate" hreflang="en-US" href={enUrl} />}
     <link rel="alternate" hreflang="x-default" href={esUrl ?? canonical} />
+
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={`${SITE.name} — Blog (${lang === 'es' ? 'español' : 'English'})`}
+      href={url(`/${lang}/blog/rss.xml`)}
+    />
+
+    <!-- Fonts: the H1 and body copy both paint from these, so start fetching
+         them in parallel with the stylesheet rather than after it. -->
+    <link rel="preload" href={displayFont} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={bodyFont} as="font" type="font/woff2" crossorigin />
 
     <!-- Icons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

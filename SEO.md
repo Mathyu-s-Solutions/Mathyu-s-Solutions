@@ -10,7 +10,7 @@ para empezar a aparecer en Google y conseguir clientes.
 
 ---
 
-## 0) ⚠️ Tres cosas que solo tú puedes arreglar (hazlas primero)
+## 0) ⚠️ Cuatro cosas que solo tú puedes arreglar (hazlas primero)
 
 Son las de mayor impacto y ninguna se puede resolver desde el código:
 
@@ -22,7 +22,13 @@ Son las de mayor impacto y ninguna se puede resolver desde el código:
 2. **`sameAs` está vacío.** En `src/data/site.ts` hay una lista comentada. Google la usa para
    conectar tu web con tu entidad real (LinkedIn, Instagram, GitHub, Perfil de Empresa). Es de las
    señales más baratas que existen: crea los perfiles, pega las URLs y descoméntalas.
-3. **Nadie te enlaza todavía.** Ver la sección 6.
+3. **Los casos de éxito no tienen números.** Las páginas de `/es/casos/` están escritas solo con lo
+   que se puede verificar mirando el producto en vivo: qué se construyó y con qué. **Revisa la
+   redacción** (yo no estuve en esos proyectos) y sobre todo llena el array `results` de cada caso
+   en `src/data/cases.ts` con métricas reales — y `quote` con una cita del cliente, si te la dan.
+   Un caso con "el tiempo de carga bajó de 6 s a 1.2 s" vale diez veces uno sin cifras, y es lo que
+   consigue enlaces. Mientras estén vacíos, esa sección simplemente no se renderiza.
+4. **Nadie te enlaza todavía.** Ver la sección 6.
 
 ---
 
@@ -40,6 +46,11 @@ Son las de mayor impacto y ninguna se puede resolver desde el código:
 - **Páginas de servicio dedicadas** (cada una rankea por su término):
   - `/es/desarrollo-web/` · `/es/desarrollo-de-apps/` · `/es/software-con-ia/` · `/es/cloud-y-devops/`
   - `/en/web-development/` · `/en/mobile-app-development/` · `/en/ai-software-development/` · `/en/cloud-devops/`
+- **Casos de éxito con página propia** (`/es/casos/`, `/en/case-studies/`): Ciclo, Parco dei Colori
+  y Calarm. Las tarjetas de la home ahora enlazan a estas páginas en vez de salir directo a la web
+  del cliente — el clic (y el link equity) se queda en tu sitio y el producto en vivo está a un clic
+  desde ahí. Cada caso marca con schema el producto real (`WebSite` / `MobileApplication`), que es
+  lo que separa un portafolio verificable de una promesa de marketing.
 
 ### Técnico
 - **Títulos y meta-descriptions** únicos por página, con la keyword al inicio y la marca al final.
@@ -60,7 +71,18 @@ Son las de mayor impacto y ninguna se puede resolver desde el código:
 - **Imágenes sociales por página** (`public/og/`): home ES/EN, cada servicio y cada artículo llevan
   su propia tarjeta con su titular. Se regeneran con `pnpm og`.
 - **`site.webmanifest`**, `theme-color`, `geo.position`/`ICBM`.
-- **Rendimiento:** sitio 100% estático, fuentes self-hosted, CSS crítico inline, casi 0 JS.
+- **RSS** en `/es/blog/rss.xml` y `/en/blog/rss.xml`, enlazados desde el `<head>`.
+- **Redirección real 301** de `/` a `/es/` vía `vercel.json`. Antes Astro generaba un
+  `<meta http-equiv="refresh">` **con `noindex`** en la raíz: justo la URL que la gente teclea,
+  comparte y enlaza. Un 301 pasa las señales de forma limpia; un meta-refresh no.
+- **Rendimiento:**
+  - Sitio 100% estático, fuentes self-hosted, casi 0 JS.
+  - Las fuentes del H1 y del cuerpo van en `preload`; antes el navegador no las descubría hasta
+    haber descargado y parseado la hoja de estilos (tres saltos antes de pintar el LCP).
+  - **El blog y los casos ya no cargan GSAP ni Lenis: 5 KB de JS en vez de 136 KB.** Esas páginas
+    son las que reciben el tráfico orgánico frío, y son justo donde Core Web Vitals pesa más.
+    Además, el scroll suave de Lenis estorba en un artículo de 1,500 palabras. La landing y las
+    páginas de servicio conservan la animación completa.
 
 ### Datos estructurados (JSON-LD)
 Todo el sitio emite **un solo `@graph` enlazado** por página, en vez de bloques sueltos:
@@ -75,6 +97,7 @@ Todo el sitio emite **un solo `@graph` enlazado** por página, en vez de bloques
 | `BreadcrumbList` | `<url>#breadcrumb` | La ruta |
 | `Service` | `<url>#service` | Solo en páginas de servicio, con `offers` y `availableChannel` |
 | `BlogPosting` | `<url>#article` | Solo en artículos, con autor, fechas y `wordCount` |
+| `CreativeWork` + `WebSite`/`MobileApplication` | `<url>#case` / `#product` | Solo en casos: el estudio y el producto real que vive en una URL pública |
 
 Antes cada página declaraba su propio `ProfessionalService` con la URL de esa página: para Google
 eran ocho negocios distintos. Ahora hay **uno solo**, referenciado por `@id` desde todas partes.
@@ -184,7 +207,8 @@ compuesta.
 - [ ] Sitio desplegado en Vercel con dominio `mathyusolutions.com` (HTTPS).
 - [ ] `astro.config.mjs` `site` y `src/data/site.ts` `url` apuntan al dominio final.
 - [ ] Verificado en Google Search Console + sitemap enviado.
-- [ ] Indexación solicitada para las 17 URLs principales.
+- [ ] Indexación solicitada para las 27 URLs del sitemap.
+- [ ] Casos revisados y con métricas reales en `results`.
 - [ ] Bing Webmaster Tools conectado.
 - [ ] Perfil de Empresa de Google creado, verificado y completo.
 - [ ] 3–5 reseñas iniciales conseguidas.

@@ -29,6 +29,13 @@
 - [Cloud y DevOps](https://mathyusolutions.com/es/cloud-y-devops/): migración a la nube, CI/CD, monitoreo 24/7, respaldos y optimización de costos en AWS, Azure y GCP.
 - English versions: [web](https://mathyusolutions.com/en/web-development/), [mobile](https://mathyusolutions.com/en/mobile-app-development/), [AI](https://mathyusolutions.com/en/ai-software-development/), [cloud](https://mathyusolutions.com/en/cloud-devops/).
 
+## Proyectos / Case studies
+
+- [Ciclo](https://mathyusolutions.com/es/casos/ciclo/) — web corporativa para una empresa peruana de economía circular (residuos de construcción y ecomateriales). Next.js, React, AWS. En vivo: https://ciclo.com.pe
+- [Parco dei Colori](https://mathyusolutions.com/es/casos/parco-dei-colori/) — sitio bilingüe IT/EN con reservas y suscripciones para una asociación italiana de jardines y mariposas. Next.js, autenticación, i18n. En vivo: https://www.parcodeicolori.it
+- [Calarm](https://mathyusolutions.com/es/casos/calarm/) — app nativa de iPhone que crea alarmas a partir del calendario. Swift, SwiftUI, EventKit. En vivo: App Store.
+- English index: https://mathyusolutions.com/en/case-studies/
+
 ## Guías y precios / Guides and pricing
 
 - [¿Cuánto cuesta hacer una app en Perú?](https://mathyusolutions.com/es/blog/cuanto-cuesta-hacer-una-app-en-peru/)
@@ -42,5 +49,7 @@
 ## Opcional / Optional
 
 - [Sitemap](https://mathyusolutions.com/sitemap-index.xml)
+- [RSS en español](https://mathyusolutions.com/es/blog/rss.xml)
+- [RSS in English](https://mathyusolutions.com/en/blog/rss.xml)
 - [Inicio en español](https://mathyusolutions.com/es/)
 - [English homepage](https://mathyusolutions.com/en/)

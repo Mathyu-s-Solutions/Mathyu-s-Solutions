@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import CasesIndex from '../../../components/CasesIndex.astro';
+import { CASES_UI, casesIndexPath } from '../../../data/cases';
+import { casesListJsonLd } from '../../../data/caseSchema';
+import { abs } from '../../../data/site';
+
+const lang = 'en' as const;
+const ui = CASES_UI[lang];
+const path = casesIndexPath(lang);
+---
+<BaseLayout
+  title={`${ui.title} — Mathyu's Solutions`}
+  description={ui.description}
+  lang={lang}
+  path={path}
+  esHref={casesIndexPath('es')}
+  enHref={path}
+  breadcrumbs={[{ name: ui.navLabel, path }]}
+  extraJsonLd={casesListJsonLd(lang, abs(path))}
+>
+  <CasesIndex lang={lang} />
+</BaseLayout>

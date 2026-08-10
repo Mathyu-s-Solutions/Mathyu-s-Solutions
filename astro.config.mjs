@@ -99,6 +99,7 @@ export default defineConfig({
         const isHome = /^\/(es|en)\/$/.test(path);
         const isBlogIndex = /^\/(es|en)\/blog\/$/.test(path);
         const isPost = /^\/(es|en)\/blog\/.+/.test(path);
+        const isCase = /^\/(es\/casos|en\/case-studies)\//.test(path);
 
         const lastmod = LASTMOD.get(path);
         if (lastmod) item.lastmod = lastmod;
@@ -111,6 +112,11 @@ export default defineConfig({
         } else if (isPost) {
           item.priority = 0.6;
           item.changefreq = ChangeFreqEnum.MONTHLY;
+        } else if (isCase) {
+          // Proof pages: they convert well and attract links, but the service
+          // pages are still the ones we want ranking for commercial terms.
+          item.priority = 0.8;
+          item.changefreq = ChangeFreqEnum.YEARLY;
         } else {
           // Service pages — these are the pages that convert.
           item.priority = 0.9;

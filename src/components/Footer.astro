@@ -3,6 +3,7 @@ import { translator, type Lang } from '../i18n/utils';
 import { SITE } from '../data/site';
 import { servicePageHref, type PanelId } from '../data/services';
 import { getPosts, postHref } from '../data/blog';
+import { casesIndexPath } from '../data/cases';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const tt = translator(lang, 'biz');
@@ -20,7 +21,7 @@ const serviceLinks: { panel: PanelId; key: string }[] = [
 const services = serviceLinks.map((s) => ({ href: servicePageHref(s.panel, lang) ?? `${home}#services`, key: s.key }));
 const company = [
   { href: anchor('process'), key: 'foot.s2a' },
-  { href: anchor('cases'), key: 'foot.s2b' },
+  { href: casesIndexPath(lang), key: 'foot.s2b' },
   { href: anchor('pricing'), key: 'foot.s2c' },
   { href: anchor('contact'), key: 'foot.s2d' },
 ];

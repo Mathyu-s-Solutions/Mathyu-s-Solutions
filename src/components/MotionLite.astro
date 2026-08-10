@@ -1,0 +1,53 @@
+---
+/**
+ * Lightweight motion layer for long-form pages (blog index, articles).
+ *
+ * The full Motion.astro pulls in GSAP + ScrollTrigger + Lenis — ~131 KB of
+ * JavaScript — to drive the landing page's hero timeline, stat counters and
+ * case-thumbnail parallax. None of that exists on an article page, and article
+ * pages are exactly the ones that receive cold organic traffic, where Core Web
+ * Vitals and time-to-interactive matter most.
+ *
+ * Lenis is deliberately omitted here too: hijacking the scroll of a 1,500-word
+ * article fights the one thing the reader came to do.
+ *
+ * `is:inline` keeps this out of the bundle entirely — no extra request, and the
+ * hidden initial states stay gated behind `html.js` so a no-JS visitor still
+ * sees everything.
+ */
+---
+<script is:inline>
+  (function () {
+    var nav = document.getElementById('site-nav');
+    function syncNav() {
+      if (nav) nav.classList.toggle('scrolled', window.scrollY > 10);
+    }
+    window.addEventListener('scroll', syncNav, { passive: true });
+    syncNav();
+
+    var targets = document.querySelectorAll('.reveal, [data-animate]');
+    function showAll() {
+      for (var i = 0; i < targets.length; i++) targets[i].classList.add('in');
+    }
+
+    if (
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      !('IntersectionObserver' in window)
+    ) {
+      showAll();
+      return;
+    }
+
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        });
+      },
+      { rootMargin: '0px 0px -12% 0px' },
+    );
+    for (var i = 0; i < targets.length; i++) io.observe(targets[i]);
+  })();
+</script>

@@ -1,0 +1,63 @@
+---
+import type { Lang } from '../i18n/utils';
+import { SITE } from '../data/site';
+import { CASES, CASES_UI, casePath, casesIndexPath } from '../data/cases';
+import Nav from './Nav.astro';
+import Footer from './Footer.astro';
+import ContactModal from './ContactModal.astro';
+import SiteBehavior from './SiteBehavior.astro';
+import MotionLite from './MotionLite.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import CaseThumb from './CaseThumb.astro';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const ui = CASES_UI[lang];
+const waHref = `https://wa.me/${SITE.whatsapp}`;
+---
+<Nav lang={lang} />
+<main>
+  <header class="hero blog-hero" id="top">
+    <div class="wrap">
+      <Breadcrumbs lang={lang} items={[{ name: ui.navLabel, path: casesIndexPath(lang) }]} />
+      <span class="eyebrow mono" style="margin-top:22px;">{ui.navLabel}</span>
+      <h1 style="font-size:clamp(36px,5.5vw,64px); margin:18px 0 22px; max-width:18ch;">{ui.heading}</h1>
+      <p class="lead" style="max-width:60ch;">{ui.lead}</p>
+    </div>
+  </header>
+
+  <section class="block" style="padding-top:0;">
+    <div class="wrap">
+      <div class="cases">
+        {CASES.map((c) => (
+          <a class="case reveal" href={casePath(c, lang)}>
+            <div class="thumb">
+              <CaseThumb id={c.id} />
+            </div>
+            <div class="body">
+              <h2 class="case-title">{c.name}</h2>
+              <p class="url">{c.urlLabel}</p>
+              <p>{c.page[lang].summary}</p>
+              <div class="meta">{c.tags.map((tag) => <span>{tag}</span>)}</div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div class="blog-cta">
+        <h2>{ui.ctaTitle}</h2>
+        <p>{ui.ctaText}</p>
+        <div class="hero-cta" style="justify-content:center;">
+          <button class="btn" type="button" data-modal-open>
+            <span>{ui.ctaButton}</span><span class="arr" aria-hidden="true">→</span>
+          </button>
+          <a class="btn btn-secondary" href={waHref} target="_blank" rel="noopener">{ui.ctaWhatsapp}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<Footer lang={lang} />
+<ContactModal lang={lang} />
+<SiteBehavior lang={lang} />
+<MotionLite />

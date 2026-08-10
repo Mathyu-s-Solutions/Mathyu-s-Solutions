@@ -23,6 +23,7 @@ import { readFileSync, readdirSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { SERVICES, SERVICE_SHORT } from '../src/data/services.ts';
+import { CASES } from '../src/data/cases.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const publicDir = join(__dirname, '..', 'public');
@@ -146,6 +147,14 @@ for (const service of SERVICES) {
       title: service[lang].h1,
     });
   }
+}
+
+/* ── Case studies (one card per case; the slug is shared across locales) ── */
+for (const study of CASES) {
+  await write(join(ogDir, `caso-${study.page.es.slug}.png`), {
+    eyebrow: `${study.name} · ${study.tags.slice(0, 2).join(' · ')}`,
+    title: study.page.es.h1,
+  });
 }
 
 /* ── Blog posts ────────────────────────────────────────────────────────── */
