@@ -276,6 +276,14 @@ export const SERVICES: ServicePageData[] = [
   },
 ];
 
+/** Short label for breadcrumbs, cross-links and nav menus. */
+export const SERVICE_SHORT: Record<string, Record<Lang, string>> = {
+  web: { es: 'Desarrollo web', en: 'Web development' },
+  apps: { es: 'Apps móviles', en: 'Mobile apps' },
+  ai: { es: 'Software con IA', en: 'AI software' },
+  cloud: { es: 'Cloud y DevOps', en: 'Cloud & DevOps' },
+};
+
 /** URL of the service page that covers a given homepage tab, for the current language. */
 export function servicePageHref(panel: PanelId, lang: Lang): string | undefined {
   const svc = SERVICES.find((s) => s.panels.includes(panel));

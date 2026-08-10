@@ -1,0 +1,46 @@
+# Mathyu's Solutions
+
+> Consultora de software con base en Lima, Perú. Diseñamos y desarrollamos
+> páginas web y tiendas online, aplicaciones móviles para iOS y Android,
+> automatización con inteligencia artificial, e infraestructura cloud y DevOps
+> sobre AWS, Azure y GCP. Atendemos a negocios en Perú y a clientes nearshore
+> en Estados Unidos, Europa y el resto de Latinoamérica.
+>
+> Software consultancy based in Lima, Peru. We build websites and online
+> stores, iOS and Android apps, AI automation, and cloud/DevOps platforms on
+> AWS, Azure and GCP — for businesses in Peru and nearshore clients abroad.
+
+## Datos de contacto / Contact
+
+- Web: https://mathyusolutions.com
+- Correo / Email: mathyusolutions@gmail.com
+- Teléfono / WhatsApp: +51 994 283 802
+- RUC: 20609454211
+- Ubicación / Location: Lima, Perú (trabajo remoto / remote-first)
+- Idiomas / Languages: Español, English
+- Precios de referencia: desde S/ 2,500 (proyectos en Perú) · desde US$ 1,000 (clientes internacionales)
+- Tiempo de respuesta a cotizaciones: menos de 24 horas hábiles
+
+## Servicios / Services
+
+- [Desarrollo web y tiendas online](https://mathyusolutions.com/es/desarrollo-web/): páginas web institucionales y ecommerce, optimizados para Google, con hosting y panel de administración.
+- [Desarrollo de apps móviles](https://mathyusolutions.com/es/desarrollo-de-apps/): apps nativas (Swift, Kotlin) y multiplataforma (React Native, Flutter), publicadas en App Store y Google Play.
+- [Software con inteligencia artificial](https://mathyusolutions.com/es/software-con-ia/): chatbots de WhatsApp, automatización de procesos, búsqueda inteligente sobre documentos propios.
+- [Cloud y DevOps](https://mathyusolutions.com/es/cloud-y-devops/): migración a la nube, CI/CD, monitoreo 24/7, respaldos y optimización de costos en AWS, Azure y GCP.
+- English versions: [web](https://mathyusolutions.com/en/web-development/), [mobile](https://mathyusolutions.com/en/mobile-app-development/), [AI](https://mathyusolutions.com/en/ai-software-development/), [cloud](https://mathyusolutions.com/en/cloud-devops/).
+
+## Guías y precios / Guides and pricing
+
+- [¿Cuánto cuesta hacer una app en Perú?](https://mathyusolutions.com/es/blog/cuanto-cuesta-hacer-una-app-en-peru/)
+- [¿Cuánto cuesta una página web en Perú?](https://mathyusolutions.com/es/blog/cuanto-cuesta-una-pagina-web-en-peru/)
+- [Cómo crear una tienda online en Perú](https://mathyusolutions.com/es/blog/como-crear-una-tienda-online-en-peru/)
+- [Pasarelas de pago en Perú: cuál elegir](https://mathyusolutions.com/es/blog/pasarelas-de-pago-en-peru-cual-elegir/)
+- [Chatbot de WhatsApp para empresas en Perú](https://mathyusolutions.com/es/blog/chatbot-whatsapp-para-empresas-peru/)
+- [Nearshore software development in Peru](https://mathyusolutions.com/en/blog/nearshore-software-development-peru/)
+- [How much does it cost to build an app?](https://mathyusolutions.com/en/blog/how-much-does-it-cost-to-build-an-app/)
+
+## Opcional / Optional
+
+- [Sitemap](https://mathyusolutions.com/sitemap-index.xml)
+- [Inicio en español](https://mathyusolutions.com/es/)
+- [English homepage](https://mathyusolutions.com/en/)

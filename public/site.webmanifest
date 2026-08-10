@@ -1,0 +1,19 @@
+{
+  "name": "Mathyu's Solutions",
+  "short_name": "Mathyu's",
+  "description": "Consultora de software en Lima, Perú: páginas web, apps móviles, inteligencia artificial y cloud.",
+  "start_url": "/es/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#11161b",
+  "theme_color": "#11161b",
+  "lang": "es-PE",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

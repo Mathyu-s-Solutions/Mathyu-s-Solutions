@@ -5,16 +5,8 @@ import { FAQ } from '../data/faq';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const faq = FAQ[lang];
-
-const faqLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faq.items.map((it) => ({
-    '@type': 'Question',
-    name: it.q,
-    acceptedAnswer: { '@type': 'Answer', text: it.a },
-  })),
-};
+// FAQPage structured data lives in BaseLayout's @graph (the page node becomes
+// a WebPage + FAQPage), so it stays linked to the rest of the entities.
 ---
 <section class="block" id="faq">
   <div class="wrap">
@@ -34,5 +26,3 @@ const faqLd = {
     </div>
   </div>
 </section>
-
-<script type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />

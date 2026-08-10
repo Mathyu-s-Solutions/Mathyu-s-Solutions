@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogPost from '../../../components/BlogPost.astro';
+import { BLOG_UI, getPosts, postSlug, type Post } from '../../../data/blog';
+
+export async function getStaticPaths() {
+  const posts = await getPosts('en');
+  return posts.map((post) => ({
+    params: { slug: postSlug(post) },
+    props: { post, related: posts.filter((p) => p.id !== post.id).slice(0, 3) },
+  }));
+}
+
+const lang = 'en' as const;
+const ui = BLOG_UI[lang];
+const { post, related } = Astro.props as { post: Post; related: Post[] };
+const path = `/en/blog/${postSlug(post)}/`;
+---
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  lang={lang}
+  path={path}
+  esHref={post.data.alternate ? `/es/blog/${post.data.alternate}/` : null}
+  enHref={path}
+  ogImage={`/og/blog-${postSlug(post)}.png`}
+  ogType="article"
+  breadcrumbs={[
+    { name: ui.navLabel, path: '/en/blog/' },
+    { name: post.data.heading, path },
+  ]}
+  faqs={post.data.faqs}
+  article={{
+    published: post.data.pubDate,
+    modified: post.data.updatedDate,
+    section: post.data.tags[0],
+    tags: post.data.tags,
+    wordCount: post.body?.trim().split(/\s+/).length,
+  }}
+>
+  <BlogPost lang={lang} post={post} related={related} />
+</BaseLayout>

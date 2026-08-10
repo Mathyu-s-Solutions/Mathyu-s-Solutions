@@ -529,7 +529,7 @@ section.block { padding: 110px 0; border-top: 1px solid var(--line); position: r
 
 /* ---------- FOOTER ---------- */
 footer.foot { border-top: 1px solid var(--line); padding: 56px 0 32px; }
-.foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+.foot-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr 1fr; gap: 40px; margin-bottom: 48px; }
 .foot-grid h3 { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--fg-muted); margin: 0 0 14px; }
 .foot-grid ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
 .foot-grid ul li a { color: var(--fg-dim); text-decoration: none; font-size: 14px; }
@@ -691,8 +691,160 @@ html.js [data-animate] { opacity: 0; transform: translateY(26px); }
   * { scroll-behavior: auto !important; }
 }
 
+/* ---------- BLOG ---------- */
+.blog-hero { padding-bottom: 40px; }
+.blog-hero::after { display: none; }
+
+.post-list { display: grid; gap: 18px; max-width: 900px; }
+.post-card {
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--bg-card);
+  transition: transform var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+.post-card:hover { transform: translateY(-4px); border-color: var(--line-strong); box-shadow: var(--shadow-sm); }
+.post-card > a { display: block; padding: 28px 30px; text-decoration: none; color: inherit; }
+.post-card h2, .post-card h3 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 12px 0 10px;
+}
+.post-card p { color: var(--fg-dim); font-size: 15px; margin: 0; max-width: 62ch; }
+.post-card-meta {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg-muted);
+}
+.post-card-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.post-card-tags .chip {
+  font-family: var(--font-mono); font-size: 11px; padding: 4px 9px;
+  border: 1px solid var(--line); border-radius: var(--r-pill); color: var(--fg-muted);
+}
+
+/* Article layout: optional sticky TOC beside the text column */
+.post-body { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 56px; padding-top: 8px; padding-bottom: 40px; align-items: start; }
+.post-body > .prose:only-child { grid-column: 1 / -1; max-width: 74ch; }
+.post-toc { position: sticky; top: 96px; border-left: 1px solid var(--line); padding-left: 20px; }
+.post-toc .toc-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--fg-muted); margin: 0 0 14px; font-weight: 500; }
+.post-toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; counter-reset: toc; }
+.post-toc li { counter-increment: toc; font-size: 13px; line-height: 1.4; }
+.post-toc li::before { content: counter(toc, decimal-leading-zero) " "; font-family: var(--font-mono); font-size: 10px; color: var(--fg-muted); }
+.post-toc a { color: var(--fg-dim); text-decoration: none; }
+.post-toc a:hover { color: var(--accent); }
+
+/* ---------- Long-form prose ---------- */
+.prose { max-width: 72ch; color: var(--fg-dim); font-size: 17px; line-height: 1.72; }
+.prose > * + * { margin-top: 1.15em; }
+.prose h2 {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--fg);
+  margin-top: 2.2em;
+  margin-bottom: 0.7em;
+  scroll-margin-top: 96px;
+}
+.prose h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  margin-top: 1.9em;
+  margin-bottom: 0.5em;
+  scroll-margin-top: 96px;
+}
+.prose h2 + p, .prose h3 + p { margin-top: 0; }
+.prose strong { color: var(--fg); font-weight: 600; }
+.prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.prose a:hover { text-decoration-thickness: 2px; }
+.prose ul, .prose ol { padding-left: 1.3em; display: grid; gap: 0.5em; }
+.prose li { padding-left: 0.2em; }
+.prose li::marker { color: var(--accent); }
+.prose blockquote {
+  border-left: 2px solid var(--accent);
+  padding: 4px 0 4px 22px;
+  margin-left: 0;
+  color: var(--fg);
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 1.4;
+}
+.prose code {
+  font-family: var(--font-mono); font-size: 0.87em;
+  background: var(--bg-elev); border: 1px solid var(--line);
+  border-radius: 5px; padding: 1px 5px; color: var(--fg);
+}
+.prose pre { background: var(--bg-elev); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 18px 20px; overflow-x: auto; }
+.prose pre code { background: none; border: none; padding: 0; }
+.prose hr { border: none; border-top: 1px solid var(--line); margin: 2.6em 0; }
+.prose img { border-radius: var(--r-sm); border: 1px solid var(--line); }
+
+/* Pricing articles lean on tables. Each one gets its own scroll container
+   (see rehypeWrapTables in astro.config.mjs) so a wide price table scrolls by
+   itself instead of making the whole page scroll sideways on a phone. */
+.prose .table-scroll { overflow-x: auto; }
+.prose table {
+  width: 100%;
+  min-width: 460px;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+.prose thead th {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg-muted);
+  font-weight: 500;
+  padding: 0 16px 10px 0;
+  border-bottom: 1px solid var(--line-strong);
+}
+.prose tbody td { padding: 12px 16px 12px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.prose tbody tr:last-child td { border-bottom: none; }
+.prose tbody td:first-child { color: var(--fg); }
+
+.post-faq { margin-top: 3em; }
+.post-faq h2 { margin-bottom: 0.9em; }
+
+.blog-cta {
+  margin: 56px 0 0;
+  text-align: center;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 48px 28px;
+  background: var(--bg-card);
+}
+.blog-cta h2 { font-family: var(--font-display); font-size: clamp(26px, 3.6vw, 38px); margin: 0 0 14px; letter-spacing: -0.02em; }
+.blog-cta p { color: var(--fg-dim); max-width: 52ch; margin: 0 auto 26px; }
+.blog-cta-link { font-size: 14px; margin-top: 24px !important; }
+.blog-cta-link a { color: var(--accent); }
+
+.blog-services { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 40px; justify-content: center; }
+.blog-services a {
+  font-family: var(--font-mono); font-size: 12px; padding: 8px 14px;
+  border: 1px solid var(--line); border-radius: var(--r-pill);
+  color: var(--fg-dim); text-decoration: none;
+  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+.blog-services a:hover { color: var(--fg); border-color: var(--accent); }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1020px) {
+  .post-body { grid-template-columns: 1fr; gap: 28px; }
+  .post-toc {
+    position: static;
+    border-left: none;
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    background: var(--bg-elev);
+    padding: 20px 22px;
+  }
   .hero-grid { grid-template-columns: 1fr; gap: 40px; }
   .section-head { grid-template-columns: 1fr; gap: 18px; }
   .svc-tabs { grid-template-columns: 1fr; }
@@ -743,6 +895,8 @@ html.js [data-animate] { opacity: 0; transform: translateY(26px); }
 @media (max-width: 620px) {
   .process { grid-template-columns: 1fr; }
   .foot-grid { grid-template-columns: 1fr; }
+  .post-card > a { padding: 24px 22px; }
+  .prose { font-size: 16px; }
   .contact-info, .form { padding: 28px; }
   .hero { padding: 60px 0 40px; }
   section.block { padding: 70px 0; }

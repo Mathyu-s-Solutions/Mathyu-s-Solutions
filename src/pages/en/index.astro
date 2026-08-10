@@ -1,12 +1,20 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Landing from '../../components/Landing.astro';
+import { FAQ } from '../../data/faq';
 
 const lang = 'en' as const;
-const title = "Mathyu's Solutions — Software consultancy in Lima: web, mobile, AI & cloud";
+const title = "Software development company in Peru | Mathyu's Solutions";
 const description =
-  'Software consultancy based in Lima, Peru. We build web apps, iOS and Android mobile apps, AI solutions, DevOps and cloud (AWS, Azure, GCP). From idea to product.';
+  'Nearshore software consultancy in Lima, Peru. We build web platforms, iOS and Android apps, AI automation and cloud infrastructure (AWS, Azure, GCP). Quote in 24h.';
 ---
-<BaseLayout title={title} description={description} lang={lang} path="/en/">
+<BaseLayout
+  title={title}
+  description={description}
+  lang={lang}
+  path="/en/"
+  ogImage="/og/home-en.png"
+  faqs={FAQ[lang].items}
+>
   <Landing lang={lang} />
 </BaseLayout>

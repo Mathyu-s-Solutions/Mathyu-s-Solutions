@@ -1,36 +1,51 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ServicePage from '../../components/ServicePage.astro';
-import { SERVICES, type ServicePageData } from '../../data/services';
-import { SITE } from '../../data/site';
+import { SERVICES, SERVICE_SHORT, type ServicePageData } from '../../data/services';
+import { SITE, abs } from '../../data/site';
+import { getPosts, type Post } from '../../data/blog';
 
-export function getStaticPaths() {
-  return SERVICES.map((service) => ({ params: { service: service.en.slug }, props: { service } }));
+export async function getStaticPaths() {
+  const posts = await getPosts('en');
+  return SERVICES.map((service) => ({
+    params: { service: service.en.slug },
+    props: {
+      service,
+      posts: posts.filter((p) => p.data.service === service.id).slice(0, 3),
+    },
+  }));
 }
 
 const lang = 'en' as const;
-const { service } = Astro.props as { service: ServicePageData };
+const { service, posts } = Astro.props as { service: ServicePageData; posts: Post[] };
 const loc = service.en;
 const path = `/en/${loc.slug}/`;
-const esHref = `/es/${service.es.slug}/`;
-const enHref = `/en/${service.en.slug}/`;
 
 const serviceLd = {
-  '@context': 'https://schema.org',
   '@type': 'Service',
+  '@id': `${abs(path)}#service`,
   name: loc.h1,
   description: loc.description,
-  provider: { '@type': 'Organization', name: SITE.name, url: SITE.url },
-  areaServed: ['PE', 'LATAM'],
-  url: new URL(path, SITE.url).toString(),
-};
-const breadcrumbLd = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/en/', SITE.url).toString() },
-    { '@type': 'ListItem', position: 2, name: loc.h1, item: new URL(path, SITE.url).toString() },
-  ],
+  serviceType: SERVICE_SHORT[service.id].en,
+  provider: { '@id': abs('/#organization') },
+  areaServed: SITE.areaServed.map((n) => ({ '@type': 'AdministrativeArea', name: n })),
+  availableChannel: {
+    '@type': 'ServiceChannel',
+    serviceUrl: abs(path),
+    servicePhone: SITE.phoneE164,
+    availableLanguage: ['es', 'en'],
+  },
+  offers: {
+    '@type': 'Offer',
+    priceSpecification: {
+      '@type': 'PriceSpecification',
+      priceCurrency: 'USD',
+      minPrice: 1000,
+    },
+    availability: 'https://schema.org/InStock',
+    url: abs(path),
+  },
+  url: abs(path),
 };
 ---
 <BaseLayout
@@ -38,9 +53,12 @@ const breadcrumbLd = {
   description={loc.description}
   lang={lang}
   path={path}
-  esHref={esHref}
-  enHref={enHref}
-  extraJsonLd={[serviceLd, breadcrumbLd]}
+  esHref={`/es/${service.es.slug}/`}
+  enHref={path}
+  ogImage={`/og/${loc.slug}.png`}
+  breadcrumbs={[{ name: SERVICE_SHORT[service.id].en, path }]}
+  faqs={loc.faqs}
+  extraJsonLd={[serviceLd]}
 >
-  <ServicePage service={service} lang={lang} />
+  <ServicePage service={service} lang={lang} posts={posts} />
 </BaseLayout>

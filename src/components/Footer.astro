@@ -2,10 +2,13 @@
 import { translator, type Lang } from '../i18n/utils';
 import { SITE } from '../data/site';
 import { servicePageHref, type PanelId } from '../data/services';
+import { getPosts, postHref } from '../data/blog';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const tt = translator(lang, 'biz');
 const home = `/${lang}/`;
+const isHome = Astro.url.pathname === home;
+const anchor = (id: string) => (isHome ? `#${id}` : `${home}#${id}`);
 const year = new Date().getFullYear();
 const serviceLinks: { panel: PanelId; key: string }[] = [
   { panel: 'web', key: 'foot.s1a' },
@@ -16,11 +19,16 @@ const serviceLinks: { panel: PanelId; key: string }[] = [
 ];
 const services = serviceLinks.map((s) => ({ href: servicePageHref(s.panel, lang) ?? `${home}#services`, key: s.key }));
 const company = [
-  { href: '#process', key: 'foot.s2a' },
-  { href: '#cases', key: 'foot.s2b' },
-  { href: '#pricing', key: 'foot.s2c' },
-  { href: '#contact', key: 'foot.s2d' },
+  { href: anchor('process'), key: 'foot.s2a' },
+  { href: anchor('cases'), key: 'foot.s2b' },
+  { href: anchor('pricing'), key: 'foot.s2c' },
+  { href: anchor('contact'), key: 'foot.s2d' },
 ];
+
+// Latest articles in the footer: every page then links to fresh content,
+// which is the cheapest way to get new posts crawled quickly.
+const latest = (await getPosts(lang)).slice(0, 3);
+const guidesLabel = lang === 'es' ? 'Guías' : 'Guides';
 ---
 <footer class="foot">
   <div class="wrap">
@@ -50,8 +58,19 @@ const company = [
           {company.map((s) => (
             <li><a href={s.href} data-i18n={s.key}>{tt(s.key)}</a></li>
           ))}
+          <li><a href={`${home}blog/`}>Blog</a></li>
         </ul>
       </div>
+      {latest.length > 0 && (
+        <div>
+          <h3>{guidesLabel}</h3>
+          <ul>
+            {latest.map((p) => (
+              <li><a href={postHref(p)}>{p.data.heading}</a></li>
+            ))}
+          </ul>
+        </div>
+      )}
       <div>
         <h3 data-i18n="foot.s3">{tt('foot.s3')}</h3>
         <ul>

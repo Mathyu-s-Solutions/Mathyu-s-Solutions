@@ -1,0 +1,74 @@
+---
+import type { Lang } from '../i18n/utils';
+import { SITE } from '../data/site';
+import { BLOG_UI, formatDate, postHref, readingMinutes, type Post } from '../data/blog';
+import { SERVICES } from '../data/services';
+import Nav from './Nav.astro';
+import Footer from './Footer.astro';
+import ContactModal from './ContactModal.astro';
+import SiteBehavior from './SiteBehavior.astro';
+import Motion from './Motion.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+
+interface Props { lang: Lang; posts: Post[] }
+const { lang, posts } = Astro.props;
+const ui = BLOG_UI[lang];
+const waHref = `https://wa.me/${SITE.whatsapp}`;
+---
+<Nav lang={lang} />
+<main>
+  <header class="hero blog-hero" id="top">
+    <div class="wrap">
+      <Breadcrumbs lang={lang} items={[{ name: ui.navLabel, path: `/${lang}/blog/` }]} />
+      <span class="eyebrow mono" style="margin-top:22px;">{ui.eyebrow}</span>
+      <h1 style="font-size:clamp(36px,5.5vw,64px); margin:18px 0 22px; max-width:20ch;">{ui.heading}</h1>
+      <p class="lead" style="max-width:60ch;">{ui.lead}</p>
+    </div>
+  </header>
+
+  <section class="block" style="padding-top:0;">
+    <div class="wrap">
+      <div class="post-list">
+        {posts.map((post) => (
+          <article class="post-card reveal">
+            <a href={postHref(post)}>
+              <div class="post-card-meta mono">
+                <time datetime={post.data.pubDate.toISOString()}>
+                  {formatDate(post.data.updatedDate ?? post.data.pubDate, lang)}
+                </time>
+                <span>·</span>
+                <span>{readingMinutes(post)} {ui.readingTime}</span>
+              </div>
+              <h2>{post.data.heading}</h2>
+              <p>{post.data.description}</p>
+              <div class="post-card-tags">
+                {post.data.tags.map((tag) => <span class="chip">{tag}</span>)}
+              </div>
+            </a>
+          </article>
+        ))}
+      </div>
+
+      <div class="blog-cta">
+        <h2>{ui.ctaTitle}</h2>
+        <p>{ui.ctaText}</p>
+        <div class="hero-cta" style="justify-content:center;">
+          <button class="btn" type="button" data-modal-open>
+            <span>{ui.ctaButton}</span><span class="arr" aria-hidden="true">→</span>
+          </button>
+          <a class="btn btn-secondary" href={waHref} target="_blank" rel="noopener">{ui.ctaWhatsapp}</a>
+        </div>
+      </div>
+
+      <nav class="blog-services" aria-label={lang === 'es' ? 'Servicios' : 'Services'}>
+        {SERVICES.map((s) => (
+          <a href={`/${lang}/${s[lang].slug}/`}>{s[lang].h1}</a>
+        ))}
+      </nav>
+    </div>
+  </section>
+</main>
+<Footer lang={lang} />
+<ContactModal lang={lang} />
+<SiteBehavior lang={lang} />
+<Motion />

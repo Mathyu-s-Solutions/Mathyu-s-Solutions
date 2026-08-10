@@ -1,0 +1,55 @@
+---
+import type { Lang } from '../i18n/utils';
+import type { Crumb } from '../layouts/BaseLayout.astro';
+
+interface Props {
+  lang: Lang;
+  /** Trail after the home item. The last entry renders as plain text. */
+  items: Crumb[];
+}
+const { lang, items } = Astro.props;
+const home = { name: lang === 'es' ? 'Inicio' : 'Home', path: `/${lang}/` };
+const all = [home, ...items];
+---
+<nav class="crumbs" aria-label={lang === 'es' ? 'Ruta de navegación' : 'Breadcrumb'}>
+  <ol>
+    {all.map((c, i) => (
+      <li>
+        {i === all.length - 1 ? (
+          <span aria-current="page">{c.name}</span>
+        ) : (
+          <a href={c.path}>{c.name}</a>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style>
+  .crumbs {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--fg-muted);
+  }
+  .crumbs ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+  .crumbs li + li::before {
+    content: "/";
+    margin-right: 8px;
+    color: var(--line-strong);
+  }
+  .crumbs a {
+    color: var(--fg-dim);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease);
+  }
+  .crumbs a:hover { color: var(--accent); }
+  .crumbs [aria-current="page"] { color: var(--fg-muted); }
+</style>

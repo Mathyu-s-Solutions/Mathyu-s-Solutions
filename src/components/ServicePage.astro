@@ -1,58 +1,47 @@
 ---
 import { translator, type Lang } from '../i18n/utils';
-import { SERVICES, type ServicePageData } from '../data/services';
+import { SERVICES, SERVICE_SHORT, type ServicePageData } from '../data/services';
 import { SITE } from '../data/site';
+import { BLOG_UI, formatDate, postHref, readingMinutes, type Post } from '../data/blog';
 import Nav from './Nav.astro';
 import Footer from './Footer.astro';
 import ContactModal from './ContactModal.astro';
 import SiteBehavior from './SiteBehavior.astro';
 import Motion from './Motion.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
 import WebDashboard from './ServiceIllustrations/WebDashboard.astro';
 import MobileScreens from './ServiceIllustrations/MobileScreens.astro';
 import AIAgentFlow from './ServiceIllustrations/AIAgentFlow.astro';
 import MultiCloud from './ServiceIllustrations/MultiCloud.astro';
 
-interface Props { service: ServicePageData; lang: Lang }
-const { service, lang } = Astro.props;
+interface Props { service: ServicePageData; lang: Lang; posts?: Post[] }
+const { service, lang, posts = [] } = Astro.props;
 const tt = translator(lang, 'biz');
 const tb = translator(lang, 'biz');
 const loc = service[lang];
+const blogUi = BLOG_UI[lang];
 
 const illus = { web: WebDashboard, mobile: MobileScreens, ai: AIAgentFlow, cloud: MultiCloud };
 const Illu = illus[service.illustration];
 
-const shortName: Record<string, Record<Lang, string>> = {
-  web: { es: 'Desarrollo web', en: 'Web development' },
-  apps: { es: 'Apps móviles', en: 'Mobile apps' },
-  ai: { es: 'Software con IA', en: 'AI software' },
-  cloud: { es: 'Cloud y DevOps', en: 'Cloud & DevOps' },
-};
+const shortName = SERVICE_SHORT;
 
 const others = SERVICES.filter((s) => s.id !== service.id);
 const homeHref = `/${lang}/`;
 const waHref = `https://wa.me/${SITE.whatsapp}`;
 
 const ui = {
-  es: { eyebrow: 'Servicio', includes: 'Qué incluye', ctaTitle: '¿Conversamos sobre tu proyecto?', cta: 'Cotizar', quote: 'Empezar un proyecto', wa: 'Escríbenos por WhatsApp', other: 'Otros servicios', back: '← Todos los servicios', faqEyebrow: 'FAQ', faqTitle: 'Preguntas frecuentes' },
-  en: { eyebrow: 'Service', includes: "What's included", ctaTitle: "Let's talk about your project?", cta: 'Get a quote', quote: 'Start a project', wa: 'Message us on WhatsApp', other: 'Other services', back: '← All services', faqEyebrow: 'FAQ', faqTitle: 'Frequently asked questions' },
+  es: { eyebrow: 'Servicio', includes: 'Qué incluye', ctaTitle: '¿Conversamos sobre tu proyecto?', cta: 'Cotizar', quote: 'Empezar un proyecto', wa: 'Escríbenos por WhatsApp', other: 'Otros servicios', back: '← Todos los servicios', faqEyebrow: 'FAQ', faqTitle: 'Preguntas frecuentes', guides: 'Guías relacionadas' },
+  en: { eyebrow: 'Service', includes: "What's included", ctaTitle: "Let's talk about your project?", cta: 'Get a quote', quote: 'Start a project', wa: 'Message us on WhatsApp', other: 'Other services', back: '← All services', faqEyebrow: 'FAQ', faqTitle: 'Frequently asked questions', guides: 'Related guides' },
 }[lang];
-
-const faqLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: loc.faqs.map((it) => ({
-    '@type': 'Question',
-    name: it.q,
-    acceptedAnswer: { '@type': 'Answer', text: it.a },
-  })),
-};
 ---
 <Nav lang={lang} />
 <main>
   <header class="hero" id="top">
     <div class="wrap hero-grid">
       <div>
-        <span class="eyebrow mono">{ui.eyebrow} · Lima, {SITE.countryName}</span>
+        <Breadcrumbs lang={lang} items={[{ name: shortName[service.id][lang], path: `/${lang}/${loc.slug}/` }]} />
+        <span class="eyebrow mono" style="margin-top:20px;">{ui.eyebrow} · Lima, {SITE.countryName}</span>
         <h1 style="font-size:clamp(36px,5vw,64px); margin:18px 0 22px;">{loc.h1}</h1>
         <p class="lead">{loc.intro}</p>
         <div class="hero-cta">
@@ -121,6 +110,36 @@ const faqLd = {
     </section>
   )}
 
+  {posts.length > 0 && (
+    <section class="block" style="padding-top:0;">
+      <div class="wrap">
+        <div class="section-head reveal" style="margin-bottom:28px;">
+          <div>
+            <span class="eyebrow mono">{blogUi.eyebrow}</span>
+            <h2>{ui.guides}</h2>
+          </div>
+        </div>
+        <div class="post-list">
+          {posts.map((p) => (
+            <article class="post-card">
+              <a href={postHref(p)}>
+                <div class="post-card-meta mono">
+                  <time datetime={p.data.pubDate.toISOString()}>
+                    {formatDate(p.data.updatedDate ?? p.data.pubDate, lang)}
+                  </time>
+                  <span>·</span>
+                  <span>{readingMinutes(p)} {blogUi.readingTime}</span>
+                </div>
+                <h3>{p.data.heading}</h3>
+                <p>{p.data.description}</p>
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
   <section class="block">
     <div class="wrap">
       <div class="section-head">
@@ -148,9 +167,6 @@ const faqLd = {
     </div>
   </section>
 </main>
-{loc.faqs.length > 0 && (
-  <script type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
-)}
 <Footer lang={lang} />
 <ContactModal lang={lang} />
 <SiteBehavior lang={lang} />

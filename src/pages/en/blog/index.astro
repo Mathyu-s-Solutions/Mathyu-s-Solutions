@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogIndex from '../../../components/BlogIndex.astro';
+import { BLOG_UI, getPosts } from '../../../data/blog';
+
+const lang = 'en' as const;
+const ui = BLOG_UI[lang];
+const posts = await getPosts(lang);
+const path = '/en/blog/';
+---
+<BaseLayout
+  title={`${ui.title} — Mathyu's Solutions`}
+  description={ui.description}
+  lang={lang}
+  path={path}
+  esHref="/es/blog/"
+  enHref={path}
+  breadcrumbs={[{ name: ui.navLabel, path }]}
+>
+  <BlogIndex lang={lang} posts={posts} />
+</BaseLayout>

@@ -8,6 +8,11 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const tt = translator(lang, 'biz');
 const home = `/${lang}/`;
+// On the landing page keep bare hashes so smooth-scroll handles them; anywhere
+// else prefix with the home path so every page links back into the main
+// sections (good for users, and it spreads internal link equity to the home).
+const isHome = Astro.url.pathname === home;
+const anchor = (id: string) => (isHome ? `#${id}` : `${home}#${id}`);
 ---
 <nav class="nav" id="site-nav">
   <div class="wrap nav-inner">
@@ -27,11 +32,12 @@ const home = `/${lang}/`;
     </button>
     <div class="nav-collapse" id="nav-menu">
       <div class="nav-links">
-        <a href="#services" data-i18n="nav.services">{tt('nav.services')}</a>
-        <a href="#process" data-i18n="nav.process">{tt('nav.process')}</a>
-        <a href="#cases" data-i18n="nav.cases">{tt('nav.cases')}</a>
-        <a href="#pricing" data-i18n="nav.pricing">{tt('nav.pricing')}</a>
-        <a href="#contact" data-i18n="nav.contact">{tt('nav.contact')}</a>
+        <a href={anchor('services')} data-i18n="nav.services">{tt('nav.services')}</a>
+        <a href={anchor('process')} data-i18n="nav.process">{tt('nav.process')}</a>
+        <a href={anchor('cases')} data-i18n="nav.cases">{tt('nav.cases')}</a>
+        <a href={anchor('pricing')} data-i18n="nav.pricing">{tt('nav.pricing')}</a>
+        <a href={`${home}blog/`}>Blog</a>
+        <a href={anchor('contact')} data-i18n="nav.contact">{tt('nav.contact')}</a>
       </div>
       <div class="nav-actions">
         <AudienceToggle lang={lang} />
