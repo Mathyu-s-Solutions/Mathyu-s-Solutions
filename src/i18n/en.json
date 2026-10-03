@@ -58,11 +58,13 @@
     },
     "case": {
       "eyebrow": "03 · Case studies", "title": "Real products. Real users.",
-      "desc": "A small selection of projects we've shipped: a circular-economy platform in Peru, a bilingual park site in Italy, and a native iOS app on the App Store.",
-      "b1": "Sustainability · Web", "b2": "Tourism · Web · IT/EN", "b3": "Productivity · iOS",
+      "desc": "A small selection of projects we've shipped: a streetwear ecommerce in Peru, a circular-economy platform, two bilingual sites in Italy, and a native iOS app on the App Store.",
+      "b1": "Sustainability · Web", "b2": "Tourism · Web · IT/EN", "b3": "Productivity · iOS", "b4": "Fashion · Ecommerce", "b5": "Food · Web · IT/EN",
       "c1p": "Web platform for a circular-economy company: construction waste management and eco-materials in Peru.",
       "c2p": "Bilingual (IT/EN) website for an Italian gardens & butterflies association in Basilicata: bookings, subscriptions and gallery.",
-      "c3p": "Native iOS app: smart alarms based on calendar events. In 2 taps you pick the event and how many minutes before to wake up."
+      "c3p": "Native iOS app: smart alarms based on calendar events. In 2 taps you pick the event and how many minutes before to wake up.",
+      "c4p": "Custom ecommerce for a Peruvian streetwear brand: fit-based catalog, payments via Culqi, Yape and Plin, and nationwide shipping.",
+      "c5p": "Bilingual (IT/EN) site for cooking workshops, horticultural therapy and a personal chef in Basilicata: events calendar and WhatsApp bookings."
     },
     "testi": {
       "eyebrow": "04 · Testimonials", "title": "What the teams we work with say.",
@@ -180,11 +182,13 @@
     },
     "case": {
       "eyebrow": "03 · Projects", "title": "Real products people use.",
-      "desc": "A small sample of projects we've launched: a circular-economy platform in Peru, a bilingual park website in Italy, and a native iPhone app on the App Store.",
-      "b1": "Sustainability · Web", "b2": "Tourism · Web · IT/EN", "b3": "Productivity · iPhone",
+      "desc": "A small sample of projects we've launched: a streetwear online store in Peru, a circular-economy company website, two bilingual websites in Italy, and an iPhone app on the App Store.",
+      "b1": "Sustainability · Web", "b2": "Tourism · Web · IT/EN", "b3": "Productivity · iPhone", "b4": "Fashion · Online store", "b5": "Food · Web · IT/EN",
       "c1p": "Website for a circular-economy company: construction waste management and eco-materials in Peru.",
       "c2p": "Bilingual (IT/EN) website for an Italian gardens and butterflies association: bookings, subscriptions and gallery.",
-      "c3p": "Native iPhone app: smart alarms based on your calendar. In 2 taps you pick the event and how many minutes before to wake."
+      "c3p": "Native iPhone app: smart alarms based on your calendar. In 2 taps you pick the event and how many minutes before to wake.",
+      "c4p": "Online store for a Peruvian streetwear brand: catalog, card, Yape and Plin payments, and shipping across Peru.",
+      "c5p": "Bilingual (IT/EN) website for cooking workshops and a personal chef in Italy: events calendar and WhatsApp bookings."
     },
     "testi": {
       "eyebrow": "04 · Testimonials", "title": "What the businesses who trusted us say.",

@@ -31,9 +31,11 @@
 
 ## Proyectos / Case studies
 
+- [Twenty](https://mathyusolutions.com/es/casos/twenty/) — ecommerce a medida para una marca peruana de moda urbana: catálogo por fit, pagos con tarjeta (Culqi), Yape y Plin, envíos a todo el Perú. Next.js. En vivo: https://www.twentymoda.com
 - [Ciclo](https://mathyusolutions.com/es/casos/ciclo/) — web corporativa para una empresa peruana de economía circular (residuos de construcción y ecomateriales). Next.js, React, AWS. En vivo: https://ciclo.com.pe
 - [Parco dei Colori](https://mathyusolutions.com/es/casos/parco-dei-colori/) — sitio bilingüe IT/EN con reservas y suscripciones para una asociación italiana de jardines y mariposas. Next.js, autenticación, i18n. En vivo: https://www.parcodeicolori.it
 - [Calarm](https://mathyusolutions.com/es/casos/calarm/) — app nativa de iPhone que crea alarmas a partir del calendario. Swift, SwiftUI, EventKit. En vivo: App Store.
+- [I Selvatici](https://mathyusolutions.com/es/casos/i-selvatici/) — sitio bilingüe IT/EN para talleres de cocina, huerto terapéutico y personal chef en Basilicata, Italia, con agenda de eventos y reservas por WhatsApp. Next.js, i18n. En vivo: https://selvatici.vercel.app
 - English index: https://mathyusolutions.com/en/case-studies/
 
 ## Guías y precios / Guides and pricing

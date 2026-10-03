@@ -58,11 +58,13 @@
     },
     "case": {
       "eyebrow": "03 · Casos de éxito", "title": "Productos que ya están en producción.",
-      "desc": "Proyectos reales que hemos lanzado: una plataforma de economía circular en Perú, un sitio bilingüe para un parque en Italia y una app nativa para iPhone en la App Store.",
-      "b1": "Sostenibilidad · Web", "b2": "Turismo · Web · IT/EN", "b3": "Productividad · iOS",
+      "desc": "Proyectos reales que hemos lanzado: un ecommerce de moda urbana en Perú, una plataforma de economía circular, dos sitios bilingües en Italia y una app nativa para iPhone en la App Store.",
+      "b1": "Sostenibilidad · Web", "b2": "Turismo · Web · IT/EN", "b3": "Productividad · iOS", "b4": "Moda · Ecommerce", "b5": "Gastronomía · Web · IT/EN",
       "c1p": "Plataforma web para empresa de economía circular: gestión de residuos de construcción y venta de ecomateriales en Perú.",
       "c2p": "Sitio web bilingüe (IT/EN) para asociación italiana de jardines y mariposas en Basilicata: reservas, suscripciones y galería.",
-      "c3p": "App nativa para iOS: alarmas inteligentes basadas en eventos del calendario. En 2 pasos eliges el evento y cuántos minutos antes despertar."
+      "c3p": "App nativa para iOS: alarmas inteligentes basadas en eventos del calendario. En 2 pasos eliges el evento y cuántos minutos antes despertar.",
+      "c4p": "Ecommerce a medida para una marca peruana de moda urbana: catálogo por fit, pagos con Culqi, Yape y Plin, y envíos a todo el Perú.",
+      "c5p": "Sitio bilingüe (IT/EN) para un proyecto de talleres de cocina, huerto terapéutico y personal chef en Basilicata: agenda de eventos y reservas por WhatsApp."
     },
     "testi": {
       "eyebrow": "04 · Testimonios", "title": "Lo que dicen los equipos con los que trabajamos.",
@@ -180,11 +182,13 @@
     },
     "case": {
       "eyebrow": "03 · Proyectos", "title": "Productos reales que ya están en uso.",
-      "desc": "Una pequeña muestra de proyectos que hemos lanzado: una plataforma de economía circular en Perú, un sitio bilingüe para un parque en Italia y una app nativa para iPhone en la App Store.",
-      "b1": "Sostenibilidad · Web", "b2": "Turismo · Web · IT/EN", "b3": "Productividad · iPhone",
+      "desc": "Una pequeña muestra de proyectos que hemos lanzado: una tienda online de moda urbana en Perú, la web de una empresa de economía circular, dos sitios bilingües en Italia y una app para iPhone en la App Store.",
+      "b1": "Sostenibilidad · Web", "b2": "Turismo · Web · IT/EN", "b3": "Productividad · iPhone", "b4": "Moda · Tienda online", "b5": "Gastronomía · Web · IT/EN",
       "c1p": "Página web para una empresa de economía circular: gestión de residuos de construcción y ecomateriales en Perú.",
       "c2p": "Sitio bilingüe (IT/EN) para una asociación italiana de jardines y mariposas: reservas, suscripciones y galería.",
-      "c3p": "App nativa para iPhone: alarmas inteligentes según tu agenda. En 2 toques eliges el evento y cuántos minutos antes despertar."
+      "c3p": "App nativa para iPhone: alarmas inteligentes según tu agenda. En 2 toques eliges el evento y cuántos minutos antes despertar.",
+      "c4p": "Tienda online para una marca de moda urbana de Gamarra: catálogo, pagos con tarjeta, Yape y Plin, y envíos a todo el Perú.",
+      "c5p": "Sitio bilingüe (IT/EN) para talleres de cocina y servicio de personal chef en Italia: agenda de eventos y reservas por WhatsApp."
     },
     "testi": {
       "eyebrow": "04 · Testimonios", "title": "Lo que dicen los negocios que confiaron en nosotros.",

@@ -8,7 +8,7 @@ import type { Lang } from "./../i18n/utils";
  * links and close deals through *numbers and quotes* — add them in `results`
  * and `quote` once you have the client's OK. Empty sections simply don't render.
  */
-export type CaseId = "ciclo" | "parco" | "calarm";
+export type CaseId = "twenty" | "ciclo" | "parco" | "calarm" | "selvatici";
 
 interface CasePageCopy {
   slug: string;
@@ -56,6 +56,70 @@ export interface CaseStudy {
 }
 
 export const CASES: CaseStudy[] = [
+  {
+    id: "twenty",
+    name: "Twenty",
+    urlLabel: "twentymoda.com",
+    href: "https://www.twentymoda.com/",
+    badgeKey: "case.b4",
+    descKey: "case.c4p",
+    tags: ["Next.js", "Ecommerce", "Culqi", "Yape/Plin"],
+    year: 2026,
+    service: "web",
+    builtType: "WebSite",
+    page: {
+      es: {
+        slug: "twenty",
+        title: "Twenty — Tienda online de moda urbana en Perú",
+        description:
+          "Caso: ecommerce de TWENTY, marca peruana de moda urbana. Catálogo por fit, pagos con tarjeta (Culqi), Yape y Plin, y envíos a todo el Perú. Next.js.",
+        h1: "Twenty: la tienda online de una marca de moda urbana",
+        summary:
+          "TWENTY es una marca peruana de moda urbana juvenil con tienda física en Gamarra. Construimos su ecommerce a medida con Next.js: catálogo, carrito, pagos con tarjeta, Yape y Plin, y envíos a Lima y provincias.",
+        contextTitle: "El reto",
+        context:
+          "Una marca con tienda física en Gamarra y comunidad en redes necesita que comprar en la web sea tan simple como escribir por WhatsApp. La tienda tenía que mostrar un catálogo que cambia cada temporada, dejar elegir talla y fit sin fricción, y cobrar con los medios que de verdad usa el cliente peruano —Yape, Plin y tarjeta—, con envío en Lima y a provincias.",
+        deliveredTitle: "Qué construimos",
+        delivered: [
+          "Ecommerce a medida con Next.js, con páginas prerenderizadas para carga rápida e indexación limpia.",
+          "Catálogo por categorías (pantalones, polos, hoodies, jackets y más) con filtros por fit y orden.",
+          "Carrito y checkout con pagos por tarjeta vía Culqi, Yape y Plin.",
+          "Envíos en 24–48 h en Lima y a todo el Perú por Shalom y Olva, con seguimiento de pedidos.",
+          "Cuentas de cliente, promociones por combo y atención directa por WhatsApp.",
+          "Libro de reclamaciones virtual y políticas de envío, cambios y privacidad, como pide la normativa peruana.",
+          "SEO técnico y local: metadatos, blog y datos estructurados de tienda con dirección y horarios.",
+        ],
+        resultsTitle: "Resultados",
+        results: [],
+        visitLabel: "Ver la tienda en vivo",
+      },
+      en: {
+        slug: "twenty",
+        title: "Twenty — Online store for a streetwear brand in Peru",
+        description:
+          "Case study: ecommerce for TWENTY, a Peruvian streetwear brand. Fit-based catalog, card payments (Culqi), Yape and Plin, and nationwide shipping. Next.js.",
+        h1: "Twenty: an online store for a streetwear brand",
+        summary:
+          "TWENTY is a Peruvian youth streetwear brand with a physical store in Gamarra, Lima. We built their custom ecommerce in Next.js: catalog, cart, card, Yape and Plin payments, and shipping across Lima and the rest of Peru.",
+        contextTitle: "The challenge",
+        context:
+          "A brand with a store in Gamarra and a following on social media needs buying online to be as easy as sending a WhatsApp message. The store had to present a catalog that changes every season, let shoppers pick size and fit without friction, and take the payment methods Peruvian customers actually use — Yape, Plin and cards — with delivery in Lima and nationwide.",
+        deliveredTitle: "What we built",
+        delivered: [
+          "Custom ecommerce in Next.js, with prerendered pages for fast loads and clean indexing.",
+          "Catalog organised by category (jeans, tees, hoodies, jackets and more) with fit filters and sorting.",
+          "Cart and checkout with card payments via Culqi, plus Yape and Plin.",
+          "24–48 h delivery in Lima and nationwide shipping via Shalom and Olva, with order tracking.",
+          "Customer accounts, bundle promotions and direct support over WhatsApp.",
+          "Online complaints book and shipping, returns and privacy policies, as Peruvian consumer law requires.",
+          "Technical and local SEO: metadata, a blog and store structured data with address and opening hours.",
+        ],
+        resultsTitle: "Results",
+        results: [],
+        visitLabel: "Visit the live store",
+      },
+    },
+  },
   {
     id: "ciclo",
     name: "Ciclo",
@@ -238,6 +302,70 @@ export const CASES: CaseStudy[] = [
       },
     },
   },
+  {
+    id: "selvatici",
+    name: "I Selvatici",
+    urlLabel: "selvatici.vercel.app",
+    href: "https://selvatici.vercel.app/en",
+    badgeKey: "case.b5",
+    descKey: "case.c5p",
+    tags: ["Next.js", "i18n", "SEO", "Web"],
+    year: 2026,
+    service: "web",
+    builtType: "WebSite",
+    page: {
+      es: {
+        slug: "i-selvatici",
+        title: "I Selvatici — Web bilingüe de talleres y personal chef (Italia)",
+        description:
+          "Caso: sitio bilingüe italiano/inglés para I Selvatici, talleres de cocina, huerto terapéutico y personal chef en Basilicata, Italia. Next.js e i18n.",
+        h1: "I Selvatici: web bilingüe para talleres de cocina y personal chef",
+        summary:
+          "I Selvatici es un proyecto comunitario en Castelgrande (Basilicata, Italia) que organiza talleres de cocina, huerto terapéutico y costura, y ofrece servicio de personal chef. Desarrollamos su sitio bilingüe italiano/inglés con Next.js, con agenda de eventos y reservas por WhatsApp.",
+        contextTitle: "El reto",
+        context:
+          "Un proyecto comunitario tiene que contar quién está detrás y qué propone antes de pedir una reserva. La web debía presentar cuatro propuestas distintas —talleres de cocina, huerto terapéutico, costura y personal chef— sin mezclarlas, publicar las próximas fechas con cupos limitados y llevar al visitante a reservar por el canal que el equipo realmente atiende: WhatsApp. Todo en italiano para el público local y en inglés para quien llega de fuera.",
+        deliveredTitle: "Qué construimos",
+        delivered: [
+          "Sitio bilingüe italiano/inglés con rutas por idioma y hreflang correcto.",
+          "Una sección por propuesta: talleres de cocina, huerto terapéutico, costura y personal chef.",
+          "Agenda de próximos eventos con cupos limitados.",
+          "Reservas y contacto directo por WhatsApp y teléfono.",
+          "Galería, testimonios, merchandising y presentación de los fundadores.",
+          "SEO local: metadatos por idioma, imagen para redes y datos estructurados de negocio, servicios y eventos.",
+          "Next.js desplegado en Vercel, con páginas prerenderizadas para carga rápida.",
+        ],
+        resultsTitle: "Resultados",
+        results: [],
+        visitLabel: "Ver el sitio en vivo",
+      },
+      en: {
+        slug: "i-selvatici",
+        title: "I Selvatici — Bilingual site for workshops and a personal chef (Italy)",
+        description:
+          "Case study: a bilingual Italian/English site for I Selvatici, cooking workshops, horticultural therapy and personal chef services in Basilicata, Italy.",
+        h1: "I Selvatici: a bilingual site for cooking workshops and a personal chef",
+        summary:
+          "I Selvatici is a community project in Castelgrande (Basilicata, Italy) running cooking, horticultural therapy and sewing workshops, plus a personal chef service. We built their bilingual Italian/English site in Next.js, with an events calendar and bookings over WhatsApp.",
+        contextTitle: "The challenge",
+        context:
+          "A community project has to explain who is behind it and what it offers before asking anyone to book. The site had to present four different offers — cooking workshops, horticultural therapy, sewing and a personal chef — without blurring them together, publish upcoming dates with limited spots, and send visitors to book through the channel the team actually answers: WhatsApp. All of it in Italian for locals and in English for visitors from abroad.",
+        deliveredTitle: "What we built",
+        delivered: [
+          "Bilingual Italian/English site with per-language routes and correct hreflang.",
+          "One section per offer: cooking workshops, horticultural therapy, sewing and personal chef.",
+          "Upcoming events calendar with limited spots.",
+          "Bookings and direct contact over WhatsApp and phone.",
+          "Gallery, testimonials, merchandise and a founders section.",
+          "Local SEO: per-language metadata, a social preview image and business, service and event structured data.",
+          "Next.js deployed on Vercel, with prerendered pages for fast loads.",
+        ],
+        resultsTitle: "Results",
+        results: [],
+        visitLabel: "Visit the live site",
+      },
+    },
+  },
 ];
 
 /** Path of a case study page in a given language. */
@@ -256,7 +384,7 @@ export const CASES_UI = {
     title: "Proyectos y casos de éxito",
     heading: "Productos reales, en producción",
     description:
-      "Casos de desarrollo de software de Mathyu's Solutions: webs corporativas, plataformas con reservas y apps nativas publicadas en la App Store.",
+      "Casos de desarrollo de software de Mathyu's Solutions: tiendas online, webs corporativas, sitios bilingües con reservas y apps nativas publicadas en la App Store.",
     lead:
       "Una muestra de lo que hemos construido y qué había detrás de cada proyecto. Puedes abrir cada producto y verlo funcionando.",
     stack: "Stack",
@@ -275,7 +403,7 @@ export const CASES_UI = {
     title: "Projects and case studies",
     heading: "Real products, in production",
     description:
-      "Software development case studies from Mathyu's Solutions: corporate websites, booking platforms and native apps shipped to the App Store.",
+      "Software development case studies from Mathyu's Solutions: online stores, corporate websites, bilingual booking sites and native apps shipped to the App Store.",
     lead:
       "A sample of what we have built and what sat behind each project. You can open every product and see it running.",
     stack: "Stack",

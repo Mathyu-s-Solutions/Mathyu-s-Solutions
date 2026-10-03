@@ -397,6 +397,15 @@ section.block { padding: 110px 0; border-top: 1px solid var(--line); position: r
 
 /* ---------- CASES ---------- */
 .cases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+/* Six tracks, two per card, so a short last row (one or two cards) sits
+   centred instead of hugging the left edge. Below 1020px it's one column. */
+@media (min-width: 1021px) {
+  .cases { grid-template-columns: repeat(6, 1fr); }
+  .cases > .case { grid-column: span 2; }
+  .cases > .case:nth-child(3n+1):last-child { grid-column: 3 / span 2; }
+  .cases > .case:nth-child(3n+1):nth-last-child(2) { grid-column: 2 / span 2; }
+  .cases > .case:nth-child(3n+2):last-child { grid-column: 4 / span 2; }
+}
 .case {
   position: relative;
   background: var(--bg-card);

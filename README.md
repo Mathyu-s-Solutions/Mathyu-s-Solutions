@@ -463,6 +463,8 @@ proyectos_publicos:
   - { nombre: Ciclo, url: "https://ciclo.com.pe/inicio", tipo: web }
   - { nombre: Parco dei Colori, url: "https://www.parcodeicolori.it/en", tipo: web }
   - { nombre: Calarm, url: "https://apps.apple.com/us/app/calarm-smart-alarms/id6772419323", tipo: ios }
+  - { nombre: Twenty, url: "https://www.twentymoda.com/", tipo: ecommerce }
+  - { nombre: I Selvatici, url: "https://selvatici.vercel.app/en", tipo: web }
 ```
 
 ---
